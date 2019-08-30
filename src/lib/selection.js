@@ -6,7 +6,13 @@
 import { Plugin } from 'prosemirror-state';
 import { Decoration, DecorationSet } from 'prosemirror-view';
 
-const punc = /([.?!])/g;
+// End of sentence punctuation
+const EOSPunc = /([.?!])/g;
+// Styled in Home.js
+const sentenceClasses = {
+  base: 'editor__sentence',
+  selected: 'sentence--selected',
+};
 
 class Selection {
   constructor(text, id, active = false) {
@@ -21,9 +27,9 @@ function randomID() {
 }
 
 function deco(from, to, selection) {
-  let cls = 'editor__sentence';
+  let cls = sentenceClasses.base;
   if (selection.active) {
-    cls += ' sentence--selected';
+    cls += ` ${sentenceClasses.selected}`;
   }
   return Decoration.inline(from, to, { class: cls }, { selection });
 }
@@ -49,9 +55,9 @@ function split(doc) {
 
     if (node.isText) {
       let match;
-      // Record blocks of text between each match of "punc"
+      // Record blocks of text between each match of "EOSPunc"
       // eslint-disable-next-line no-cond-assign
-      while (match = punc.exec(node.text)) {
+      while (match = EOSPunc.exec(node.text)) {
         const end = match.index + 1;
         record(start, end, position, node);
         // Assumes one space is between each sentence
@@ -152,21 +158,33 @@ export const selectionPlugin = new Plugin({
 // Selection UI
 
 export function selectionUI(dispatch) {
+  function handleClick(view, _, event) {
+    if (!event.target.className.includes(sentenceClasses.base)) {
+      // Ensure click is really on a decorator
+      // Using DecorationSet.find (selectionsAt) ProseMirror will return the last decorator
+      // on the same line even if it's not under the cursor.
+      return null;
+    }
+
+    const sel = view.state.selection;
+    if (!sel.empty) return null;
+
+    const selections = selectionPlugin.getState(view.state).selectionsAt(sel.from);
+    if (!selections[0]) return null;
+
+    const selection = selections && selections[0].spec.selection;
+    dispatch(view.state.tr.setMeta(selectionPlugin, { type: 'toggleSelect', selection }));
+    return false;
+  }
+
   return new Plugin({
     props: {
       decorations(state) {
         return this.getState(state);
       },
-      // eslint-disable-next-line
-      handleClick(view, _, event) {
-        const sel = view.state.selection;
-        if (!sel.empty) return null;
-        const selections = selectionPlugin.getState(view.state).selectionsAt(sel.from);
-        if (!selections[0]) return null;
-        const selection = selections && selections[0].spec.selection;
-        dispatch(view.state.tr.setMeta(selectionPlugin, { type: 'toggleSelect', selection }));
-        return false;
-      },
+      handleClick,
+      handleDoubleClick: handleClick,
+      handleTripleClick: handleClick,
     },
   });
 }

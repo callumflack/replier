@@ -2,8 +2,6 @@
   <div class="home">
     <div class="container">
       <div class="editor" ref="editor" />
-
-      <div ref="editor_initial_content" class="editor-initial-content" v-once />
     </div>
   </div>
 </template>
