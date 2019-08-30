@@ -1,8 +1,12 @@
 <template>
-  <div class="home">
-    <div class="container max-w-5xl">
-      <div class="editor" ref="editor" />
+  <div class="container Block-sm max-w-5xl">
+    <div class="editor" ref="editor" />
 
+    <div class="flex mt-4 flex-start justify-between">
+      <p
+        :class="{ 'timestamp--transparent': !timestamp }"
+        class="timestamp"
+      >{{ timestamp }}</p>
       <button
         class="Button Button--continue"
         @click="handleContinueClick"
@@ -21,11 +25,32 @@ import { exampleSetup } from 'prosemirror-example-setup';
 import { selectionPlugin, selectionUI } from '../lib/selection';
 
 
+function formatDate(date) {
+  const monthNames = [
+    'January', 'February', 'March',
+    'April', 'May', 'June', 'July',
+    'August', 'September', 'October',
+    'November', 'December',
+  ];
+
+  const padDigit = s => s.toString().padStart(2, '0');
+
+  const day = date.getDate();
+  const monthIndex = date.getMonth();
+  const year = date.getFullYear();
+  const hour = padDigit(date.getHours());
+  const minutes = padDigit(date.getMinutes());
+
+  return `${hour}:${minutes}, ${day} ${monthNames[monthIndex]} ${year}`;
+}
+
+
 export default {
   name: 'home',
   data() {
     return {
       editor: null,
+      timestamp: null,
     };
   },
   methods: {
@@ -45,6 +70,7 @@ export default {
   mounted() {
     // Used to mount editor to the DOM
     const editorRef = this.$refs.editor;
+    const that = this;
 
     // Empty document data for initializing editor
     const initData = {
@@ -90,6 +116,10 @@ export default {
           });
           this.state = new State(editState);
         } else if (action.type === 'transaction') {
+          if (!that.timestamp) {
+            that.timestamp = formatDate(new Date());
+          }
+
           newEditState = this.state.edit.apply(action.transaction);
 
           if (newEditState.doc.content.size > 40000) {
@@ -181,5 +211,15 @@ export default {
   @apply border;
   /* Wrap inner content padding */
   overflow: auto;
+}
+
+.timestamp {
+  opacity: 0.7;
+  transition: opacity 0.5s ease-in;
+  float: left;
+}
+
+.timestamp--transparent {
+  opacity: 0;
 }
 </style>

@@ -1,15 +1,15 @@
 <template>
-  <div>
-    <div class="container max-w-5xl">
-      <div class="selection" v-for="selection in $store.state.selections" :key="selection">
-        <p class="s-p">"{{ selection }}"</p>
-        <textarea
-          class="reply-input Input"
-          placeholder="Reply..."
-          rows="3"
-          />
-      </div>
+  <div class="container Block-sm max-w-5xl">
+    <div class="selection" v-for="selection in $store.state.selections" :key="selection">
+      <p class="s-p">"{{ selection }}"</p>
+      <textarea
+        class="reply-input Input"
+        placeholder="Reply..."
+        rows="3"
+        />
+    </div>
 
+    <div class="mt-8">
       <button
         class="Button Button--continue"
         @click="exportReply"

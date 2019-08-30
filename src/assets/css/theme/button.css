@@ -208,7 +208,6 @@ textarea.Input {
 
 .Button--continue {
   @apply Button--lg;
-  @apply my-10;
   --button-height: 47px;
   --button-font-weight: bold;
   --button-font-case: uppercase;
