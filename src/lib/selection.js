@@ -81,6 +81,13 @@ function splitDeco(doc, oldActive) {
   });
 }
 
+function updateSelectionsInStore(decos) {
+  // Update store
+  const activeDecos = decos
+    .find(null, null, spec => spec.selection.active)
+    .map(d => d.type.spec.selection.text);
+  store.commit('setSelections', activeDecos);
+}
 
 class SelectionState {
   constructor(decos) {
@@ -121,12 +128,7 @@ class SelectionState {
       decos = decos.remove([selection]);
       decos = decos.add(tr.doc, [deco(selection.from, selection.to, newSelection)]);
 
-      // Update store
-      const activeDecos = decos
-        .find(null, null, spec => spec.selection.active)
-        .map(d => d.type.spec.selection.text);
-      store.commit('setSelections', activeDecos);
-
+      updateSelectionsInStore(decos);
       return new SelectionState(decos);
     }
 
@@ -137,6 +139,7 @@ class SelectionState {
     decos = splitDeco(tr.doc, oldActive);
     decos = DecorationSet.create(tr.doc, decos);
 
+    updateSelectionsInStore(decos);
     return new SelectionState(decos);
   }
 

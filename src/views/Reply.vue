@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container max-w-4xl">
+    <div class="container max-w-5xl">
       <div class="selection" v-for="selection in $store.state.selections" :key="selection">
         <p class="s-p">"{{ selection }}"</p>
         <textarea

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div id="nav" class="container max-w-4xl">
+    <div id="nav" class="container max-w-5xl">
       <router-link to="/">Home</router-link>
     </div>
     <router-view/>

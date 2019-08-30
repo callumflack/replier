@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div class="container max-w-4xl">
+    <div class="container max-w-5xl">
       <div class="editor" ref="editor" />
 
       <button
