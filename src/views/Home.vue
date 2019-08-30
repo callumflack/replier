@@ -9,19 +9,21 @@
 </template>
 
 <script>
-import { commentPlugin, commentUI } from '../lib/comment';
+import { EditorState } from 'prosemirror-state';
+import { EditorView } from 'prosemirror-view';
+import { schema } from 'prosemirror-schema-basic';
+import { exampleSetup } from 'prosemirror-example-setup';
 
-const { EditorState } = require('prosemirror-state');
-const { EditorView } = require('prosemirror-view');
-const { schema } = require('prosemirror-schema-basic');
-const { exampleSetup } = require('prosemirror-example-setup');
+import { selectionPlugin, selectionUI } from '../lib/selection';
 
 
 export default {
   name: 'home',
   mounted() {
-    const that = this;
+    // Used to mount editor to the DOM
+    const editorRef = this.$refs.editor;
 
+    // Empty document data for initializing editor
     const initData = {
       doc: {
         type: 'doc',
@@ -32,23 +34,19 @@ export default {
           },
         ],
       },
-      comments: [],
-      commentVersion: 0,
+      selections: [],
     };
 
 
     class State {
-      constructor(edit, comm) {
+      constructor(edit) {
         this.edit = edit;
-        this.comm = comm;
       }
     }
 
     class EditorConnection {
       constructor() {
-        this.state = new State(null, 'start');
-        this.request = null;
-        this.backOff = 0;
+        this.state = new State(null);
         this.view = null;
         this.dispatch = this.dispatch.bind(this);
         this.start();
@@ -57,33 +55,32 @@ export default {
       // All state changes go through this
       dispatch(action) {
         let newEditState = null;
+
         if (action.type === 'loaded') {
           const editState = EditorState.create({
             doc: action.doc,
             plugins: exampleSetup({ schema, menuBar: false }).concat([
-              commentPlugin,
-              commentUI(transaction => this.dispatch({ type: 'transaction', transaction })),
+              selectionPlugin,
+              selectionUI(transaction => this.dispatch({ type: 'transaction', transaction })),
             ]),
-            comments: action.comments,
+            selections: action.selections,
           });
-          this.state = new State(editState, 'poll');
+          this.state = new State(editState);
         } else if (action.type === 'transaction') {
           newEditState = this.state.edit.apply(action.transaction);
-        }
 
-        if (newEditState) {
           if (newEditState.doc.content.size > 40000) {
-            this.state = new State(newEditState, 'detached');
-          } else {
-            this.state = new State(newEditState, this.state.comm);
+            // Document too big
           }
+
+          this.state = new State(newEditState);
         }
 
         // Sync the editor with this.state.edit
         if (this.state.edit) {
           if (this.view) this.view.updateState(this.state.edit);
           else {
-            this.setView(new EditorView(that.$refs.editor, {
+            this.setView(new EditorView(editorRef, {
               state: this.state.edit,
               dispatchTransaction: transaction => this.dispatch({ type: 'transaction', transaction }),
             }));
@@ -94,15 +91,11 @@ export default {
       // Load the document from the server and start up
       start() {
         const data = initData;
-        this.backOff = 0;
+
         this.dispatch({
           type: 'loaded',
           doc: schema.nodeFromJSON(data.doc),
-          version: data.version,
-          users: data.users,
-          comments: {
-            version: data.commentVersion, comments: data.comments,
-          },
+          selections: data.selections,
         });
       }
 

@@ -1,14 +1,14 @@
 /**
- * Comment classes for prosemirror editor
+ * Selection classes for prosemirror editor
  *
- * @module comment
+ * @module selection
  */
 import { Plugin } from 'prosemirror-state';
 import { Decoration, DecorationSet } from 'prosemirror-view';
 
 const punc = /([.?!])/g;
 
-class Comment {
+class Selection {
   constructor(text, id, active = false) {
     this.id = id;
     this.text = text;
@@ -20,12 +20,12 @@ function randomID() {
   return Math.floor(Math.random() * 0xffffffff);
 }
 
-function deco(from, to, comment) {
+function deco(from, to, selection) {
   let cls = 'editor__sentence';
-  if (comment.active) {
+  if (selection.active) {
     cls += ' sentence--selected';
   }
-  return Decoration.inline(from, to, { class: cls }, { comment });
+  return Decoration.inline(from, to, { class: cls }, { selection });
 }
 
 
@@ -70,32 +70,31 @@ function split(doc) {
 function splitDeco(doc, oldActive) {
   return split(doc).map((c) => {
     const active = oldActive.some(old => old.from === c.from);
-    return deco(c.from, c.to, new Comment(c.text, randomID(), active));
+    return deco(c.from, c.to, new Selection(c.text, randomID(), active));
   });
 }
 
 
-class CommentState {
-  constructor(version, decos) {
-    this.version = version;
+class SelectionState {
+  constructor(decos) {
     this.decos = decos;
   }
 
-  findComment(id) {
+  findSelection(id) {
     const current = this.decos.find();
     for (let i = 0; i < current.length; i++) {
-      if (current[i].spec.comment.id === id) return current[i];
+      if (current[i].spec.selection.id === id) return current[i];
     }
     return null;
   }
 
-  commentsAt(pos) {
+  selectionsAt(pos) {
     return this.decos.find(pos, pos);
   }
 
   apply(tr) {
     // eslint-disable-next-line
-    const action = tr.getMeta(commentPlugin); const
+    const action = tr.getMeta(selectionPlugin); const
       actionType = action && action.type;
     if (!action && !tr.docChanged) return this;
 
@@ -103,36 +102,46 @@ class CommentState {
     decos = decos.map(tr.mapping, tr.doc);
 
     if (actionType === 'toggleSelect') {
-      action.comment.active = !action.comment.active;
+      action.selection.active = !action.selection.active;
 
-      const comment = this.findComment(action.comment.id);
-      const newComment = new Comment(action.comment.text, action.comment.id, action.comment.active);
+      const selection = this.findSelection(action.selection.id);
+      const newSelection = new Selection(
+        action.selection.text,
+        action.selection.id,
+        action.selection.active,
+      );
 
-      decos = decos.remove([this.findComment(action.comment.id)]);
-      decos = decos.add(tr.doc, [deco(comment.from, comment.to, newComment)]);
+      decos = decos.remove([selection]);
+      decos = decos.add(tr.doc, [deco(selection.from, selection.to, newSelection)]);
 
-      return new CommentState(this.version, decos);
+      return new SelectionState(decos);
     }
 
     // Handle general updates (typing)
 
-    // Maintain active active state of comments
-    const oldActive = decos.find(null, null, spec => spec.comment.active);
+    // Maintain active active state of selections
+    const oldActive = decos.find(null, null, spec => spec.selection.active);
     decos = splitDeco(tr.doc, oldActive);
     decos = DecorationSet.create(tr.doc, decos);
 
-    return new CommentState(this.version, decos);
+    return new SelectionState(decos);
   }
 
   static init(config) {
-    const decos = config.comments.comments.map(c => deco(c.from, c.to, new Comment(c.text, c.id)));
-    return new CommentState(config.comments.version, DecorationSet.create(config.doc, decos), []);
+    const decos = config.selections.map(conf => deco(
+      conf.from,
+      conf.to,
+      new Selection(conf.text, conf.id),
+    ));
+    return new SelectionState(
+      DecorationSet.create(config.doc, decos),
+    );
   }
 }
 
-export const commentPlugin = new Plugin({
+export const selectionPlugin = new Plugin({
   state: {
-    init: CommentState.init,
+    init: SelectionState.init,
     apply(tr, prev) { return prev.apply(tr); },
   },
   props: {
@@ -140,9 +149,9 @@ export const commentPlugin = new Plugin({
   },
 });
 
-// Comment UI
+// Selection UI
 
-export function commentUI(dispatch) {
+export function selectionUI(dispatch) {
   return new Plugin({
     props: {
       decorations(state) {
@@ -152,10 +161,10 @@ export function commentUI(dispatch) {
       handleClick(view, _, event) {
         const sel = view.state.selection;
         if (!sel.empty) return null;
-        const comments = commentPlugin.getState(view.state).commentsAt(sel.from);
-        if (!comments[0]) return null;
-        const comment = comments && comments[0].spec.comment;
-        dispatch(view.state.tr.setMeta(commentPlugin, { type: 'toggleSelect', comment }));
+        const selections = selectionPlugin.getState(view.state).selectionsAt(sel.from);
+        if (!selections[0]) return null;
+        const selection = selections && selections[0].spec.selection;
+        dispatch(view.state.tr.setMeta(selectionPlugin, { type: 'toggleSelect', selection }));
         return false;
       },
     },
