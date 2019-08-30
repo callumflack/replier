@@ -1,0 +1,51 @@
+/**
+ * Typography styles specific to ProseMirror editor
+ *
+ * HTML is generated from input so styles must apply to
+ * tags not classes
+ */
+
+/*
+ *
+ * Sizing
+ *
+ */
+
+.ProseMirror h1,
+.ProseMirror h2,
+.ProseMirror h3,
+.ProseMirror h4,
+.ProseMirror h5 {
+  font-weight: bold;
+}
+
+.ProseMirror h1 {
+  @apply text-4xl;
+}
+
+.ProseMirror h2 {
+  @apply text-3xl;
+}
+
+.ProseMirror h3 {
+  @apply text-xl;
+}
+
+
+/*
+ *
+ * Spacing
+ *
+ */
+
+.ProseMirror figure,
+.ProseMirror blockquote,
+.ProseMirror h1:not(:last-child),
+.ProseMirror h2:not(:last-child),
+.ProseMirror h3:not(:last-child),
+.ProseMirror h4:not(:last-child),
+.ProseMirror h5:not(:last-child),
+.ProseMirror p:not(:last-child) {
+  margin-bottom: calc(theme(spacing.5) * var(--space-ratio));
+}
+

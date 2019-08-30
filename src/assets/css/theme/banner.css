@@ -1,0 +1,20 @@
+.Banner {
+  @apply bg-brand-primary text-white py-6;
+}
+
+.Banner__inner {
+  @apply flex flex-col justify-between items-center;
+}
+
+.Banner__inner * + * {
+  margin-left: 2px;
+}
+
+@screen md {
+  .Banner {
+    @apply py-12;
+  }
+  .Banner__inner {
+    @apply flex-row;
+  }
+}

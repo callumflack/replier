@@ -1,0 +1,21 @@
+/* SCALE */
+
+:root {
+  --text-ratio: theme(responsiveScale.textXs);
+  --title-ratio: theme(responsiveScale.titleXs);
+  --space-ratio: theme(responsiveScale.spaceXs);
+}
+@screen sm {
+  :root {
+    --text-ratio: theme(responsiveScale.textSm);
+    --title-ratio: theme(responsiveScale.titleSm);
+    --space-ratio: theme(responsiveScale.spaceSm);
+  }
+}
+@screen lg {
+  :root {
+    --text-ratio: theme(responsiveScale.textMd);
+    --title-ratio: theme(responsiveScale.titleMd);
+    --space-ratio: theme(responsiveScale.spaceMd);
+  }
+}

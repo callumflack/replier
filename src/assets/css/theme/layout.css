@@ -1,0 +1,14 @@
+/*
+
+  BASE
+
+*/
+html {
+}
+
+body {
+}
+
+main {
+  @apply min-h-full;
+}

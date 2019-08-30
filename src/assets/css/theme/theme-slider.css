@@ -1,0 +1,13 @@
+/*
+  Only show arrows on lg.
+  Else it stuffs the layouts on mobile/tablet.
+ */
+.glide__arrows {
+  display: none;
+}
+
+@screen lg {
+  .glide__arrows {
+    display: block;
+  }
+}

@@ -1,0 +1,92 @@
+/*
+
+  Spacing between typographic elements.
+
+  Meta spacing
+  Need smaller spacing? Use mb-px or mb-1.
+  It's ok that they're unresponsive b/c they're small enough.
+
+*/
+
+.s-block-m:not(:last-child),
+.s-m {
+  margin-bottom: calc(theme(spacing.2) * var(--space-ratio));
+}
+.st-m {
+  margin-top: calc(theme(spacing.2) * var(--space-ratio));
+}
+.sy-m {
+  margin-top: calc(theme(spacing.2) * var(--space-ratio));
+  margin-bottom: calc(theme(spacing.2) * var(--space-ratio));
+}
+
+/*
+
+  Paragraph spacing
+
+*/
+
+.s-block-p:not(:last-child) {
+  margin-bottom: calc(theme(spacing.5) * var(--space-ratio));
+}
+
+.s-p {
+  margin-bottom: calc(theme(spacing.3) * var(--space-ratio));
+}
+.st-p {
+  margin-top: calc(theme(spacing.2) * var(--space-ratio));
+}
+.sy-p {
+  margin-top: calc(theme(spacing.2) * var(--space-ratio));
+  margin-bottom: calc(theme(spacing.2) * var(--space-ratio));
+}
+
+/*
+
+  Heading spacing
+
+*/
+
+.s-block-h:not(:last-child),
+.s-h {
+  margin-bottom: calc(theme(spacing.4) * var(--space-ratio));
+}
+.st-h {
+  margin-top: calc(theme(spacing.4) * var(--space-ratio));
+}
+.sy-h {
+  margin-top: calc(theme(spacing.4) * var(--space-ratio));
+  margin-bottom: calc(theme(spacing.4) * var(--space-ratio));
+}
+
+.s-2xh {
+  margin-bottom: calc(theme(spacing.8) * var(--space-ratio));
+}
+.st-2xh {
+  margin-top: calc(theme(spacing.8) * var(--space-ratio));
+}
+.sy-2xh {
+  margin-top: calc(theme(spacing.8) * var(--space-ratio));
+  margin-bottom: calc(theme(spacing.8) * var(--space-ratio));
+}
+
+/* for .Display in a card b/c it's a shit font! */
+.st-display {
+  margin-top: calc(theme(spacing.4) * var(--space-ratio) * -1);
+}
+
+
+/*
+
+  Input & hr spacing
+
+ */
+
+.sy-hr {
+  margin-top: calc(theme(spacing.5) * var(--space-ratio));
+  margin-bottom: calc(theme(spacing.5) * var(--space-ratio));
+}
+
+.s-input {
+  margin-bottom: calc(theme(spacing.5) * var(--space-ratio));
+}

@@ -1,10 +1,10 @@
 <template>
   <div class="home">
-    <div class="container">
+    <div class="container max-w-4xl">
       <div class="editor" ref="editor" />
 
       <button
-        class="next-button"
+        class="Button Button--continue"
         @click="handleContinueClick"
         :disabled="!$store.state.selections.length"
       >Next</button>
@@ -142,19 +142,25 @@ export default {
 </script>
 
 <style>
-.editor {
-  border: 1px solid #eaeaea;
-  /* Wrap inner content padding */
-  overflow: auto;
-}
+/* Unscoped styles for ProseMirror elements */
 
 .ProseMirror {
+  --vertical-padding: 1.8rem;
+
   outline: none;
-  padding: 1rem 2.2rem;
+  padding: var(--vertical-padding) 2rem;
   overflow-y: scroll;
   height: 75vh;
   /* REQUIRED: https://github.com/ProseMirror/prosemirror/issues/651#issuecomment-313436150 */
   white-space: pre-wrap;
+}
+
+/* Set vertical padding to bottom of vertical scrolling editor */
+.ProseMirror:after {
+  content: "";
+  display: block;
+  height: var(--vertical-padding);
+  width: 100%;
 }
 
 .editor__sentence {
@@ -168,8 +174,12 @@ export default {
   background-color: #B3E7FF88;
   border: 1px solid #97B9E888;
 }
+</style>
 
-.editor-initial-content {
-  display: none;
+<style scoped>
+.editor {
+  @apply border;
+  /* Wrap inner content padding */
+  overflow: auto;
 }
 </style>

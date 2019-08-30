@@ -1,0 +1,24 @@
+/*
+
+  Title
+
+ */
+
+@font-face {
+    font-family:"PictureHouse One";
+    src:
+      url("/../../fonts/MB-PictureHouse-One-W01-Regular.woff") format("woff2"),
+      url("/../../fonts/MB-PictureHouse-One-W01-Regular.woff") format("woff");
+    font-style: normal;
+    font-weight: 400;
+}
+
+
+@font-face {
+    font-family:"PictureHouse One";
+    src:
+      url("/../../fonts/MB-PictureHouse-One-W01-Bold.woff") format("woff2"),
+      url("/../../fonts/MB-PictureHouse-One-W01-Bold.woff") format("woff");
+    font-style: normal;
+    font-weight: 700;
+}

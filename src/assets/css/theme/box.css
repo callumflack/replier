@@ -1,0 +1,13 @@
+.Box {
+  @apply bg-brand-blueneutral px-4 py-4;
+}
+
+.Box + .Box {
+  @apply border-t-2 border-white;
+}
+
+@screen md {
+  .Box {
+    @apply px-6 py-6;
+  }
+}
