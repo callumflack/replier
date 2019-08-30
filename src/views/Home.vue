@@ -2,6 +2,12 @@
   <div class="home">
     <div class="container">
       <div class="editor" ref="editor" />
+
+      <button
+        class="next-button"
+        @click="handleContinueClick"
+        :disabled="!$store.state.selections.length"
+      >Next</button>
     </div>
   </div>
 </template>
@@ -17,6 +23,25 @@ import { selectionPlugin, selectionUI } from '../lib/selection';
 
 export default {
   name: 'home',
+  data() {
+    return {
+      editor: null,
+    };
+  },
+  methods: {
+    handleContinueClick(event) {
+      event.preventDefault();
+      // Get selected sentences
+      const editorState = this.editor.state.edit;
+      const pluginState = selectionPlugin.getState(editorState);
+      const activeDecos = pluginState.decos
+        .find(null, null, spec => spec.selection.active)
+        .map(deco => deco.type.spec.selection.text);
+
+      this.$store.commit('setSelections', activeDecos);
+      this.$router.push({ path: 'reply' });
+    },
+  },
   mounted() {
     // Used to mount editor to the DOM
     const editorRef = this.$refs.editor;
@@ -108,10 +133,10 @@ export default {
       // eslint-disable-next-line no-multi-assign
       const editor = window.editor = new EditorConnection();
       editor.view.focus();
-      return true;
+      return editor;
     }
 
-    createEditor();
+    this.editor = createEditor();
   },
 };
 </script>
@@ -127,7 +152,7 @@ export default {
   outline: none;
   padding: 1rem 2.2rem;
   overflow-y: scroll;
-  height: 80vh;
+  height: 75vh;
   /* REQUIRED: https://github.com/ProseMirror/prosemirror/issues/651#issuecomment-313436150 */
   white-space: pre-wrap;
 }

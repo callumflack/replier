@@ -5,6 +5,7 @@
  */
 import { Plugin } from 'prosemirror-state';
 import { Decoration, DecorationSet } from 'prosemirror-view';
+import store from '../store';
 
 // End of sentence punctuation
 const EOSPunc = /([.?!])/g;
@@ -119,6 +120,12 @@ class SelectionState {
 
       decos = decos.remove([selection]);
       decos = decos.add(tr.doc, [deco(selection.from, selection.to, newSelection)]);
+
+      // Update store
+      const activeDecos = decos
+        .find(null, null, spec => spec.selection.active)
+        .map(d => d.type.spec.selection.text);
+      store.commit('setSelections', activeDecos);
 
       return new SelectionState(decos);
     }
