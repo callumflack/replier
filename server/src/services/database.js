@@ -5,6 +5,7 @@
  */
 
 const humps = require('humps');
+const bcrypt = require('bcryptjs');
 const db = require('../../knex/knex');
 
 /**
@@ -22,6 +23,20 @@ async function userGet(id) {
 }
 
 /**
+ * Get a user by email
+ *
+ * @param {string} email
+ * @returns {object} user
+ */
+async function userGetByEmail(email) {
+	const user = await db('users')
+		.where('email', email)
+		.first();
+
+	return humps.camelizeKeys(user);
+}
+
+/**
  * Create new user
  *
  * @param {string} email
@@ -29,13 +44,24 @@ async function userGet(id) {
  * @returns {object} user
  */
 async function userCreate(email, password) {
+	const userWithEmail = await userGetByEmail(email);
+
+	if (userWithEmail) {
+		const error = new Error('An account already exists with given email');
+		error.code = 'EMAIL_TAKEN';
+		return error;
+	}
+
+	const salt = await bcrypt.genSalt(10);
+	const hash = await bcrypt.hash(password, salt);
+
 	const result = await db.raw(
 		`INSERT INTO users
       (email, password)
       values (?, ?)
       RETURNING *;
     `,
-		[email, password],
+		[email, hash],
 	);
 
 	return humps.camelizeKeys(result.rows[0]);
@@ -73,6 +99,7 @@ async function userUpdate(
 
 module.exports = {
 	userGet,
+	userGetByEmail,
 	userCreate,
 	userUpdate,
 };
