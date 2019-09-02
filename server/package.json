@@ -1,0 +1,42 @@
+{
+  "name": "writing-app-server",
+  "version": "0.1.0",
+  "description": "A starting point for Node.js express apps",
+  "author": "Barry Hood <barryph@protonmail.com>",
+  "scripts": {
+    "start": "npm run serve",
+    "dev": "nodemon src/server.js",
+    "test": "jest --forceExit --coverage --verbose",
+    "lint": "eslint .",
+    "lint:open": "npm run lint | grep '^/home' | xargs nvim -p",
+    "debug": "npm run serve-debug",
+    "serve-debug": "nodemon --inspect dist/server.js",
+    "db:down": "npx knex-migrate down --to 0 --env development",
+    "db:up": "npx knex-migrate up"
+  },
+  "dependencies": {
+    "@hapi/joi": "15.1.1",
+    "body-parser": "^1.19.0",
+    "cheerio": "1.0.0-rc.3",
+    "compression": "^1.7.4",
+    "dotenv": "^8.1.0",
+    "eslint-plugin-import": "2.18.2",
+    "express": "^4.17.1",
+    "express-session": "^1.16.2",
+    "humps": "2.0.1",
+    "knex": "0.19.3",
+    "lodash": "^4.17.15",
+    "lusca": "^1.6.1",
+    "pg": "7.12.1",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint": "6.3.0",
+    "eslint-config-airbnb-base": "14.0.0",
+    "jest": "^24.9.0",
+    "knex-migrate": "1.7.2",
+    "nodemon": "^1.19.1",
+    "supertest": "^4.0.2"
+  }
+}
