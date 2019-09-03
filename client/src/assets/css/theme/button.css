@@ -107,7 +107,7 @@ button:disabled {
 .Input {
   --button-color: theme(colors.text);
   --button-invert-color: white;
-  --button-border-width: 0;
+  --button-border-width: 1px;
   --button-box-shadow-color: theme(colors.brand.blue);
   --button-font-weight: 400;
   /* unlike buttons, inputs are full width */
@@ -153,7 +153,7 @@ textarea.Input {
 }
 
 .Button--lg {
-  --button-height: 60px;
+  --button-height: 50px;
   --button-padding-x: 2rem;
   /* padding-bottom: calc((2.5 / 15) * 1em); */
 }

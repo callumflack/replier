@@ -6,6 +6,7 @@ const dotenv = require('dotenv');
 const session = require('express-session');
 const passport = require('passport');
 const KnexSessionStore = require('connect-session-knex')(session);
+const { errors } = require('celebrate');
 
 const knex = require('../knex/knex');
 const setupRoutes = require('./routes/index');
@@ -60,5 +61,6 @@ app.use(lusca.xframe('SAMEORIGIN'));
 app.use(lusca.xssProtection(true));
 
 setupRoutes(app);
+app.use(errors());
 
 module.exports = app;

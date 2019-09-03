@@ -16,7 +16,7 @@ function comparePasswords(password, hash) {
  * @param {object} user
  * @returns {object}
  */
-function sanitizeUser(user) {
+function sanitizeUser(user = {}) {
 	user.password = undefined;
 	return user;
 }

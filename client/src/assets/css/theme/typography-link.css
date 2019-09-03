@@ -5,6 +5,10 @@
 
 */
 
+.Link {
+  color: theme('colors.brand.primary');
+}
+
 .Link--underline {
   @apply inline-block border-b border-gray-500;
   text-decoration: none !important;

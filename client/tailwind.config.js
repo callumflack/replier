@@ -1,5 +1,7 @@
 // https://tailwindcss.com/docs/configuration/
 
+const blueLight = '#00CDFB';
+
 module.exports = {
   prefix: '',
   important: false,
@@ -11,7 +13,8 @@ module.exports = {
       white: '#fff',
       text: '#4a4a4a',
       brand: {
-        primary: '#00CDFB',
+        primary: blueLight,
+        bluelight: blueLight,
         blue: '#1b495a',
         blueneutral: '#f1f2f3',
         neutral: '#FAF8F5',

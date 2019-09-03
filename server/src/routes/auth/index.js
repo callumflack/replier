@@ -1,5 +1,6 @@
 const express = require('express');
 const passport = require('passport');
+const { celebrate, Joi } = require('celebrate');
 const promisify = require('util').promisify;
 const middleware = require('../middleware');
 const db = require('../../services/database');
@@ -22,6 +23,13 @@ const router = express.Router();
 router.post(
 	'/register',
 	middleware.ensureNotAuthed,
+	celebrate({
+		body: Joi.object().keys({
+			email: Joi.string().email().required(),
+			password: Joi.string().min(8).required(),
+			confirmPassword: Joi.any().required().valid(Joi.ref('password')),
+		}),
+	}),
 	async (req, res) => {
 		const { email, password } = req.body;
 
@@ -69,11 +77,32 @@ router.post(
 router.post(
 	'/login',
 	middleware.ensureNotAuthed,
-	passport.authenticate('local'),
-	async (req, res) => {
-		res.json({
-			user: auth.sanitizeUse(req.user),
-		});
+	celebrate({
+		body: Joi.object().keys({
+			email: Joi.string().email().required(),
+			password: Joi.string().required(),
+		}),
+	}),
+	(req, res, next) => {
+		passport.authenticate('local', (err, user, info) => {
+			if (err) {
+				return next(err);
+			}
+
+			if (info && info.message) {
+				res.status(401).json({
+					error: info.message,
+				});
+				return null;
+			}
+
+			req.login(user, () => {
+				res.json({
+					user: auth.sanitizeUser(user),
+				});
+			});
+			return null;
+		})(req, res, next);
 	},
 );
 

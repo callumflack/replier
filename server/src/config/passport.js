@@ -11,13 +11,15 @@ passport.use(new LocalStrategy(
 		const user = await db.userGetByEmail(email);
 
 		if (!user) {
-			done(null, false, { error: 'Invalid email or password' });
+			done(null, false, { message: 'Invalid email or password' });
+			return;
 		}
 
-		const passwordsMatch = auth.comparePasswords(password, user.password);
+		const passwordsMatch = await auth.comparePasswords(password, user.password);
 
 		if (!passwordsMatch) {
-			done(null, false, { error: 'Invalid email or password' });
+			done(null, false, { message: 'Invalid email or password' });
+			return;
 		}
 
 		done(null, user);

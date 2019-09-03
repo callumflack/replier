@@ -22,7 +22,7 @@ import { EditorView } from 'prosemirror-view';
 import { schema } from 'prosemirror-schema-basic';
 import { exampleSetup } from 'prosemirror-example-setup';
 
-import { selectionPlugin, selectionUI } from '../lib/selection';
+import { selectionPlugin, selectionUI } from '../utils/selection';
 
 
 function formatDate(date) {

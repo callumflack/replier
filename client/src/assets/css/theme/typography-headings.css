@@ -46,7 +46,7 @@
 .Display,
 .Title,
 .Subtitle {
-  @apply font-serif text-black tracking-wide lowercase;
+  @apply text-black tracking-wide;
 }
 
 .Display {
