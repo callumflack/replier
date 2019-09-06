@@ -15,16 +15,20 @@ const sentenceClasses = {
   selected: 'sentence--selected',
 };
 
-class Selection {
-  constructor(text, id, active = false) {
-    this.id = id;
-    this.text = text;
-    this.active = active;
-  }
-}
-
 function randomID() {
   return Math.floor(Math.random() * 0xffffffff);
+}
+
+/**
+ * @param {string} text
+ * @param {string?} id - id of selected deco
+ */
+class Selection {
+  constructor(text, id, active = false) {
+    this.id = id || randomID();
+    this.active = active;
+    this.text = text;
+  }
 }
 
 function deco(from, to, selection) {
@@ -74,18 +78,22 @@ function split(doc) {
   return result;
 }
 
-function splitDeco(doc, oldActive) {
+function splitDeco(doc, activeDecos) {
   return split(doc).map((c) => {
-    const active = oldActive.some(old => old.from === c.from);
-    return deco(c.from, c.to, new Selection(c.text, randomID(), active));
+    const active = activeDecos.find(x => x.from === c.from);
+
+    if (active) {
+      const selection = active.type.spec.selection;
+      return deco(c.from, c.to, new Selection(c.text, selection.id, selection.active));
+    }
+
+    return deco(c.from, c.to, new Selection(c.text));
   });
 }
 
 function updateSelectionsInStore(decos) {
-  // Update store
   const activeDecos = decos
-    .find(null, null, spec => spec.selection.active)
-    .map(d => d.type.spec.selection.text);
+    .find(null, null, spec => spec.selection.active);
   store.commit('setSelections', activeDecos);
 }
 
@@ -115,6 +123,7 @@ class SelectionState {
     let { decos } = this;
     decos = decos.map(tr.mapping, tr.doc);
 
+    // Update list of decorations
     if (actionType === 'toggleSelect') {
       action.selection.active = !action.selection.active;
 
@@ -127,31 +136,24 @@ class SelectionState {
 
       decos = decos.remove([selection]);
       decos = decos.add(tr.doc, [deco(selection.from, selection.to, newSelection)]);
+    } else {
+      // Handle general updates (typing)
 
-      updateSelectionsInStore(decos);
-      return new SelectionState(decos);
+      // Maintain active state of current selections
+      const activeDecos = decos.find(null, null, spec => spec.selection.active);
+      decos = splitDeco(tr.doc, activeDecos);
+      decos = DecorationSet.create(tr.doc, decos);
     }
-
-    // Handle general updates (typing)
-
-    // Maintain active active state of selections
-    const oldActive = decos.find(null, null, spec => spec.selection.active);
-    decos = splitDeco(tr.doc, oldActive);
-    decos = DecorationSet.create(tr.doc, decos);
 
     updateSelectionsInStore(decos);
     return new SelectionState(decos);
   }
 
   static init(config) {
-    const decos = config.selections.map(conf => deco(
-      conf.from,
-      conf.to,
-      new Selection(conf.text, conf.id),
-    ));
-    return new SelectionState(
-      DecorationSet.create(config.doc, decos),
-    );
+    const activeDecos = config.selections;
+    let decos = splitDeco(config.doc, activeDecos);
+    decos = DecorationSet.create(config.doc, decos);
+    return new SelectionState(decos);
   }
 }
 

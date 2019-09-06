@@ -1,7 +1,13 @@
 <template>
   <div class="container Block-sm max-w-5xl">
-    <div class="selection" v-for="selection in $store.state.selections" :key="selection">
-      <p class="s-p">"{{ selection }}"</p>
+    <router-link to="/" class="Link mb-8 block opacity-75">Return to Editor</router-link>
+
+    <div
+      class="selection"
+      v-for="selection in $store.state.selections"
+      :key="selection.type.spec.selection.id"
+    >
+      <p class="s-p">"{{ selection.type.spec.selection.text }}"</p>
       <textarea
         class="reply-input Input"
         placeholder="Reply..."
@@ -32,7 +38,7 @@ export default {
 
 <style scoped>
 .selection {
-  @apply mt-12;
+  @apply mb-12;
 }
 
 .selection p {

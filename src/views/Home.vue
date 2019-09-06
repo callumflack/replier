@@ -11,7 +11,7 @@
         class="Button Button--continue"
         @click="handleContinueClick"
         :disabled="!$store.state.selections.length"
-      >Next</button>
+      >Reply</button>
     </div>
   </div>
 </template>
@@ -60,9 +60,9 @@ export default {
       const editorState = this.editor.state.edit;
       const pluginState = selectionPlugin.getState(editorState);
       const activeDecos = pluginState.decos
-        .find(null, null, spec => spec.selection.active)
-        .map(deco => deco.type.spec.selection.text);
+        .find(null, null, spec => spec.selection.active);
 
+      this.$store.commit('setEditorState', editorState.toJSON());
       this.$store.commit('setSelections', activeDecos);
       this.$router.push({ path: 'reply' });
     },
@@ -143,12 +143,17 @@ export default {
 
       // Load the document from the server and start up
       start() {
-        const data = initData;
+        // Check for persisted state
+        // fallback to default initData
+        const doc = that.$store.state.editorState
+          ? that.$store.state.editorState.doc
+          : initData.doc;
+        const selections = that.$store.state.selections || initData.selections;
 
         this.dispatch({
           type: 'loaded',
-          doc: schema.nodeFromJSON(data.doc),
-          selections: data.selections,
+          doc: schema.nodeFromJSON(doc),
+          selections,
         });
       }
 
