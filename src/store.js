@@ -7,6 +7,8 @@ export default new Vuex.Store({
   state: {
     editorState: null,
     selections: [],
+    // Keyed by selection ids
+    replies: {},
   },
   mutations: {
     setEditorState(state, editorState) {
@@ -15,8 +17,10 @@ export default new Vuex.Store({
     setSelections(state, selections) {
       state.selections = selections;
     },
+    setReply(state, reply) {
+      Vue.set(state.replies, reply.id, reply.text);
+    },
   },
   actions: {
-
   },
 });

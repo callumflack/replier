@@ -12,7 +12,8 @@
         class="reply-input Input"
         placeholder="Reply..."
         rows="3"
-        />
+        @input="(event) => handleInput(event, selection.type.spec.selection)"
+        >{{ findReply(selection) }}</textarea>
     </div>
 
     <div class="mt-8">
@@ -28,6 +29,15 @@
 export default {
   name: 'reply',
   methods: {
+    findReply(selection) {
+      return this.$store.state.replies[selection.type.spec.selection.id];
+    },
+    handleInput(event, selection) {
+      this.$store.commit('setReply', {
+        id: selection.id,
+        text: event.target.value,
+      });
+    },
     exportReply() {
       // Copy exported contents to clipboard
       // Display UI feedback
