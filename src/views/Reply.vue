@@ -50,9 +50,22 @@ export default {
         text: event.target.value,
       });
     },
-    exportReply() {
+    async exportReply() {
       // Copy exported contents to clipboard
       // Display UI feedback
+      const exportText = this.$store.state.selections
+        .map((item) => {
+          const selection = item.type.spec.selection;
+          const reply = this.$store.state.replies[selection.id] || '';
+          return `> ${selection.text}\n${reply}`;
+        })
+        .join('\n\n');
+
+      try {
+        await navigator.clipboard.writeText(exportText);
+      } catch (err) {
+        console.error('Could not copy text to clipboard: ', err);
+      }
     },
   },
 };
