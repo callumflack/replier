@@ -17,6 +17,10 @@ export default new Vuex.Store({
     setSelections(state, selections) {
       state.selections = selections;
     },
+    deleteSelection(state, id) {
+      const index = state.selections.map(item => item.type.spec.selection.id).indexOf(id);
+      Vue.delete(state.selections, index);
+    },
     setReply(state, reply) {
       Vue.set(state.replies, reply.id, reply.text);
     },

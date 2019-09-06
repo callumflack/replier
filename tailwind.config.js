@@ -11,6 +11,7 @@ module.exports = {
       transparent: 'transparent',
       black: '#333',
       white: '#fff',
+      red: '#d91e18',
       text: '#4a4a4a',
       brand: {
         primary: blueLight,

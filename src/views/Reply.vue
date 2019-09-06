@@ -7,7 +7,13 @@
       v-for="selection in $store.state.selections"
       :key="selection.type.spec.selection.id"
     >
-      <p class="s-p">"{{ selection.type.spec.selection.text }}"</p>
+      <div class="selection-header">
+        <p class="s-p">"{{ selection.type.spec.selection.text }}"</p>
+        <button
+          @click="(event) => deleteSelection(event, selection.type.spec.selection)"
+          class="delete-button opacity-75"
+        >&#10005;</button>
+      </div>
       <textarea
         class="reply-input Input"
         placeholder="Reply..."
@@ -29,6 +35,12 @@
 export default {
   name: 'reply',
   methods: {
+    deleteSelection(event, selection) {
+      this.$store.commit('deleteSelection', selection.id);
+      if (!this.$store.state.selections.length) {
+        this.$router.push('/');
+      }
+    },
     findReply(selection) {
       return this.$store.state.replies[selection.type.spec.selection.id];
     },
@@ -51,7 +63,25 @@ export default {
   @apply mb-12;
 }
 
-.selection p {
+.selection-header {
+  @apply flex justify-between items-start;
+}
+
+.selection .delete-button {
+  @apply text-red text-3xl ml-10;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.selection:hover .delete-button {
+  opacity: 0.50;
+}
+
+.selection:hover .delete-button:hover {
+  opacity: 1;
+}
+
+.selection-header p {
   font-weight: bold;
 }
 
