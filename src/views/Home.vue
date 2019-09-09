@@ -1,17 +1,25 @@
 <template>
-  <div class="container Block-sm max-w-5xl">
-    <div class="editor" ref="editor" />
+  <div class="Block-sm">
+    <div class="main-block container  max-w-5xl">
+      <div class="editor" ref="editor" />
 
-    <div class="flex mt-4 flex-start justify-between">
-      <p
-        :class="{ 'timestamp--transparent': !timestamp }"
-        class="timestamp"
-      >{{ timestamp }}</p>
-      <button
-        class="Button Button--continue"
-        @click="handleContinueClick"
-        :disabled="!$store.state.selections.length"
-      >Next</button>
+      <div class="flex mt-4 flex-start justify-between">
+        <p
+          :class="{ 'timestamp--transparent': !timestamp }"
+          class="timestamp"
+        >{{ timestamp }}</p>
+        <button
+          class="Button Button--continue"
+          @click="handleContinueClick"
+          :disabled="!$store.state.selections.length"
+        >Reply</button>
+      </div>
+
+      <aside class="aside-map">
+        <p v-for="selection in $store.state.selections" :key="selection.type.spec.selection.id ">
+          {{ selection.type.spec.selection.text }}
+        </p>
+      </aside>
     </div>
   </div>
 </template>
@@ -60,9 +68,9 @@ export default {
       const editorState = this.editor.state.edit;
       const pluginState = selectionPlugin.getState(editorState);
       const activeDecos = pluginState.decos
-        .find(null, null, spec => spec.selection.active)
-        .map(deco => deco.type.spec.selection.text);
+        .find(null, null, spec => spec.selection.active);
 
+      this.$store.commit('setEditorState', editorState.toJSON());
       this.$store.commit('setSelections', activeDecos);
       this.$router.push({ path: 'reply' });
     },
@@ -143,12 +151,17 @@ export default {
 
       // Load the document from the server and start up
       start() {
-        const data = initData;
+        // Check for persisted state
+        // fallback to default initData
+        const doc = that.$store.state.editorState
+          ? that.$store.state.editorState.doc
+          : initData.doc;
+        const selections = that.$store.state.selections || initData.selections;
 
         this.dispatch({
           type: 'loaded',
-          doc: schema.nodeFromJSON(data.doc),
-          selections: data.selections,
+          doc: schema.nodeFromJSON(doc),
+          selections,
         });
       }
 
@@ -221,5 +234,22 @@ export default {
 
 .timestamp--transparent {
   opacity: 0;
+}
+
+.main-block {
+  position: relative;
+}
+
+.aside-map {
+  @apply text-brand-primary;
+  position: absolute;
+  top: 0;
+  right: calc(0% - 200px);
+  width: 150px;
+}
+
+.aside-map p {
+  @apply block mb-2;
+  font-size: 0.40rem;
 }
 </style>

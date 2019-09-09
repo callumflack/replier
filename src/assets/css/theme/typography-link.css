@@ -5,6 +5,10 @@
 
 */
 
+.Link {
+  @apply text-brand-bluelight;
+}
+
 .Link--underline {
   @apply inline-block border-b border-gray-500;
   text-decoration: none !important;
