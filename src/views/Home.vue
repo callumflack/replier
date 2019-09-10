@@ -207,15 +207,18 @@ export default {
 }
 
 .editor__sentence {
-  background-color: #B3E7FF22;
-  border: 1px solid #97B9E822;
   cursor: pointer;
+  border: 1px solid transparent;
 }
 
-.editor__sentence.sentence--selected,
 .editor__sentence:hover {
-  background-color: #B3E7FF88;
-  border: 1px solid #97B9E888;
+  background-color: #B3E7FF44;
+  border-color: #97B9E888;
+}
+
+.editor__sentence.sentence--selected {
+  background-color: #B3E7FF99;
+  border-color: #97B9E888;
 }
 </style>
 
