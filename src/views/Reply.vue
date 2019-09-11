@@ -4,13 +4,13 @@
 
     <div
       class="selection"
-      v-for="selection in $store.state.selections"
-      :key="selection.type.spec.selection.id"
+      v-for="selection in groupedSelections"
+      :key="selection.id"
     >
       <div class="selection-header">
-        <p class="s-p">"{{ selection.type.spec.selection.text }}"</p>
+        <p class="s-p">"{{ selection.text }}"</p>
         <button
-          @click="(event) => deleteSelection(event, selection.type.spec.selection)"
+          @click="(event) => deleteSelection(event, selection)"
           class="delete-button opacity-75"
         >&#10005;</button>
       </div>
@@ -18,7 +18,7 @@
         class="reply-input Input"
         placeholder="Reply..."
         rows="3"
-        @input="(event) => handleInput(event, selection.type.spec.selection)"
+        @input="(event) => handleInput(event, selection)"
         >{{ findReply(selection) }}</textarea>
     </div>
 
@@ -34,15 +34,58 @@
 <script>
 export default {
   name: 'reply',
+  computed: {
+    groupedSelections() {
+      const selections = this.$store.state.selections;
+      const groupedSelections = [];
+
+      selections.forEach((deco) => {
+        const selection = deco.type.spec.selection;
+        let index = -1;
+
+        if (selection.groupId) {
+          index = groupedSelections.findIndex(
+            sel => sel.groupId === selection.groupId,
+          );
+        }
+
+        // Create new object to avoid mutation
+        if (index !== -1) {
+          const groupedSelection = groupedSelections[index];
+          groupedSelections[index] = {
+            ...groupedSelection,
+            text: groupedSelection.text += ` ${selection.text}`,
+          };
+        } else {
+          groupedSelections.push({ ...selection });
+        }
+      });
+
+      return groupedSelections;
+    },
+  },
   methods: {
-    deleteSelection(event, selection) {
-      this.$store.commit('deleteSelection', selection.id);
+    goBackIfSelectionsEmpty() {
       if (!this.$store.state.selections.length) {
         this.$router.push('/');
       }
     },
+    deleteSelection(event, selection) {
+      // TODO: If in group delete whole group of selections
+      let selectionsToDelete = [selection.id];
+
+      if (selection.groupId) {
+        selectionsToDelete = this.$store.state.selections
+          .filter(deco => deco.type.spec.selection.groupId === selection.groupId)
+          .map(deco => deco.type.spec.selection.id);
+      }
+
+      this.$store.commit('deleteSelections', selectionsToDelete);
+
+      this.goBackIfSelectionsEmpty();
+    },
     findReply(selection) {
-      return this.$store.state.replies[selection.type.spec.selection.id];
+      return this.$store.state.replies[selection.id];
     },
     handleInput(event, selection) {
       this.$store.commit('setReply', {
@@ -53,9 +96,8 @@ export default {
     async exportReply() {
       // Copy exported contents to clipboard
       // Display UI feedback
-      const exportText = this.$store.state.selections
-        .map((item) => {
-          const selection = item.type.spec.selection;
+      const exportText = this.groupedSelections
+        .map((selection) => {
           const reply = this.$store.state.replies[selection.id] || '';
           return `> ${selection.text}\n${reply}`;
         })
@@ -67,6 +109,9 @@ export default {
         console.error('Could not copy text to clipboard: ', err);
       }
     },
+  },
+  mounted() {
+    this.goBackIfSelectionsEmpty();
   },
 };
 </script>
