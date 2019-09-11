@@ -135,7 +135,7 @@ function splitDeco(doc, activeDecos) {
 
     if (active) {
       const selection = active.type.spec.selection;
-      newSelection = new Selection(c.text, selection.id, selection.active, active.groupId);
+      newSelection = new Selection(c.text, selection.id, selection.active, selection.groupId);
     } else {
       newSelection = new Selection(c.text);
     }
