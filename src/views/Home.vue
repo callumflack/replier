@@ -213,12 +213,14 @@ export default {
 
 .editor__sentence:hover {
   background-color: #B3E7FF44;
-  border-color: #97B9E888;
 }
 
 .editor__sentence.sentence--selected {
   background-color: #B3E7FF99;
-  border-color: #97B9E888;
+}
+
+.editor__sentence.sentence--group {
+  border-color: #97B9E8;
 }
 </style>
 
