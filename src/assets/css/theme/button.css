@@ -53,7 +53,6 @@
   position: relative;
   text-decoration: none;
   text-transform: var(--button-font-case);
-  user-select: none;
   padding-bottom: calc((2 / 15) * 1em); /* 2 */
 }
 

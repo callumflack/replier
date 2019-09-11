@@ -66,12 +66,9 @@ export default {
       event.preventDefault();
       // Get selected sentences
       const editorState = this.editor.state.edit;
-      const pluginState = selectionPlugin.getState(editorState);
-      const activeDecos = pluginState.decos
-        .find(null, null, spec => spec.selection.active);
 
       this.$store.commit('setEditorState', editorState.toJSON());
-      this.$store.commit('setSelections', activeDecos);
+      this.$store.commit('addMissingOrders');
       this.$router.push({ path: 'reply' });
     },
   },
@@ -249,7 +246,8 @@ export default {
   @apply text-brand-primary;
   position: absolute;
   top: 0;
-  right: calc(0% - 200px);
+  right: 0;
+  transform: translateX(100%);
   width: 150px;
 }
 

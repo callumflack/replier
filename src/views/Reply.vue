@@ -2,25 +2,34 @@
   <div class="container Block-sm max-w-5xl">
     <router-link to="/" class="Link mb-8 block opacity-75">Return to Editor</router-link>
 
-    <div
-      class="selection"
-      v-for="selection in groupedSelections"
-      :key="selection.id"
-    >
-      <div class="selection-header">
-        <p class="s-p">"{{ selection.text }}"</p>
-        <button
-          @click="(event) => deleteSelection(event, selection)"
-          class="delete-button opacity-75"
-        >&#10005;</button>
+    <draggable v-model="groupedSelections" handle=".handle" @end="end">
+      <div
+        class="selection"
+        v-for="selection in groupedSelections"
+        :key="selection.id"
+      >
+        <div class="selection__options">
+          <button
+            class="option-button handle"
+          >&#9776;</button>
+          <button
+            @click="(event) => deleteSelection(event, selection)"
+            class="option-button delete-button"
+          >&#10005;</button>
+        </div>
+        <div class="selection-content">
+          <div class="selection-header s-p">
+           "{{ selection.text }}"
+          </div>
+          <textarea
+            class="reply-input Input"
+            placeholder="Reply..."
+            rows="3"
+            @input="(event) => handleInput(event, selection)"
+            >{{ findReply(selection) }}</textarea>
+        </div>
       </div>
-      <textarea
-        class="reply-input Input"
-        placeholder="Reply..."
-        rows="3"
-        @input="(event) => handleInput(event, selection)"
-        >{{ findReply(selection) }}</textarea>
-    </div>
+    </draggable>
 
     <div class="mt-8">
       <button
@@ -32,10 +41,20 @@
 </template>
 
 <script>
+import draggable from 'vuedraggable';
+
 export default {
   name: 'reply',
-  computed: {
-    groupedSelections() {
+  components: {
+    draggable,
+  },
+  data() {
+    return {
+      groupedSelections: [],
+    };
+  },
+  methods: {
+    groupSelections() {
       const selections = this.$store.state.selections;
       const groupedSelections = [];
 
@@ -61,10 +80,17 @@ export default {
         }
       });
 
-      return groupedSelections;
+      groupedSelections.sort((a, b) => {
+        const orderA = this.$store.state.orders[a.id];
+        const orderB = this.$store.state.orders[b.id];
+        return orderA - orderB;
+      });
+
+      this.groupedSelections = groupedSelections;
     },
-  },
-  methods: {
+    end() {
+      this.$store.commit('updateOrders', this.groupedSelections);
+    },
     goBackIfSelectionsEmpty() {
       if (!this.$store.state.selections.length) {
         this.$router.push('/');
@@ -81,8 +107,8 @@ export default {
       }
 
       this.$store.commit('deleteSelections', selectionsToDelete);
-
       this.goBackIfSelectionsEmpty();
+      this.groupSelections();
     },
     findReply(selection) {
       return this.$store.state.replies[selection.id];
@@ -112,34 +138,48 @@ export default {
   },
   mounted() {
     this.goBackIfSelectionsEmpty();
+    this.groupSelections();
   },
 };
 </script>
 
 <style scoped>
 .selection {
-  @apply mb-12;
+  @apply mb-12 flex relative;
 }
 
-.selection-header {
-  @apply flex justify-between items-start;
+.selection__options {
+  @apply px-8 absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-100%);
 }
 
-.selection .delete-button {
-  @apply text-red text-3xl ml-10;
+.selection .option-button {
+  @apply ml-4;
   opacity: 0;
   transition: opacity 0.2s;
+  vertical-align: middle;
 }
 
-.selection:hover .delete-button {
+.selection:hover .option-button {
   opacity: 0.50;
 }
 
-.selection:hover .delete-button:hover {
+.selection:hover .option-button:hover {
   opacity: 1;
 }
 
-.selection-header p {
+.selection .delete-button {
+  @apply text-red text-3xl;
+}
+
+.selection-content {
+  flex-grow: 1;
+}
+
+.selection-header {
   font-weight: bold;
 }
 
