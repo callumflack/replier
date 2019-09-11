@@ -27,7 +27,7 @@ export default new Vuex.Store({
 
       state.orders = orders;
     },
-    addUnsetOrders(state) {
+    addMissingOrders(state) {
       const orders = state.selections
         .map(sel => state.orders[sel.type.spec.selection.id])
         .filter(order => !!order);

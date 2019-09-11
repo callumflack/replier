@@ -163,16 +163,6 @@ class SelectionState {
     return null;
   }
 
-  getSelectionBefore(id) {
-    const current = this.decos.find();
-    for (let i = 0; i < current.length; i++) {
-      if (current[i].spec.selection.id === id) {
-        return i === 0 ? null : current[i - 1];
-      }
-    }
-    return null;
-  }
-
   selectionsAt(pos) {
     return this.decos.find(pos, pos);
   }
@@ -192,7 +182,6 @@ class SelectionState {
       action.selection.active = active;
 
       const selectedDeco = this.findDecoOfSelection(action.selection.id);
-
       const newSelection = new Selection(
         action.selection.text,
         action.selection.id,

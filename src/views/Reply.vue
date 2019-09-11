@@ -107,9 +107,8 @@ export default {
       }
 
       this.$store.commit('deleteSelections', selectionsToDelete);
-      this.groupSelections();
-
       this.goBackIfSelectionsEmpty();
+      this.groupSelections();
     },
     findReply(selection) {
       return this.$store.state.replies[selection.id];
@@ -138,8 +137,8 @@ export default {
     },
   },
   mounted() {
-    this.groupSelections();
     this.goBackIfSelectionsEmpty();
+    this.groupSelections();
   },
 };
 </script>

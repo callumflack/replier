@@ -68,7 +68,7 @@ export default {
       const editorState = this.editor.state.edit;
 
       this.$store.commit('setEditorState', editorState.toJSON());
-      this.$store.commit('addUnsetOrders');
+      this.$store.commit('addMissingOrders');
       this.$router.push({ path: 'reply' });
     },
   },
