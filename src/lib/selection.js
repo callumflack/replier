@@ -8,7 +8,8 @@ import { Decoration, DecorationSet } from 'prosemirror-view';
 import store from '../store';
 
 // End of sentence punctuation
-const EOSPunc = /([.?!])/g;
+const EOSPuncRegex = /([.?!])/g;
+const nonWhitespaceRegex = /[^\s\\]/;
 // Styled in Home.js
 const sentenceClasses = {
   base: 'editor__sentence',
@@ -103,14 +104,19 @@ function split(doc) {
 
     if (node.isText) {
       let match;
-      // Record blocks of text between each match of "EOSPunc"
+      // Record blocks of text between each match of "EOSPuncRegex"
       // eslint-disable-next-line no-cond-assign
-      while (match = EOSPunc.exec(node.text)) {
+      while (match = EOSPuncRegex.exec(node.text)) {
         const end = match.index + 1;
         record(start, end, position, node);
-        // Assumes one space is between each sentence
-        // Should really be position of the first char after end
-        start = end + 1;
+
+        start = end;
+
+        // Ignore whitespace, find next character position
+        const nextCharacter = node.text.substring(end).match(nonWhitespaceRegex);
+        if (nextCharacter) {
+          start += nextCharacter.index;
+        }
       }
 
       // Record remaining text untill end of node/line
