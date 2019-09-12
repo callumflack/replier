@@ -31,7 +31,7 @@
       </div>
     </draggable>
 
-    <div class="mt-8">
+    <div class="mt-8 flex justify-end">
       <button
         class="Button Button--continue"
         @click="exportReply"
