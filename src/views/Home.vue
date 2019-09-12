@@ -66,12 +66,9 @@ export default {
       event.preventDefault();
       // Get selected sentences
       const editorState = this.editor.state.edit;
-      const pluginState = selectionPlugin.getState(editorState);
-      const activeDecos = pluginState.decos
-        .find(null, null, spec => spec.selection.active);
 
       this.$store.commit('setEditorState', editorState.toJSON());
-      this.$store.commit('setSelections', activeDecos);
+      this.$store.commit('addMissingOrders');
       this.$router.push({ path: 'reply' });
     },
   },
@@ -207,15 +204,20 @@ export default {
 }
 
 .editor__sentence {
-  background-color: #B3E7FF22;
-  border: 1px solid #97B9E822;
   cursor: pointer;
+  border: 1px solid transparent;
 }
 
-.editor__sentence.sentence--selected,
 .editor__sentence:hover {
-  background-color: #B3E7FF88;
-  border: 1px solid #97B9E888;
+  background-color: #B3E7FF44;
+}
+
+.editor__sentence.sentence--selected {
+  background-color: #B3E7FF99;
+}
+
+.editor__sentence.sentence--group {
+  border-color: #97B9E8;
 }
 </style>
 
@@ -244,7 +246,8 @@ export default {
   @apply text-brand-primary;
   position: absolute;
   top: 0;
-  right: calc(0% - 200px);
+  right: 0;
+  transform: translateX(100%);
   width: 150px;
 }
 
