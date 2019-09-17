@@ -4,10 +4,14 @@
       <router-link to="/" class="Text-xl font-title font-bold text-brand-primary">
         <icon v-if="$route.name !== 'home'" name="arrow-back" class="mr-1" />{{ homeLabel }}
       </router-link>
-      <!-- <span :class="{ 'text-transparent': !timestamp }" class="Timestamp"> -->
-      <span class="Timestamp Text-xs ml-4">
-        {{ $store.state.timestamp }}
-      </span>
+      <div>
+        <span class="Timestamp Text-xs">
+          {{ $store.state.timestamp }}
+        </span>
+        <span class="Info Text-xs">
+          <icon name="info"></icon>
+        </span>
+      </div>
     </nav>
   </div>
 </template>
@@ -33,5 +37,17 @@ export default {
   @apply text-gray-mid;
   /* @apply text-brand-primary; */
   transition: opacity 0.5s ease-in;
+}
+
+.Info {
+  @apply ml-4 text-gray-mid;
+  transition: opacity 0.5s ease-in;
+}
+.Info:hover {
+  @apply text-brand-primary;
+}
+.Info svg {
+  height: 1.25em !important;
+  width: 1.25em !important;
 }
 </style>

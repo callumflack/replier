@@ -33,9 +33,9 @@
       </div>
     </draggable>
 
-    <div class="Block-sm-t flex justify-end">
+    <div class="ActionButton Block-sm-t">
       <button
-        class="Button"
+        class="Button font-title"
         @click="exportReply"
       >
         Export
@@ -167,29 +167,39 @@ export default {
 }
 
 /*
-  Affordances
+  Affordance buttons
  */
 .selection__options {
-  @apply absolute inset-0 text-right;
-  transform: translateX(-100%);
+  @apply absolute inset-0 right-auto text-right;
+  left: -2rem;
 }
 
 .selection .option-button {
-  @apply ml-4 align-middle;
-  /* @apply opacity-0; */
+  /* @apply align-middle; */
+  @apply opacity-0;
   @apply text-black;
   transition: opacity 250ms cubic-bezier(0.19, 1, 0.22, 1);
 }
-
-.selection:hover .option-button {
-  @apply opacity-50;
-  @apply cursor-pointer;
+.selection .option-button + .option-button {
+  /* @apply ml-1; */
+}
+.selection .option-button svg {
+  @apply bg-transparent rounded;
+  height: 1.25em !important;
+  width: 1.25em !important;
+  transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
+.selection:hover .option-button {
+  @apply opacity-33;
+  @apply cursor-pointer;
+}
 .selection:hover .option-button:hover {
   @apply opacity-100;
 }
-
+.selection .option-button:hover svg {
+  @apply bg-gray-light;
+}
 .selection .option-button.handle {
   @apply cursor-move;
 }

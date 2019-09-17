@@ -153,6 +153,14 @@ module.exports = {
       ...theme('colors'),
       default: theme('colors.gray.light', 'currentColor'),
     }),
+    opacity: {
+      0: '0',
+      25: '0.25',
+      33: '0.333',
+      50: '0.5',
+      75: '0.75',
+      100: '1',
+    },
     container: {
       center: true,
       padding: '2rem',

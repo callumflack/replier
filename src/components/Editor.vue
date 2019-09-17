@@ -1,11 +1,17 @@
 <template>
   <div class="relative">
-      <!-- @click="remove" -->
     <div
       v-if="!$store.state.timestamp"
       class="Placeholder Text-lg"
-    >Paste here…</div>
-    <div class="editor z-10" ref="editor" />
+    >
+      Paste here…
+    </div>
+    <div
+      class="editor z-10"
+      :class="{ 'text-brand-primary': !$store.state.timestamp}"
+      ref="editor"
+    >
+    </div>
   </div>
 </template>
 
@@ -156,6 +162,7 @@ export default {
 .Placeholder {
   @apply font-title text-brand-primary pl-6;
   @apply absolute;
+  margin-left: 3px;
 }
 /*
 

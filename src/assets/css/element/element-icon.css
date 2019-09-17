@@ -55,7 +55,7 @@
   transform: rotate(-90deg);
 }
 
-/* hack to avoid _fill */
+/* hack to avoid the svgicon underscore `fill` issue… */
 .no-fill {
   fill: none !important;
 }
