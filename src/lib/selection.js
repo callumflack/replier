@@ -266,7 +266,7 @@ export function selectionUI(dispatch) {
   // Use document event listener because plugin handleKeyDown
   // doesn't seem to trigger for every ctrl key press
   function resetGroupOnCtrl(event) {
-    if (event.ctrlKey) {
+    if (event.ctrlKey || event.metaKey) {
       g_group.reset();
     }
   }
@@ -274,6 +274,11 @@ export function selectionUI(dispatch) {
   document.addEventListener('keyup', resetGroupOnCtrl);
 
   function handleClick(view, _, event) {
+    if (event.button !== 0) {
+      // Only handle left clicks
+      return true;
+    }
+
     // Remember return true to stop prosemirror parent selection on ctrl clicking
     if (!event.target.className.includes(sentenceClasses.base)) {
       // Ensure click is really on a decorator
@@ -290,7 +295,8 @@ export function selectionUI(dispatch) {
 
     if (!selection) return true;
 
-    const wasGroupClick = event.ctrlKey;
+    // Ctrl for Windows & Linux, Cmd (metaKey) for Mac
+    const wasGroupClick = event.ctrlKey || event.metaKey;
     dispatch(view.state.tr.setMeta(selectionPlugin, { type: 'toggleSelect', selection, wasGroupClick }));
 
     return true;
