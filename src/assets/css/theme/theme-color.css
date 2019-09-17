@@ -20,16 +20,16 @@
   --color-highlight: hsl(var(--accent-hue), 70%, 45%);
 
   /* sentence groups */
-  --hue-group-2: 25; /* Orange */
-  --hue-group-3: 111; /* Green */
-  --hue-group-4: 233; /* Green */
+  --hue-group-2: 11; /* Orange */
+  --hue-group-3: 122; /* Green */
+  --hue-group-4: 233; /* Purple */
 
-  --group-bg: var(--color-selected);
-  --group-color: var(--color-normal);
-  --group-2-color: hsla(var(--hue-group-2), 100%, 50%, 1);
-  --group-2-bg: hsla(var(--hue-group-2), 100%, 50%, var(--alpha-selected));
-  --group-3-color: hsla(var(--hue-group-3), 100%, 50%, 1);
-  --group-3-bg: hsla(var(--hue-group-3), 100%, 50%, var(--alpha-selected));
-  --group-4-color: hsla(var(--hue-group-4), 100%, 50%, 1);
-  --group-4-bg: hsla(var(--hue-group-4), 100%, 50%, var(--alpha-selected));
+  --group-color: hsla(var(--hue), 100%, 50%, 1);
+  --group-bg: hsla(var(--hue), 100%, 50%, var(--alpha-selected));
+  --group-2-color: hsla(var(--hue-group-2), 100%, 40%, 1);
+  --group-2-bg: hsla(var(--hue-group-2), 100%, 40%, var(--alpha-selected));
+  --group-3-color: hsla(var(--hue-group-3), 100%, 40%, 1);
+  --group-3-bg: hsla(var(--hue-group-3), 100%, 40%, var(--alpha-selected));
+  --group-4-color: hsla(var(--hue-group-4), 100%, 40%, 1);
+  --group-4-bg: hsla(var(--hue-group-4), 100%, 40%, var(--alpha-selected));
 }

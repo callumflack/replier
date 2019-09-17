@@ -195,8 +195,10 @@ export default {
   background-color: var(--color-hover);
 }
 
-.editor__sentence.sentence--selected {
+.sentence--selected {
+  @apply border-b;
   background-color: var(--color-selected);
+  border-color: var(--color-normal);
 }
 
 /*
@@ -205,11 +207,19 @@ export default {
 
  */
 
-/* colors */
-/* .sentence--group {
-  --group-bg: var(--color-selected);
-  --group-color: var(--color-normal);
-} */
+.sentence--group {
+  @apply relative;
+  /* @apply border-t; */
+  @apply border-b;
+  background-color: var(--group-bg);
+  border-color: var(--group-color);
+}
+.sentence--group:first-of-type {
+  /* @apply border-l; */
+}
+.sentence--group:last-of-type {
+  /* @apply border-r; */
+}
 .sentence--group-2 {
   --group-bg: var(--group-2-bg);
   --group-color: var(--group-2-color);
@@ -223,28 +233,17 @@ export default {
   --group-color: var(--group-4-color);
 }
 
-.editor__sentence.sentence--group {
-  @apply relative border-t border-b;
-  background-color: var(--group-bg);
-  border-color: var(--group-color);
-}
-.editor__sentence.sentence--group:first-of-type {
-  /* @apply border-l; */
-}
-.editor__sentence.sentence--group:last-of-type {
-  /* @apply border-r; */
-}
-.editor__sentence.sentence--group + .sentence--group,
-.editor__sentence.sentence--group + em > .sentence--group,
-.editor__sentence.sentence--group + strong > .sentence--group {
+.sentence--group + .sentence--group,
+.sentence--group + em > .sentence--group,
+.sentence--group + strong > .sentence--group {
   /* @apply -ml-2px; */
 }
 .sentence--group:last-of-type:after,
-.editor__sentence.sentence--group + .sentence--group:last-of-type:after,
-.editor__sentence.sentence--group + em > .sentence--group:last-of-type:after,
-.editor__sentence.sentence--group + strong > .sentence--group:last-of-type:after,
-em + .editor__sentence.sentence--group:last-of-type:after,
-strong + .editor__sentence.sentence--group:last-of-type:after {
+.sentence--group + .sentence--group:last-of-type:after,
+.sentence--group + em > .sentence--group:last-of-type:after,
+.sentence--group + strong > .sentence--group:last-of-type:after,
+em + .sentence--group:last-of-type:after,
+strong + .sentence--group:last-of-type:after {
   @apply absolute top-0 right-0;
   @apply text-white;
   @apply font-normal not-italic;
