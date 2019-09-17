@@ -16,6 +16,8 @@ const sentenceClasses = {
   selected: 'sentence--selected',
   group: 'sentence--group',
 };
+// Track unique groupIds to set unique group class based number of groups
+const groupIds = [];
 
 function randomID() {
   return Math.floor(Math.random() * 0xffffffff);
@@ -73,8 +75,15 @@ function deco(from, to, selection) {
   }
 
   if (selection.groupId) {
+    let groupIndex = groupIds.indexOf(selection.groupId);
+
+    if (groupIndex === -1) {
+      groupIds.push(selection.groupId);
+      groupIndex = groupIds.length - 1;
+    }
+
     cls += ` ${sentenceClasses.group}`;
-    cls += ` ${sentenceClasses.group}-${selection.groupId}`;
+    cls += ` ${sentenceClasses.group}-${(groupIndex % 10) + 1}`;
   }
 
   return Decoration.inline(from, to, { class: cls }, { selection });
@@ -240,14 +249,14 @@ class SelectionState {
     }
 
     updateSelectionsInStore(decos);
-    return new SelectionState(decos);
+    return new SelectionState(decos, this.groupIds);
   }
 
   static init(config) {
     const activeDecos = config.selections;
     let decos = splitDeco(config.doc, activeDecos);
     decos = DecorationSet.create(config.doc, decos);
-    return new SelectionState(decos);
+    return new SelectionState(decos, this.groupIds);
   }
 }
 
