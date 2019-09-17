@@ -6,17 +6,30 @@
 
 :root {
   /* hues */
-  --hue: 201;
   --hue: 211;
   --accent-hue: 25; /* Orange */
 
   /* alphas */
   --alpha-hover: 0.3;
-  --alpha-selected: 0.15;
+  --alpha-selected: 0.125;
 
   /* merged */
   --color-normal: hsla(var(--hue), 100%, 50%, 1);
   --color-hover: hsla(var(--hue), 100%, 50%, var(--alpha-hover));
   --color-selected: hsla(var(--hue), 100%, 50%, var(--alpha-selected));
   --color-highlight: hsl(var(--accent-hue), 70%, 45%);
+
+  /* sentence groups */
+  --hue-group-2: 25; /* Orange */
+  --hue-group-3: 111; /* Green */
+  --hue-group-4: 233; /* Green */
+
+  --group-bg: var(--color-selected);
+  --group-color: var(--color-normal);
+  --group-2-color: hsla(var(--hue-group-2), 100%, 50%, 1);
+  --group-2-bg: hsla(var(--hue-group-2), 100%, 50%, var(--alpha-selected));
+  --group-3-color: hsla(var(--hue-group-3), 100%, 50%, 1);
+  --group-3-bg: hsla(var(--hue-group-3), 100%, 50%, var(--alpha-selected));
+  --group-4-color: hsla(var(--hue-group-4), 100%, 50%, 1);
+  --group-4-bg: hsla(var(--hue-group-4), 100%, 50%, var(--alpha-selected));
 }
