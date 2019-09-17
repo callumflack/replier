@@ -33,7 +33,7 @@
       </div>
     </draggable>
 
-    <div class="ActionButton Block-sm-t">
+    <div class="ActionButton">
       <button
         class="Button font-title"
         @click="exportReply"
@@ -181,7 +181,7 @@ export default {
   transition: opacity 250ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 .selection .option-button + .option-button {
-  /* @apply ml-1; */
+  @apply ml-2px;
 }
 .selection .option-button svg {
   @apply bg-transparent rounded;

@@ -24,6 +24,10 @@ module.exports = {
         bluelight: blueLight,
         neutral: '#FAF8F5',
       },
+      group: {
+        2: 'hsl(110, 63%, 43%)',
+        3: 'hsl(179, 63%, 43%)',
+      },
       gray: {
         light: '#eaeaea',
         mid: '#aaa',
@@ -56,6 +60,7 @@ module.exports = {
       48: '12rem',
       56: '14rem',
       64: '16rem',
+      96: '24rem',
     },
     screens: {
       sm: '640px',

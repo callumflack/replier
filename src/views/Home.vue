@@ -3,7 +3,7 @@
     <Editor class="editor" :editor.sync="editor" />
 
     <div
-      class="ActionButton Block-sm-t"
+      class="ActionButton"
       :class="{ 'is-active': $store.state.selections.length }"
     >
       <button
