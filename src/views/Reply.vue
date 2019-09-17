@@ -57,6 +57,13 @@ export default {
       groupedSelections: [],
     };
   },
+  /* head() {
+    return {
+      htmlAttrs: {
+        class: `page${this.currentPageClass}`,
+      },
+    };
+  }, */
   methods: {
     groupSelections() {
       const selections = this.$store.state.selections;
@@ -143,6 +150,7 @@ export default {
   mounted() {
     this.goBackIfSelectionsEmpty();
     this.groupSelections();
+    document.documentElement.classList.add('bg-brand-neutral');
   },
 };
 </script>
@@ -215,6 +223,7 @@ export default {
   --button-padding-x: 0;
   @apply font-title font-medium text-brand-primary;
   @apply leading-relaxed;
+  @apply bg-transparent;
   /* @apply border; */
   font-size: calc(theme(fontSize.xl) * var(--text-ratio) - 1px);
   transition: border-color 0.2s;

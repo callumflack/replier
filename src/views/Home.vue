@@ -50,6 +50,9 @@ export default {
       this.$router.push({ path: 'reply' });
     },
   },
+  mounted() {
+    document.documentElement.classList.remove('bg-brand-neutral');
+  },
 };
 </script>
 
