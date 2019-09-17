@@ -32,3 +32,12 @@ export default {
   },
 };
 </script>
+
+<style lang="postcss">
+  .fade-in-right .fade-in-right-enter-active,
+  .fade-in-right .fade-in-right-leave-active,
+  .fade-in-left .fade-in-left-enter-active,
+  .fade-in-left .fade-in-left-leave-active {
+    /* transition: all 10s ease !important; */
+  }
+</style>
