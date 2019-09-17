@@ -10,26 +10,31 @@
 @import "./tailwind/base.css";
 
 /* CFd standard components */
-@import "./theme/font-face";
-@import "./theme/layout";
-@import "./theme/layout-grid";
-@import "./theme/layout-block";
-@import "./theme/layout-container";
-@import "./theme/layout-column";
-@import "./theme/layout-media";
-@import "./theme/typography-scale";
-@import "./theme/typography-link";
-@import "./theme/typography-text";
-@import "./theme/typography-headings";
-@import "./theme/typography-spacing";
-@import "./theme/typography-prosemirror";
-@import "./theme/button";
-@import "./theme/form";
-@import "./theme/icon";
+@import "./theme/theme-color";
+@import "./theme/theme-fontface";
+
+@import "./layout/layout-base";
+@import "./layout/layout-grid";
+@import "./layout/layout-block";
+@import "./layout/layout-container";
+@import "./layout/layout-column";
+@import "./layout/layout-media";
+
+@import "./typography/typography-scale";
+@import "./typography/typography-link";
+@import "./typography/typography-text";
+@import "./typography/typography-headings";
+@import "./typography/typography-spacing";
+@import "./typography/typography-prosemirror";
+
+@import "./element/element-button";
+@import "./element/element-form";
+@import "./element/element-icon";
 
 /* CFd custom components */
-@import "./theme/banner";
-@import "./theme/box";
+@import "./custom/custom-box";
+@import "./custom/custom-banner";
+@import "./custom/custom-action-button";
 @import "./theme/theme-modal";
 @import "./theme/theme-slider";
 
@@ -37,5 +42,4 @@
 @import "./tailwind/utilities.css";
 
 /* CFd custom utils */
-/* @import "./theme/typography-linebreak"; */
-@import "./theme/aria";
+@import "./element/element-aria";

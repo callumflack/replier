@@ -2,7 +2,7 @@
 .container--su {
   max-width: none !important;
 }
-@screen su {
+@screen xl {
   .container--su {
     padding-left: 7vw !important;
     padding-right: 7vw !important;

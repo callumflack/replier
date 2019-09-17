@@ -1,0 +1,51 @@
+/*
+
+  Sans
+
+ */
+
+@font-face {
+    font-family:"PictureHouse One";
+    src:
+      url("/../../fonts/MB-PictureHouse-One-W01-Regular.woff") format("woff2"),
+      url("/../../fonts/MB-PictureHouse-One-W01-Regular.woff") format("woff");
+    font-style: normal;
+    font-weight: 400;
+}
+@font-face {
+    font-family:"PictureHouse One";
+    src:
+      url("/../../fonts/MB-PictureHouse-One-W01-Bold.woff") format("woff2"),
+      url("/../../fonts/MB-PictureHouse-One-W01-Bold.woff") format("woff");
+    font-style: normal;
+    font-weight: 700;
+}
+
+/*
+
+  Mono
+  https://gist.github.com/AndrewBarba/2c0f6612ceef30f5f55d
+
+ */
+
+@font-face {
+  font-family: "SF Mono";
+  font-weight: 400;
+  src: url("https://sf.abarba.me/SFMono-Regular.otf");
+}
+@font-face {
+  font-family: "SF Mono";
+  font-weight: 500;
+  src: url("https://sf.abarba.me/SFMono-Medium.otf");
+}
+@font-face {
+  font-family: "SF Mono";
+  font-weight: 700;
+  src: url("https://sf.abarba.me/SFMono-Bold.otf");
+}
+@font-face {
+  font-family: "SF Mono";
+  font-weight: 800;
+  src: url("https://sf.abarba.me/SFMono-Heavy.otf");
+}
+

@@ -1,6 +1,6 @@
 <template>
-  <div class="container Block-sm max-w-5xl">
-    <router-link to="/" class="Link mb-8 block opacity-75">Return to Editor</router-link>
+  <div class="container Block-sm max-w-3xl">
+    <!-- <router-link to="/" class="Link mb-8 block opacity-75">Return to Editor</router-link> -->
 
     <draggable v-model="groupedSelections" handle=".handle" @end="end">
       <div
@@ -9,21 +9,23 @@
         :key="selection.id"
       >
         <div class="selection__options">
-          <button
-            class="option-button handle"
-          >&#9776;</button>
+          <button class="option-button handle">
+            <icon name="grip" />
+          </button>
           <button
             @click="(event) => deleteSelection(event, selection)"
             class="option-button delete-button"
-          >&#10005;</button>
+          >
+            <icon name="delete" />
+          </button>
         </div>
         <div class="selection-content">
           <div class="selection-header s-p">
-           "{{ selection.text }}"
+            {{ selection.text }}
           </div>
           <textarea
             class="reply-input Input"
-            placeholder="Reply..."
+            placeholder="Reply…"
             rows="3"
             @input="(event) => handleInput(event, selection)"
             >{{ findReply(selection) }}</textarea>
@@ -31,11 +33,13 @@
       </div>
     </draggable>
 
-    <div class="mt-8 flex justify-end">
+    <div class="Block-sm-t flex justify-end">
       <button
-        class="Button Button--continue"
+        class="Button"
         @click="exportReply"
-      >Export</button>
+      >
+        Export
+      </button>
     </div>
   </div>
 </template>
@@ -143,36 +147,14 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="postcss" scoped>
 .selection {
-  @apply mb-12 flex relative;
+  @apply relative flex px-6;
+  @apply cursor-default;
 }
-
-.selection__options {
-  @apply px-8 absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  transform: translateX(-100%);
-}
-
-.selection .option-button {
-  @apply ml-4;
-  opacity: 0;
-  transition: opacity 0.2s;
-  vertical-align: middle;
-}
-
-.selection:hover .option-button {
-  opacity: 0.50;
-}
-
-.selection:hover .option-button:hover {
-  opacity: 1;
-}
-
-.selection .delete-button {
-  @apply text-red text-3xl;
+.selection:not(:last-of-type) {
+  /* less than Block-sm-b */
+  margin-bottom: calc(theme(spacing.10) * var(--block-size-ratio));
 }
 
 .selection-content {
@@ -180,11 +162,51 @@ export default {
 }
 
 .selection-header {
-  font-weight: bold;
+  /* @apply font-semibold; */
+  /* @apply text-gray-dark; */
 }
 
+/*
+  Affordances
+ */
+.selection__options {
+  @apply absolute inset-0 text-right;
+  transform: translateX(-100%);
+}
+
+.selection .option-button {
+  @apply ml-4 align-middle;
+  /* @apply opacity-0; */
+  @apply text-black;
+  transition: opacity 250ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.selection:hover .option-button {
+  @apply opacity-50;
+  @apply cursor-pointer;
+}
+
+.selection:hover .option-button:hover {
+  @apply opacity-100;
+}
+
+.selection .option-button.handle {
+  @apply cursor-move;
+}
+
+.selection .delete-button {
+  /* @apply text-form-bad text-3xl; */
+}
+
+/*
+  Inputs
+ */
 .reply-input {
-  @apply border;
+  --button-padding-x: 0;
+  @apply font-title font-medium text-brand-primary;
+  @apply leading-relaxed;
+  /* @apply border; */
+  font-size: calc(theme(fontSize.xl) * var(--text-ratio) - 1px);
   transition: border-color 0.2s;
 }
 .reply-input:focus {

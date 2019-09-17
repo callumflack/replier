@@ -1,22 +1,29 @@
 <template>
-  <div class="main-block Block-sm container max-w-5xl">
+  <div class="container max-w-3xl relative">
     <Editor class="editor" :editor.sync="editor" :timestamp.sync="timestamp" />
 
-    <div class="mt-4 flex justify-between">
-      <p
-        :class="{ 'timestamp--transparent': !timestamp }"
-        class="timestamp"
-      >{{ timestamp }}</p>
+    <div
+      class="ActionButton Block-sm-t"
+      :class="{ 'is-active': $store.state.selections.length }"
+    >
+      <!-- <p :class="{ 'text-transparent': !timestamp }" class="timestamp">
+        {{ timestamp }}
+      </p> -->
       <button
-        class="Button Button--continue"
+        class="Button font-title"
         @click="handleContinueClick"
         :disabled="!$store.state.selections.length"
       >Reply</button>
     </div>
 
     <aside class="aside-map">
-      <p v-for="selection in $store.state.selections" :key="selection.type.spec.selection.id ">
-        {{ selection.type.spec.selection.text }}
+      <p
+        v-for="selection in $store.state.selections"
+        :key="selection.type.spec.selection.id "
+      >
+        <span>
+          {{ selection.type.spec.selection.text }}
+        </span>
       </p>
     </aside>
   </div>
@@ -50,36 +57,21 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="postcss" scoped>
 .editor {
-  height: 75vh;
-}
-
-.timestamp {
-  opacity: 0.7;
-  transition: opacity 0.5s ease-in;
-  float: left;
-}
-
-.timestamp--transparent {
-  opacity: 0;
-}
-
-.main-block {
-  position: relative;
+  min-height: 40vh;
 }
 
 .aside-map {
-  @apply text-brand-primary;
-  position: absolute;
-  top: 0;
-  right: 0;
+  @apply absolute top-0 right-0;
   transform: translateX(100%);
   width: 150px;
 }
-
 .aside-map p {
-  @apply block mb-2;
-  font-size: 0.40rem;
+  @apply text-transparent mb-2;
+  font-size: 0.4rem;
+}
+.aside-map span {
+  background-color: var(--color-selected);
 }
 </style>

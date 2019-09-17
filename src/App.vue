@@ -1,16 +1,22 @@
 <template>
   <div id="app">
-    <div id="nav" class="container Block-sm max-w-5xl">
-      <router-link to="/">Corvid Writing</router-link>
-    </div>
+    <!-- <nav id="nav" class="container max-w-3xl Block-md-t Block-sm-b">
+      <router-link to="/" class="font-title">Corvid Writing</router-link>
+    </nav> -->
+    <NavBar></NavBar>
     <vue-page-transition :name="transitionName">
-      <router-view/>
+      <router-view />
     </vue-page-transition>
   </div>
 </template>
 
 <script>
+import NavBar from '@/components/NavBar.vue';
+
 export default {
+  components: {
+    NavBar,
+  },
   data() {
     return {
       // Default for home page which doesn't trigger $route watcher
@@ -26,9 +32,3 @@ export default {
   },
 };
 </script>
-
-<style>
-#nav a.router-link-active {
-  @apply text-brand-primary;
-}
-</style>

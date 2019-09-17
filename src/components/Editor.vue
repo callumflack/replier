@@ -1,5 +1,12 @@
 <template>
-  <div class="editor" ref="editor" />
+  <div class="relative">
+      <!-- @click="remove" -->
+    <div
+      v-if="!timestamp"
+      class="Placeholder Text-lg"
+    >Paste here…</div>
+    <div class="editor z-10" ref="editor" />
+  </div>
 </template>
 
 <script>
@@ -148,50 +155,54 @@ export default {
 };
 </script>
 
-<style>
-/* Unscoped styles for ProseMirror elements */
+<style lang="postcss">
+.Placeholder {
+  @apply font-title text-brand-primary pl-6;
+  @apply absolute;
+}
+/*
 
+  Unscoped styles for ProseMirror elements
+  1. Required: https://github.com/ProseMirror/prosemirror/issues/651#issuecomment-313436150
+  2. Set vertical padding to bottom of vertical scrolling editor
+  3. Wrap inner content padding
+
+*/
 .ProseMirror {
   --vertical-padding: 1.8rem;
 
-  outline: none;
-  padding: var(--vertical-padding) 2rem;
-  overflow-y: scroll;
-  height: 100%;
-  /* REQUIRED: https://github.com/ProseMirror/prosemirror/issues/651#issuecomment-313436150 */
-  white-space: pre-wrap;
+  @apply h-full outline-none overflow-y-scroll;
+  @apply whitespace-pre-wrap; /* 1 */
+  @apply px-6;
+  /* padding: var(--vertical-padding) theme(spacing.6); */
 }
 
-/* Set vertical padding to bottom of vertical scrolling editor */
 .ProseMirror:after {
+  @apply block w-full;
   content: "";
-  display: block;
-  height: var(--vertical-padding);
-  width: 100%;
+  height: var(--vertical-padding); /* 2 */
 }
 
 .editor__sentence {
-  cursor: pointer;
-  border: 1px solid transparent;
+  @apply cursor-pointer border-transparent;
 }
 
 .editor__sentence:hover {
-  background-color: #B3E7FF44;
+  background-color: var(--color-hover);
 }
 
 .editor__sentence.sentence--selected {
-  background-color: #B3E7FF99;
+  background-color: var(--color-selected);
 }
 
 .editor__sentence.sentence--group {
-  border-color: #97B9E8;
+  @apply border-brand-primary;
 }
 </style>
 
-<style scoped>
+<style lang="postcss" scoped>
 .editor {
-  @apply border;
-  /* Wrap inner content padding */
-  overflow: auto;
+  /* @apply border; */
+  @apply overflow-auto; /* 3 */
 }
 </style>

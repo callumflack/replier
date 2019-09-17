@@ -20,23 +20,25 @@
 
   --button-bg-color: var(--button-invert-color);
   --button-bg-color-hover: var(--button-invert-color);
+  --button-border-color: var(--button-invert-color);
   --button-border-width: 1px;
   --button-border-radius: 2px;
   --button-box-shadow-color: var(--button-invert-color);
   --button-box-shadow-stroke-hover: 1px;
   --button-box-shadow-stroke-active: 2px;
   --button-box-shadow-stroke-inset: 1px;
-  --button-disabled-opacity: 0.3;
+  --button-disabled-opacity: 0.6;
   --button-font-case: initial;
-  --button-font-weight: 500;
-  --button-height: 36px;
+  --button-font-weight: 700;
+  --button-height: 44px;
   --button-inline-spacing: 0;
-  --button-padding-x: 1em;
+  --button-padding-x: 2em;
 
   --input-placeholder-color: theme(colors.text);
 
   align-items: center;
   background-color: var(--button-bg-color);
+  border-color: var(--button-border-color);
   border-radius: var(--button-border-radius);
   border-style: solid;
   border-width: var(--button-border-width);
@@ -53,7 +55,8 @@
   position: relative;
   text-decoration: none;
   text-transform: var(--button-font-case);
-  padding-bottom: calc((2 / 15) * 1em); /* 2 */
+  user-select: none;
+  padding-bottom: calc((1 / 15) * 1em); /* 2 */
 }
 
 /*
@@ -62,19 +65,25 @@
 
 .ButtonComplex:hover .Button,
 .ButtonComplex:focus .Button,
-.ButtonComplex:active .Button {
+.ButtonComplex:active .Button,
+.Button:hover,
+.Button:focus,
+.Button:active {
   --button-bg-color: var(--button-bg-color-hover);
   outline: 0;
   text-decoration: none;
 }
 
-.ButtonComplex:hover .Button {
+.ButtonComplex:hover .Button,
+.Button:hover {
   box-shadow:
     var(--button-box-shadow-color) 0 0 0 var(--button-box-shadow-stroke-hover);
 }
 
 .ButtonComplex:focus .Button,
-.ButtonComplex:active .Button {
+.ButtonComplex:active .Button,
+.Button:active,
+.Button:focus {
   box-shadow:
     var(--button-box-shadow-color) 0 0 0 var(--button-box-shadow-stroke-active);
 }
@@ -110,23 +119,23 @@ button:disabled {
   --button-box-shadow-color: theme(colors.brand.blue);
   --button-font-weight: 400;
   /* unlike buttons, inputs are full width */
-  @apply w-full;
+  @apply w-full cursor-text leading-normal;
 }
 
-.Input::placholder {
-  color: var(--input-placeholder-color); /* still dims it */
+.Input::placeholder {
+  @apply opacity-100; /* override Tailwind */
+  color: var(--input-placeholder-color);
 }
 
 /* in forms, make height & radius consistent for both inputs & buttons */
 .Input,
 .Form .Button {
   --button-border-radius: 0;
-  --button-height: 44px;
+  --button-height: 48px;
 }
 /* …but not for textareas */
 textarea.Input {
   height: auto;
-  @apply py-4;
 }
 
 /*
@@ -153,7 +162,7 @@ textarea.Input {
 
 .Button--lg {
   --button-height: 60px;
-  --button-padding-x: 2rem;
+  --button-padding-x: 1.5em;
   /* padding-bottom: calc((2.5 / 15) * 1em); */
 }
 
@@ -185,10 +194,16 @@ textarea.Input {
 }
 
 .ButtonComplex .Button--outline,
-.Button--outline {
-  --button-color: theme(colors.brand.primary);
+.Button--outline,
+.Button--invisible {
+  --button-color: theme(colors.text);
   --button-bg-color: transparent;
-  --button-bg-color-hover: var(--bg-color-hover);
+  --button-bg-color-hover: transparent;
+}
+
+.Button--invisible {
+  --button-border-color: transparent;
+  --button-invert-color: theme(colors.text);
 }
 
 .Button--whiteOutline {
@@ -204,11 +219,3 @@ textarea.Input {
   background-color: rgba(0,0,0,0.5);
 }
 
-
-.Button--continue {
-  @apply Button--lg;
-  --button-height: 47px;
-  --button-font-weight: bold;
-  --button-font-case: uppercase;
-  --button-border-width: 0;
-}

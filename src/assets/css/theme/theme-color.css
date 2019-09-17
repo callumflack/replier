@@ -1,0 +1,22 @@
+/*
+
+  Based on Apple's blue: rgb(0,122,255)
+
+ */
+
+:root {
+  /* hues */
+  --hue: 201;
+  --hue: 211;
+  --accent-hue: 25; /* Orange */
+
+  /* alphas */
+  --alpha-hover: 0.3;
+  --alpha-selected: 0.15;
+
+  /* merged */
+  --color-normal: hsla(var(--hue), 100%, 50%, 1);
+  --color-hover: hsla(var(--hue), 100%, 50%, var(--alpha-hover));
+  --color-selected: hsla(var(--hue), 100%, 50%, var(--alpha-selected));
+  --color-highlight: hsl(var(--accent-hue), 70%, 45%);
+}

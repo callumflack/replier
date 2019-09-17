@@ -19,7 +19,7 @@
 }
 .Block--hgroup {
   /* margin-top: calc(theme(spacing.12) - theme(spacing.3)); */
-  margin-top: calc((theme(spacing.24) - theme(spacing.8)) * var(--block-size-ratio));
+  margin-top: calc((theme(spacing.24) - theme(spacing.12)) * var(--block-size-ratio));
 }
 .Block--footer {
   /* margin-top: calc(theme(spacing.12) - theme(spacing.3)); */
@@ -42,14 +42,14 @@
 /* SM */
 
 .Block-sm {
-  margin-top: calc(theme(spacing.10) * var(--block-size-ratio));
-  margin-bottom: calc(theme(spacing.10) * var(--block-size-ratio));
+  margin-top: calc(theme(spacing.12) * var(--block-size-ratio));
+  margin-bottom: calc(theme(spacing.12) * var(--block-size-ratio));
 }
 .Block-sm-b {
-  margin-bottom: calc(theme(spacing.10) * var(--block-size-ratio));
+  margin-bottom: calc(theme(spacing.12) * var(--block-size-ratio));
 }
 .Block-sm-t {
-  margin-top: calc(theme(spacing.10) * var(--block-size-ratio));
+  margin-top: calc(theme(spacing.12) * var(--block-size-ratio));
 }
 
 

@@ -31,14 +31,14 @@
 }
 
 .s-p {
-  margin-bottom: calc(theme(spacing.3) * var(--space-ratio));
+  margin-bottom: calc(theme(spacing.6) * var(--space-ratio));
 }
 .st-p {
-  margin-top: calc(theme(spacing.2) * var(--space-ratio));
+  margin-top: calc(theme(spacing.6) * var(--space-ratio));
 }
 .sy-p {
-  margin-top: calc(theme(spacing.2) * var(--space-ratio));
-  margin-bottom: calc(theme(spacing.2) * var(--space-ratio));
+  margin-top: calc(theme(spacing.6) * var(--space-ratio));
+  margin-bottom: calc(theme(spacing.6) * var(--space-ratio));
 }
 
 /*
