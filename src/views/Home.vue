@@ -1,14 +1,11 @@
 <template>
   <div class="container max-w-3xl relative">
-    <Editor class="editor" :editor.sync="editor" :timestamp.sync="timestamp" />
+    <Editor class="editor" :editor.sync="editor" />
 
     <div
       class="ActionButton Block-sm-t"
       :class="{ 'is-active': $store.state.selections.length }"
     >
-      <!-- <p :class="{ 'text-transparent': !timestamp }" class="timestamp">
-        {{ timestamp }}
-      </p> -->
       <button
         class="Button font-title"
         @click="handleContinueClick"
@@ -40,7 +37,6 @@ export default {
   data() {
     return {
       editor: null,
-      timestamp: null,
     };
   },
   methods: {

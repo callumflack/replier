@@ -6,7 +6,7 @@
       </router-link>
       <!-- <span :class="{ 'text-transparent': !timestamp }" class="Timestamp"> -->
       <span class="Timestamp Text-xs ml-4">
-        10:58, 17 September 2019
+        {{ $store.state.timestamp }}
       </span>
     </nav>
   </div>
@@ -14,9 +14,6 @@
 
 <script>
 export default {
-  props: {
-    timestamp: String,
-  },
   computed: {
     homeLabel() {
       return this.$route.name === 'home' ? 'Corvid Writing' : 'Corral mode';

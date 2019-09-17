@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    timestamp: null,
     editorState: null,
     selections: [],
     // Keyed by selection ids
@@ -14,6 +15,9 @@ export default new Vuex.Store({
   mutations: {
     setEditorState(state, editorState) {
       state.editorState = editorState;
+    },
+    setTimestamp(state, timestamp) {
+      state.timestamp = timestamp;
     },
     setSelections(state, selections) {
       state.selections = selections;

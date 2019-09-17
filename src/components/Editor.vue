@@ -2,7 +2,7 @@
   <div class="relative">
       <!-- @click="remove" -->
     <div
-      v-if="!timestamp"
+      v-if="!$store.state.timestamp"
       class="Placeholder Text-lg"
     >Paste here…</div>
     <div class="editor z-10" ref="editor" />
@@ -15,7 +15,6 @@ import { EditorView } from 'prosemirror-view';
 import { schema } from 'prosemirror-schema-basic';
 import { exampleSetup } from 'prosemirror-example-setup';
 
-import store from '@/store';
 import { selectionPlugin, selectionUI } from '@/lib/selection';
 
 function formatDate(date) {
@@ -42,7 +41,6 @@ export default {
   data() {
     return {
       editor: null,
-      timestamp: null,
     };
   },
   mounted() {
@@ -93,9 +91,8 @@ export default {
           });
           this.state = new State(editState);
         } else if (action.type === 'transaction') {
-          if (!that.timestamp) {
-            that.timestamp = formatDate(new Date());
-            that.$emit('update:timestamp', that.timestamp);
+          if (!that.$store.state.timestamp) {
+            that.$store.commit('setTimestamp', formatDate(new Date()));
           }
 
           newEditState = this.state.edit.apply(action.transaction);
@@ -123,10 +120,10 @@ export default {
       start() {
         // Check for persisted state
         // fallback to default initData
-        const doc = store.state.editorState
-          ? store.state.editorState.doc
+        const doc = that.$store.state.editorState
+          ? that.$store.state.editorState.doc
           : initData.doc;
-        const selections = store.state.selections || initData.selections;
+        const selections = that.$store.state.selections || initData.selections;
 
         this.dispatch({
           type: 'loaded',
