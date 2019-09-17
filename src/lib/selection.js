@@ -220,9 +220,10 @@ class SelectionState {
                 deco(prevSelectedDeco.from, prevSelectedDeco.to, updatedPrevSelection),
               ]);
             }
+
+            newSelection.groupId = g_group.id;
           }
 
-          newSelection.groupId = g_group.id;
           g_group.lastSelection = newSelection;
         }
       }
@@ -263,24 +264,30 @@ export const selectionPlugin = new Plugin({
 // Selection UI
 
 export function selectionUI(dispatch) {
-  // Use document event listener because plugin handleKeyDown
-  // doesn't seem to trigger for every ctrl key press
-  function resetGroupOnCtrl(event) {
-    if (event.ctrlKey) {
+  function modiferPressed(event) {
+    return event.ctrlKey || event.metaKey;
+  }
+
+  function resetGroupOnModifierPress(event) {
+    if (modiferPressed(event)) {
       g_group.reset();
     }
   }
-  document.addEventListener('keydown', resetGroupOnCtrl);
-  document.addEventListener('keyup', resetGroupOnCtrl);
+
+  document.addEventListener('keydown', resetGroupOnModifierPress);
+  document.addEventListener('keyup', resetGroupOnModifierPress);
 
   function handleClick(view, _, event) {
-    // Remember return true to stop prosemirror parent selection on ctrl clicking
-    if (!event.target.className.includes(sentenceClasses.base)) {
-      // Ensure click is really on a decorator
-      // Using DecorationSet.find (selectionsAt) ProseMirror will return the last decorator
-      // on the same line even if it's not under the cursor.
-      return true;
-    }
+    // Remember to return true to stop prosemirror parent selection on ctrl clicking
+
+    // Only handle left clicks
+    if (event.button !== 0) return true;
+
+    // If click is not on a decoration element
+    // Using DecorationSet.find (selectionsAt) ProseMirror will return the last decorator
+    // on the same line even if it's not under the cursor.
+    const wasDecorationClick = event.target.className.includes(sentenceClasses.base);
+    if (!wasDecorationClick) return true;
 
     const sel = view.state.selection;
     if (!sel.empty) return true;
@@ -290,7 +297,8 @@ export function selectionUI(dispatch) {
 
     if (!selection) return true;
 
-    const wasGroupClick = event.ctrlKey;
+    // Ctrl for Windows & Linux, Cmd (metaKey) for Mac
+    const wasGroupClick = event.ctrlKey || event.metaKey;
     dispatch(view.state.tr.setMeta(selectionPlugin, { type: 'toggleSelect', selection, wasGroupClick }));
 
     return true;
