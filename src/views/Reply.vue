@@ -39,24 +39,19 @@
       </div>
     </draggable>
 
-    <div class="ActionButton">
-      <button
-        class="Button font-title"
-        @click="exportReply"
-      >
-        Export
-      </button>
-    </div>
+    <ButtonExport :groupedSelections="groupedSelections" />
   </div>
 </template>
 
 <script>
 import draggable from 'vuedraggable';
+import ButtonExport from '@/components/ButtonExport.vue';
 
 export default {
   name: 'reply',
   components: {
     draggable,
+    ButtonExport,
   },
   data() {
     return {
@@ -149,24 +144,6 @@ export default {
         id: selection.id,
         outro: event.target.value,
       });
-    },
-    async exportReply() {
-      // Copy exported contents to clipboard
-      // Display UI feedback
-      const exportText = this.groupedSelections
-        .map((selection) => {
-          const reply = this.$store.state.replies[selection.id] || '';
-          const intro = reply.intro && `\n${reply.intro}`;
-          const outro = reply.outro && `\n${reply.outro}`;
-          return `> ${selection.text}${intro}${outro}`;
-        })
-        .join('\n\n');
-
-      try {
-        await navigator.clipboard.writeText(exportText);
-      } catch (err) {
-        console.error('Could not copy text to clipboard: ', err);
-      }
     },
   },
   mounted() {

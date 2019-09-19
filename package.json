@@ -21,6 +21,7 @@
     "vue": "^2.6.10",
     "vue-page-transition": "0.2.2",
     "vue-router": "^3.0.3",
+    "vue-slick-popover": "0.1.2",
     "vue-svgicon": "^3.2.6",
     "vuedraggable": "2.23.0",
     "vuex": "^3.0.1"
