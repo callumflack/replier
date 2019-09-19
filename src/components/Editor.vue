@@ -18,9 +18,9 @@
 <script>
 import { EditorState } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
-import { schema } from 'prosemirror-schema-basic';
 import { exampleSetup } from 'prosemirror-example-setup';
 
+import { schema } from '@/lib/schema';
 import { selectionPlugin, selectionUI } from '@/lib/selection';
 
 function formatDate(date) {
