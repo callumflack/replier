@@ -29,7 +29,7 @@ module.exports = {
         3: 'hsl(179, 63%, 43%)',
       },
       gray: {
-        light: '#eaeaea',
+        light: 'rgba(0,0,0,0.1)',
         mid: '#aaa',
         dark: '#858585',
       },

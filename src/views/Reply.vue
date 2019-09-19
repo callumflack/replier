@@ -224,7 +224,7 @@ export default {
   @apply font-title font-medium text-brand-primary;
   @apply leading-relaxed;
   @apply bg-transparent;
-  /* @apply border; */
+  /* @apply border-b border-gray-light; */
   font-size: calc(theme(fontSize.xl) * var(--text-ratio) - 1px);
   transition: border-color 0.2s;
 }
