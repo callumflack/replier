@@ -52,8 +52,14 @@ export default new Vuex.Store({
         Vue.delete(state.selections, index);
       });
     },
-    setReply(state, reply) {
-      Vue.set(state.replies, reply.id, reply.text);
+    updateOrCreateReply(state, updates) {
+      const reply = {
+        intro: '',
+        outro: '',
+        ...state.replies[updates.id],
+        ...updates,
+      };
+      Vue.set(state.replies, updates.id, reply);
     },
   },
   actions: {
