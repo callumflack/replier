@@ -156,7 +156,9 @@ export default {
       const exportText = this.groupedSelections
         .map((selection) => {
           const reply = this.$store.state.replies[selection.id] || '';
-          return `> ${selection.text}\n${reply.intro}\n${reply.outro}`;
+          const intro = reply.intro && `\n${reply.intro}`;
+          const outro = reply.outro && `\n${reply.outro}`;
+          return `> ${selection.text}${intro}${outro}`;
         })
         .join('\n\n');
 
