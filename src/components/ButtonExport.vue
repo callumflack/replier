@@ -1,35 +1,30 @@
 <template>
   <div>
     <div class="ActionButton">
-      <button
-        ref="popoverReference"
-        class="Button font-title"
-        @click="togglePopover()"
-      >
-        Export
-      </button>
+      <Popover ref='popover'>
+        <template v-slot:trigger>
+          <button
+            class="Button font-title"
+          >
+            Export
+          </button>
+        </template>
+
+        <template v-slot:content>
+          <h3 class="popover-headline">Copy to share:</h3>
+          <button class="export-option" @click="exportGmail()">Format for Gmail</button>
+          <button class="export-option" @click="exportBasecamp()">Format for Basecamp</button>
+          <button class="export-option" @click="exportSlack()">Format for Slack</button>
+        </template>
+      </Popover>
     </div>
 
-    <VueSlickPopover
-      v-if="isPopoverVisible"
-      :popover-options="popoverOptions"
-      @closePopover="closePopover"
-    >
-      <VueSlickPopoverContent>
-        <h3 class="export-headline">Copy to share:</h3>
-        <button class="export-option" @click="exportGmail()">Format for Gmail</button>
-        <button class="export-option" @click="exportBasecamp()">Format for Basecamp</button>
-        <button class="export-option" @click="exportSlack()">Format for Slack</button>
-      </VueSlickPopoverContent>
-    </VueSlickPopover>
-
-    <div ref="hiddenInput" class="absolute opacity-0"></div>
+    <div ref="hiddenContainer" class="absolute opacity-0"></div>
   </div>
 </template>
 
 <script>
-import { VueSlickPopover, VueSlickPopoverContent } from 'vue-slick-popover';
-import 'vue-slick-popover/dist/vue-slick-popover.css';
+import Popover from '@/components/Popover.vue';
 
 const GmailFormatter = {
   // Uses text/html
@@ -64,8 +59,7 @@ const SlackFormatter = {
 export default {
   name: 'button-export',
   components: {
-    VueSlickPopover,
-    VueSlickPopoverContent,
+    Popover,
   },
   props: {
     groupedSelections: {
@@ -76,28 +70,9 @@ export default {
   data() {
     return {
       isPopoverVisible: false,
-      popoverOptions: {
-        animation: 'scale-fade',
-        popoverReference: null,
-        placement: 'bottom',
-        offset: '0,0',
-      },
     };
   },
-  /* head() {
-    return {
-      htmlAttrs: {
-        class: `page${this.currentPageClass}`,
-      },
-    };
-  }, */
   methods: {
-    togglePopover() {
-      this.isPopoverVisible = !this.isPopoverVisible;
-    },
-    closePopover() {
-      this.isPopoverVisible = false;
-    },
     async exportReply(formatter) {
       // Copy exported contents to clipboard
       // Display UI feedback
@@ -114,18 +89,18 @@ export default {
         .trim();
 
       const focused = document.activeElement;
-      this.$refs.hiddenInput.innerHTML = formatter.final(exportText);
-      this.$refs.hiddenInput.focus();
+      this.$refs.hiddenContainer.innerHTML = formatter.final(exportText);
+      this.$refs.hiddenContainer.focus();
 
       // Select and copy
       window.getSelection().removeAllRanges();
       const range = document.createRange();
-      range.selectNode(this.$refs.hiddenInput);
+      range.selectNode(this.$refs.hiddenContainer);
       window.getSelection().addRange(range);
       document.execCommand('copy');
 
       focused.focus();
-      this.isPopoverVisible = false;
+      this.$refs.popover.close();
     },
     exportGmail() {
       return this.exportReply(GmailFormatter);
@@ -136,9 +111,6 @@ export default {
     exportSlack() {
       return this.exportReply(SlackFormatter);
     },
-  },
-  mounted() {
-    this.popoverOptions.popoverReference = this.$refs.popoverReference;
   },
 };
 </script>
@@ -152,7 +124,7 @@ export default {
   @apply block py-4 px-8 w-full text-left border-b;
 }
 
-.export-headline {
+.popover-headline {
   @apply text-brand-primary font-bold uppercase;
 }
 </style>
