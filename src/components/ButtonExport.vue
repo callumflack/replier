@@ -26,23 +26,24 @@
 <script>
 import Popover from '@/components/Popover.vue';
 
+/**
+ * FORMATTERS
+ *
+ * Defines formatting of replies for export to another app (via pasting)
+ * All formatters are expected to include the same base functions
+ *   * blockquote - format a blockquote
+ */
 const GmailFormatter = {
   // Uses text/html
   blockquote(text) {
     return `<blockquote style="margin-left: 0; padding: 15px; background: rgb(238, 238, 238); border-radius: 5px; color: rgb(51, 51, 51); font-family: sans-serif; font-size: 14.4px;">${text}</blockquote>`;
-  },
-  final(text) {
-    return text.replace(/\n/g, '<br />');
   },
 };
 
 const BasecampFormatter = {
   // Uses text/plain
   blockquote(text) {
-    return `> ${text}\n`;
-  },
-  final(text) {
-    return text.replace(/\n/g, '<br />');
+    return `<blockquote>${text}</blockquote>\n`;
   },
 };
 
@@ -50,9 +51,6 @@ const SlackFormatter = {
   // Uses text/plain
   blockquote(text) {
     return `> ${text}\n`;
-  },
-  final(text) {
-    return text.replace(/\n/g, '<br />');
   },
 };
 
@@ -86,10 +84,13 @@ export default {
         })
         .join('\n\n')
         // Remove trailing new line displayed in some inputs
-        .trim();
+        .trim()
+        // All supported apps supportes new lines formatted as br tags
+        // but not all support "\n"
+        .replace(/\n/g, '<br />');
 
       const focused = document.activeElement;
-      this.$refs.hiddenContainer.innerHTML = formatter.final(exportText);
+      this.$refs.hiddenContainer.innerHTML = exportText;
       this.$refs.hiddenContainer.focus();
 
       // Select and copy
@@ -105,7 +106,7 @@ export default {
     exportGmail() {
       return this.exportReply(GmailFormatter);
     },
-    exportBaseCamp() {
+    exportBasecamp() {
       return this.exportReply(BasecampFormatter);
     },
     exportSlack() {
