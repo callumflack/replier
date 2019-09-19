@@ -25,10 +25,16 @@
           </div>
           <textarea
             class="reply-input Input"
-            placeholder="Reply…"
+            placeholder="Add an intro…"
             rows="3"
-            @input="(event) => handleInput(event, selection)"
-            >{{ findReply(selection) }}</textarea>
+            @input="(event) => handleIntroInput(event, selection)"
+          >{{ findReplyIntro(selection) }}</textarea>
+          <textarea
+            class="reply-input Input"
+            placeholder="Summarise your reply…"
+            rows="3"
+            @input="(event) => handleOutroInput(event, selection)"
+          >{{ findReplyOutro(selection) }}</textarea>
         </div>
       </div>
     </draggable>
@@ -124,10 +130,24 @@ export default {
     findReply(selection) {
       return this.$store.state.replies[selection.id];
     },
-    handleInput(event, selection) {
-      this.$store.commit('setReply', {
+    findReplyIntro(selection) {
+      const reply = this.findReply(selection);
+      return reply && reply.intro;
+    },
+    findReplyOutro(selection) {
+      const reply = this.findReply(selection);
+      return reply && reply.outro;
+    },
+    handleIntroInput(event, selection) {
+      this.$store.commit('updateOrCreateReply', {
         id: selection.id,
-        text: event.target.value,
+        intro: event.target.value,
+      });
+    },
+    handleOutroInput(event, selection) {
+      this.$store.commit('updateOrCreateReply', {
+        id: selection.id,
+        outro: event.target.value,
       });
     },
     async exportReply() {
@@ -136,7 +156,7 @@ export default {
       const exportText = this.groupedSelections
         .map((selection) => {
           const reply = this.$store.state.replies[selection.id] || '';
-          return `> ${selection.text}\n${reply}`;
+          return `> ${selection.text}\n${reply.intro}\n${reply.outro}`;
         })
         .join('\n\n');
 
