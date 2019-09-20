@@ -10,7 +10,7 @@
         @input="handleIntroInput"
       >{{ $store.state.repliesIntro }}</textarea>
 
-      <draggable v-model="groupedSelections" handle=".handle" @end="end">
+      <draggable v-model="groupedSelections" handle=".handle" @end="handleDragEnd">
         <div
           class="selection"
           v-for="selection in groupedSelections"
@@ -90,55 +90,18 @@ export default {
     ButtonExport,
     Tooltip,
   },
-  data() {
-    return {
-      groupedSelections: [],
-    };
-  },
-  /* head() {
-    return {
-      htmlAttrs: {
-        class: `page${this.currentPageClass}`,
+  computed: {
+    groupedSelections: {
+      get() {
+        return this.$store.getters.groupedSelections;
       },
-    };
-  }, */
-  methods: {
-    groupSelections() {
-      const selections = this.$store.state.selections;
-      const groupedSelections = [];
-
-      selections.forEach((deco) => {
-        const selection = deco.type.spec.selection;
-        let index = -1;
-
-        if (selection.groupId) {
-          index = groupedSelections.findIndex(
-            sel => sel.groupId === selection.groupId,
-          );
-        }
-
-        // Create new object to avoid mutation
-        if (index !== -1) {
-          const groupedSelection = groupedSelections[index];
-          groupedSelections[index] = {
-            ...groupedSelection,
-            text: groupedSelection.text += ` ${selection.text}`,
-          };
-        } else {
-          groupedSelections.push({ ...selection });
-        }
-      });
-
-      groupedSelections.sort((a, b) => {
-        const orderA = this.$store.state.orders[a.id];
-        const orderB = this.$store.state.orders[b.id];
-        return orderA - orderB;
-      });
-
-      this.groupedSelections = groupedSelections;
+      set(value) {
+        this.$store.commit('updateOrders', value);
+      },
     },
-    end() {
-      this.$store.commit('updateOrders', this.groupedSelections);
+  },
+  methods: {
+    handleDragEnd() {
     },
     goBackIfSelectionsEmpty() {
       if (!this.$store.state.selections.length) {
@@ -157,7 +120,6 @@ export default {
 
       this.$store.commit('deleteSelections', selectionsToDelete);
       this.goBackIfSelectionsEmpty();
-      this.groupSelections();
     },
     findReply(selection) {
       return this.$store.state.replies[selection.id];
@@ -177,7 +139,6 @@ export default {
   },
   mounted() {
     this.goBackIfSelectionsEmpty();
-    this.groupSelections();
     document.documentElement.classList.add('bg-brand-neutral');
   },
 };

@@ -72,4 +72,39 @@ export default new Vuex.Store({
   },
   actions: {
   },
+  getters: {
+    groupedSelections(state) {
+      const groupedSelections = [];
+
+      state.selections.forEach((deco) => {
+        const selection = deco.type.spec.selection;
+        let index = -1;
+
+        if (selection.groupId) {
+          index = groupedSelections.findIndex(
+            sel => sel.groupId === selection.groupId,
+          );
+        }
+
+        // Create new object to avoid mutation
+        if (index !== -1) {
+          const groupedSelection = groupedSelections[index];
+          groupedSelections[index] = {
+            ...groupedSelection,
+            text: groupedSelection.text += ` ${selection.text}`,
+          };
+        } else {
+          groupedSelections.push({ ...selection });
+        }
+      });
+
+      groupedSelections.sort((a, b) => {
+        const orderA = state.orders[a.id];
+        const orderB = state.orders[b.id];
+        return orderA - orderB;
+      });
+
+      return groupedSelections;
+    },
+  },
 });
