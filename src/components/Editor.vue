@@ -18,9 +18,9 @@
 <script>
 import { EditorState } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
-import { schema } from 'prosemirror-schema-basic';
 import { exampleSetup } from 'prosemirror-example-setup';
 
+import { schema } from '@/lib/schema';
 import { selectionPlugin, selectionUI } from '@/lib/selection';
 
 function formatDate(date) {
@@ -219,45 +219,6 @@ export default {
 .sentence--group:last-of-type {
   /* @apply border-r; */
 }
-/* .sentence--group-2 {
-  --group-bg: var(--group-2-bg);
-  --group-color: var(--group-2-color);
-}
-.sentence--group-3 {
-  --group-bg: var(--group-3-bg);
-  --group-color: var(--group-3-color);
-}
-.sentence--group-4 {
-  --group-bg: var(--group-4-bg);
-  --group-color: var(--group-4-color);
-} */
-
-/* .sentence--group:last-of-type:after,
-.sentence--group + .sentence--group:last-of-type:after,
-.sentence--group + em > .sentence--group:last-of-type:after,
-.sentence--group + strong > .sentence--group:last-of-type:after,
-em + .sentence--group:last-of-type:after,
-strong + .sentence--group:last-of-type:after {
-  @apply absolute top-0 right-0;
-  @apply text-white;
-  @apply font-normal not-italic;
-  @apply rounded-full;
-  @apply border;
-  @apply flex justify-center text-center;
-  @apply z-10;
-  content: "·";
-  content: "∶";
-  content: "⫘";
-  content: "≍";
-  background-color: var(--group-color);
-  border-color: var(--group-color);
-  font-size: 100%;
-  line-height: 0.6;
-  height: 16px;
-  width: 16px;
-  transform: translate(9px, -9px);
-} */
-
 .sentence--group:not(:first-of-type):before,
 .sentence--group + a .sentence--group:before,
 .sentence--group + a + .sentence--group:before {

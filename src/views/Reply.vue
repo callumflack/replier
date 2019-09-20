@@ -42,6 +42,7 @@
               <span class="ui-label" slot="content">Delete</span>
             </Tooltip>
           </div>
+
           <div class="selection-content">
             <div class="selection-header s-p">
               {{ selection.text }}
@@ -164,9 +165,9 @@ export default {
     handleReplyInput(event, selection) {
       this.$store.commit('setReply', {
         id: selection.id,
-        text: event.target.value,
+        intro: event.target.value,
       });
-    },
+    },  
     handleIntroInput(event) {
       this.$store.commit('setRepliesIntro', event.target.value);
     },
