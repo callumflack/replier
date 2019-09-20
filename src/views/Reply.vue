@@ -4,9 +4,9 @@
 
     <div class="px-6">
       <textarea
-        class="reply-input Input"
-        placeholder="Add an intro…"
-        rows="3"
+        class="reply-input reply-input--contextual Input"
+        placeholder="Say hi…"
+        rows="2"
         @input="handleIntroInput"
       >{{ $store.state.repliesIntro }}</textarea>
 
@@ -17,15 +17,30 @@
           :key="selection.id"
         >
           <div class="selection__options">
-            <button class="option-button handle">
+            <!-- <button class="option-button handle">
               <icon name="grip" />
-            </button>
-            <button
+            </button> -->
+            <!-- <button
               @click="(event) => deleteSelection(event, selection)"
               class="option-button delete-button"
             >
               <icon name="delete" />
-            </button>
+            </button> -->
+            <Tooltip>
+              <button class="option-button handle">
+                <icon name="grip" />
+              </button>
+              <span class="ui-label" slot="content">Drag to move</span>
+            </Tooltip>
+            <Tooltip>
+              <button
+                @click="(event) => deleteSelection(event, selection)"
+                class="option-button delete-button"
+              >
+                <icon name="delete" />
+              </button>
+              <span class="ui-label" slot="content">Delete</span>
+            </Tooltip>
           </div>
           <div class="selection-content">
             <div class="selection-header s-p">
@@ -33,17 +48,26 @@
             </div>
             <textarea
               class="reply-input Input"
-              placeholder="Reply"
+              placeholder="Reply…"
               rows="3"
               @input="(event) => handleReplyInput(event, selection)"
             >{{ findReply(selection) }}</textarea>
+            <!-- <Tooltip class="tooltip--reply">
+              <textarea
+                class="reply-input Input"
+                placeholder="Reply…"
+                rows="3"
+                @input="(event) => handleReplyInput(event, selection)"
+              >{{ findReply(selection) }}</textarea>
+              <span class="ui-label" slot="content">Click to start writing</span>
+            </Tooltip> -->
           </div>
         </div>
       </draggable>
 
       <textarea
-        class="reply-input Input"
-        placeholder="Summarise your reply…"
+        class="reply-input reply-input--contextual Input"
+        placeholder="Add a summary…"
         rows="3"
         @input="handleOutroInput"
       >{{ $store.state.repliesOutro }}</textarea>
@@ -56,12 +80,14 @@
 <script>
 import draggable from 'vuedraggable';
 import ButtonExport from '@/components/ButtonExport.vue';
+import Tooltip from '@/components/Tooltip.vue';
 
 export default {
   name: 'reply',
   components: {
     draggable,
     ButtonExport,
+    Tooltip,
   },
   data() {
     return {
@@ -165,14 +191,8 @@ export default {
   /* less than Block-sm-b */
   margin-bottom: calc(theme(spacing.10) * var(--block-size-ratio));
 }
-
 .selection-content {
   flex-grow: 1;
-}
-
-.selection-header {
-  /* @apply font-semibold; */
-  /* @apply text-gray-dark; */
 }
 
 /*
@@ -182,9 +202,7 @@ export default {
   @apply absolute inset-0 right-auto text-right;
   left: -3.5rem;
 }
-
 .selection .option-button {
-  /* @apply align-middle; */
   @apply opacity-0;
   @apply text-black;
   transition: opacity 250ms cubic-bezier(0.19, 1, 0.22, 1);
@@ -198,7 +216,6 @@ export default {
   width: 1.25em !important;
   transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
 }
-
 .selection:hover .option-button {
   @apply opacity-33;
   @apply cursor-pointer;
@@ -211,10 +228,6 @@ export default {
 }
 .selection .option-button.handle {
   @apply cursor-move;
-}
-
-.selection .delete-button {
-  /* @apply text-form-bad text-3xl; */
 }
 
 /*
@@ -232,4 +245,26 @@ export default {
 .reply-input:focus {
   border-color: theme('colors.brand.primary');
 }
+.reply-input--contextual::placeholder {
+  --input-placeholder-color: theme('colors.gray.mid');
+}
+
+/*
+  UI label
+ */
+.ui-label {
+  @apply py-1 px-2 rounded;
+  @apply bg-black text-white text-center;
+  box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.15);
+  font-size: calc(theme(fontSize.xs) * var(--text-ratio));
+  padding-bottom: 0.375rem;
+}
+/* .tooltip--reply >>> .tooltip-content {
+  @apply absolute z-10;
+  @apply text-center;
+  top: -7px;
+  left: 50%;
+  min-width: 150px;
+  transform: translate(-50%, 100%);
+} */
 </style>
