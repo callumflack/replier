@@ -4,11 +4,14 @@
       <router-link to="/" class="Text-xl font-title font-bold text-brand-primary">
         <icon v-if="$route.name !== 'home'" name="arrow-back" class="mr-1" />{{ homeLabel }}
       </router-link>
-      <div>
-        <span class="Timestamp Text-xs">
+      <div class="mt-px">
+        <span v-if="!$store.state.timestamp" class="Timestamp Text-xs text-brand-primary">
+          Click + cmd selects sentences
+        </span>
+        <span v-else class="Timestamp Text-xs">
           {{ $store.state.timestamp }}
         </span>
-        <span class="Info Text-xs">
+        <span class="Info Text-xs text-brand-primary">
           <icon name="info"></icon>
         </span>
       </div>
@@ -40,7 +43,7 @@ export default {
 }
 
 .Info {
-  @apply ml-4 text-gray-mid;
+  @apply ml-4 text-gray-mid cursor-pointer;
   transition: opacity 0.5s ease-in;
 }
 .Info:hover {

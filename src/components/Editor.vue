@@ -4,7 +4,7 @@
       v-if="!$store.state.timestamp"
       class="Placeholder Text-lg"
     >
-      Paste here…
+      Paste here &amp; click to select…
     </div>
     <div
       class="editor z-10"
@@ -203,6 +203,7 @@ export default {
   border-color: var(--color-normal);
 }
 
+
 /*
 
   Groups of sentences
@@ -211,7 +212,6 @@ export default {
 
 .sentence--group {
   @apply relative;
-  /* border-left-width: 4px; */
 }
 .sentence--group:first-of-type {
   /* @apply border-l; */
@@ -219,7 +219,6 @@ export default {
 .sentence--group:last-of-type {
   /* @apply border-r; */
 }
-
 .sentence--group:not(:first-of-type):before,
 .sentence--group + a .sentence--group:before,
 .sentence--group + a + .sentence--group:before {
@@ -237,15 +236,6 @@ export default {
   width: 13px;
   transform: translate(-8px, -6px);
 }
-/* .sentence--group-2:not(:first-of-type):before {
-  content: "2";
-}
-.sentence--group-3:not(:first-of-type):before {
-  content: "3";
-}
-.sentence--group-4:not(:first-of-type):before {
-  content: "4";
-} */
 </style>
 
 <style lang="postcss" scoped>

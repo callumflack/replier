@@ -29,7 +29,7 @@ module.exports = {
         3: 'hsl(179, 63%, 43%)',
       },
       gray: {
-        light: '#eaeaea',
+        light: 'rgba(0,0,0,0.1)',
         mid: '#aaa',
         dark: '#858585',
       },
@@ -90,7 +90,7 @@ module.exports = {
       mono: ['Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace'],
     },
     fontSize: {
-      xs: '0.75rem', // 12
+      xs: '0.6875rem', // 11 or 12
       sm: '0.875rem', // 14
       base: '0.9375rem', // 15
       lg: '1.0625rem', // 17

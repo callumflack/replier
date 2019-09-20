@@ -2,61 +2,93 @@
   <div class="container Block-sm max-w-3xl">
     <!-- <router-link to="/" class="Link mb-8 block opacity-75">Return to Editor</router-link> -->
 
-    <draggable v-model="groupedSelections" handle=".handle" @end="end">
-      <div
-        class="selection"
-        v-for="selection in groupedSelections"
-        :key="selection.id"
-      >
-        <div class="selection__options">
-          <button class="option-button handle">
-            <icon name="grip" />
-          </button>
-          <button
-            @click="(event) => deleteSelection(event, selection)"
-            class="option-button delete-button"
-          >
-            <icon name="delete" />
-          </button>
-        </div>
-        <div class="selection-content">
-          <div class="selection-header s-p">
-            {{ selection.text }}
-          </div>
-          <textarea
-            class="reply-input Input"
-            placeholder="Add an intro…"
-            rows="3"
-            @input="(event) => handleIntroInput(event, selection)"
-          >{{ findReplyIntro(selection) }}</textarea>
-          <textarea
-            class="reply-input Input"
-            placeholder="Summarise your reply…"
-            rows="3"
-            @input="(event) => handleOutroInput(event, selection)"
-          >{{ findReplyOutro(selection) }}</textarea>
-        </div>
-      </div>
-    </draggable>
+    <div class="px-6">
+      <textarea
+        class="reply-input reply-input--contextual Input"
+        placeholder="Say hi…"
+        rows="2"
+        @input="handleIntroInput"
+      >{{ $store.state.repliesIntro }}</textarea>
 
-    <div class="ActionButton">
-      <button
-        class="Button font-title"
-        @click="exportReply"
-      >
-        Export
-      </button>
+      <draggable v-model="groupedSelections" handle=".handle" @end="end">
+        <div
+          class="selection"
+          v-for="selection in groupedSelections"
+          :key="selection.id"
+        >
+          <div class="selection__options">
+            <!-- <button class="option-button handle">
+              <icon name="grip" />
+            </button> -->
+            <!-- <button
+              @click="(event) => deleteSelection(event, selection)"
+              class="option-button delete-button"
+            >
+              <icon name="delete" />
+            </button> -->
+            <Tooltip>
+              <button class="option-button handle">
+                <icon name="grip" />
+              </button>
+              <span class="ui-label" slot="content">Drag to move</span>
+            </Tooltip>
+            <Tooltip>
+              <button
+                @click="(event) => deleteSelection(event, selection)"
+                class="option-button delete-button"
+              >
+                <icon name="delete" />
+              </button>
+              <span class="ui-label" slot="content">Delete</span>
+            </Tooltip>
+          </div>
+
+          <div class="selection-content">
+            <div class="selection-header s-p">
+              {{ selection.text }}
+            </div>
+            <textarea
+              class="reply-input Input"
+              placeholder="Reply…"
+              rows="3"
+              @input="(event) => handleReplyInput(event, selection)"
+            >{{ findReply(selection) }}</textarea>
+            <!-- <Tooltip class="tooltip--reply">
+              <textarea
+                class="reply-input Input"
+                placeholder="Reply…"
+                rows="3"
+                @input="(event) => handleReplyInput(event, selection)"
+              >{{ findReply(selection) }}</textarea>
+              <span class="ui-label" slot="content">Click to start writing</span>
+            </Tooltip> -->
+          </div>
+        </div>
+      </draggable>
+
+      <textarea
+        class="reply-input reply-input--contextual Input"
+        placeholder="Add a summary…"
+        rows="3"
+        @input="handleOutroInput"
+      >{{ $store.state.repliesOutro }}</textarea>
+
+      <ButtonExport :groupedSelections="groupedSelections" />
     </div>
   </div>
 </template>
 
 <script>
 import draggable from 'vuedraggable';
+import ButtonExport from '@/components/ButtonExport.vue';
+import Tooltip from '@/components/Tooltip.vue';
 
 export default {
   name: 'reply',
   components: {
     draggable,
+    ButtonExport,
+    Tooltip,
   },
   data() {
     return {
@@ -130,41 +162,17 @@ export default {
     findReply(selection) {
       return this.$store.state.replies[selection.id];
     },
-    findReplyIntro(selection) {
-      const reply = this.findReply(selection);
-      return reply && reply.intro;
-    },
-    findReplyOutro(selection) {
-      const reply = this.findReply(selection);
-      return reply && reply.outro;
-    },
-    handleIntroInput(event, selection) {
-      this.$store.commit('updateOrCreateReply', {
+    handleReplyInput(event, selection) {
+      this.$store.commit('setReply', {
         id: selection.id,
         intro: event.target.value,
       });
+    },  
+    handleIntroInput(event) {
+      this.$store.commit('setRepliesIntro', event.target.value);
     },
-    handleOutroInput(event, selection) {
-      this.$store.commit('updateOrCreateReply', {
-        id: selection.id,
-        outro: event.target.value,
-      });
-    },
-    async exportReply() {
-      // Copy exported contents to clipboard
-      // Display UI feedback
-      const exportText = this.groupedSelections
-        .map((selection) => {
-          const reply = this.$store.state.replies[selection.id] || '';
-          return `> ${selection.text}\n${reply.intro}\n${reply.outro}`;
-        })
-        .join('\n\n');
-
-      try {
-        await navigator.clipboard.writeText(exportText);
-      } catch (err) {
-        console.error('Could not copy text to clipboard: ', err);
-      }
+    handleOutroInput(event) {
+      this.$store.commit('setRepliesOutro', event.target.value);
     },
   },
   mounted() {
@@ -177,14 +185,13 @@ export default {
 
 <style lang="postcss" scoped>
 .selection {
-  @apply relative flex px-6;
+  @apply relative flex;
   @apply cursor-default;
 }
 .selection:not(:last-of-type) {
   /* less than Block-sm-b */
   margin-bottom: calc(theme(spacing.10) * var(--block-size-ratio));
 }
-
 .selection-content {
   flex-grow: 1;
 }
@@ -194,11 +201,9 @@ export default {
  */
 .selection__options {
   @apply absolute inset-0 right-auto text-right;
-  left: -2rem;
+  left: -3.5rem;
 }
-
 .selection .option-button {
-  /* @apply align-middle; */
   @apply opacity-0;
   @apply text-black;
   transition: opacity 250ms cubic-bezier(0.19, 1, 0.22, 1);
@@ -212,7 +217,6 @@ export default {
   width: 1.25em !important;
   transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
 }
-
 .selection:hover .option-button {
   @apply opacity-33;
   @apply cursor-pointer;
@@ -227,10 +231,6 @@ export default {
   @apply cursor-move;
 }
 
-.selection .delete-button {
-  /* @apply text-form-bad text-3xl; */
-}
-
 /*
   Inputs
  */
@@ -239,11 +239,33 @@ export default {
   @apply font-title font-medium text-brand-primary;
   @apply leading-relaxed;
   @apply bg-transparent;
-  /* @apply border; */
+  /* @apply border-b border-gray-light; */
   font-size: calc(theme(fontSize.xl) * var(--text-ratio) - 1px);
   transition: border-color 0.2s;
 }
 .reply-input:focus {
   border-color: theme('colors.brand.primary');
 }
+.reply-input--contextual::placeholder {
+  --input-placeholder-color: theme('colors.gray.mid');
+}
+
+/*
+  UI label
+ */
+.ui-label {
+  @apply py-1 px-2 rounded;
+  @apply bg-black text-white text-center;
+  box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.15);
+  font-size: calc(theme(fontSize.xs) * var(--text-ratio));
+  padding-bottom: 0.375rem;
+}
+/* .tooltip--reply >>> .tooltip-content {
+  @apply absolute z-10;
+  @apply text-center;
+  top: -7px;
+  left: 50%;
+  min-width: 150px;
+  transform: translate(-50%, 100%);
+} */
 </style>
