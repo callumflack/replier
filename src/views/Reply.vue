@@ -189,11 +189,6 @@ export default {
   flex-grow: 1;
 }
 
-.selection-header {
-  /* @apply font-semibold; */
-  /* @apply text-gray-dark; */
-}
-
 /*
   Affordance buttons
  */

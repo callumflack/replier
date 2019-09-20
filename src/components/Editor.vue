@@ -177,7 +177,7 @@ export default {
 
   @apply h-full outline-none overflow-y-scroll;
   @apply whitespace-pre-wrap; /* 1 */
-  @apply px-6;
+  @apply px-6 pt-1;
   /* padding: var(--vertical-padding) theme(spacing.6); */
 }
 
@@ -196,7 +196,9 @@ export default {
 }
 
 .sentence--selected {
-  @apply border-b;
+  @apply border-l;
+  border-left-width: 2px;
+  padding-left: 4px;
   background-color: var(--color-selected);
   border-color: var(--color-normal);
 }
@@ -209,10 +211,7 @@ export default {
 
 .sentence--group {
   @apply relative;
-  /* @apply border-t; */
-  @apply border-b;
-  background-color: var(--group-bg);
-  border-color: var(--group-color);
+  /* border-left-width: 4px; */
 }
 .sentence--group:first-of-type {
   /* @apply border-l; */
@@ -220,49 +219,33 @@ export default {
 .sentence--group:last-of-type {
   /* @apply border-r; */
 }
-.sentence--group-2 {
-  --group-bg: var(--group-2-bg);
-  --group-color: var(--group-2-color);
-}
-.sentence--group-3 {
-  --group-bg: var(--group-3-bg);
-  --group-color: var(--group-3-color);
-}
-.sentence--group-4 {
-  --group-bg: var(--group-4-bg);
-  --group-color: var(--group-4-color);
-}
 
-.sentence--group + .sentence--group,
-.sentence--group + em > .sentence--group,
-.sentence--group + strong > .sentence--group {
-  /* @apply -ml-2px; */
-}
-.sentence--group:last-of-type:after,
-.sentence--group + .sentence--group:last-of-type:after,
-.sentence--group + em > .sentence--group:last-of-type:after,
-.sentence--group + strong > .sentence--group:last-of-type:after,
-em + .sentence--group:last-of-type:after,
-strong + .sentence--group:last-of-type:after {
-  @apply absolute top-0 right-0;
-  @apply text-white;
-  @apply font-normal not-italic;
+.sentence--group:not(:first-of-type):before,
+.sentence--group + a .sentence--group:before,
+.sentence--group + a + .sentence--group:before {
+  @apply absolute top-0 left-0;
+  @apply font-bold not-italic text-white;
   @apply rounded-full;
-  @apply border;
   @apply flex justify-center text-center;
   @apply z-10;
-  content: "·";
-  content: "∶";
-  content: "⫘";
-  content: "≍";
-  background-color: var(--group-color);
-  border-color: var(--group-color);
-  font-size: 100%;
-  line-height: 0.6;
-  height: 16px;
-  width: 16px;
-  transform: translate(9px, -9px);
+  content: "+";
+  background-color: var(--color-normal);
+  border-color: var(--color-normal);
+  font-size: 60%;
+  line-height: 1.1;
+  height: 13px;
+  width: 13px;
+  transform: translate(-8px, -6px);
 }
+/* .sentence--group-2:not(:first-of-type):before {
+  content: "2";
+}
+.sentence--group-3:not(:first-of-type):before {
+  content: "3";
+}
+.sentence--group-4:not(:first-of-type):before {
+  content: "4";
+} */
 </style>
 
 <style lang="postcss" scoped>
