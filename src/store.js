@@ -11,6 +11,8 @@ export default new Vuex.Store({
     // Keyed by selection ids
     orders: {},
     replies: {},
+    repliesIntro: '',
+    repliesOutro: '',
   },
   mutations: {
     setEditorState(state, editorState) {
@@ -54,6 +56,12 @@ export default new Vuex.Store({
     },
     setReply(state, reply) {
       Vue.set(state.replies, reply.id, reply.text);
+    },
+    setRepliesIntro(state, text) {
+      state.repliesIntro = text;
+    },
+    setRepliesOutro(state, text) {
+      state.repliesOutro = text;
     },
   },
   actions: {
