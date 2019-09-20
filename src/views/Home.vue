@@ -15,11 +15,11 @@
 
     <aside class="aside-map">
       <p
-        v-for="selection in $store.state.selections"
-        :key="selection.type.spec.selection.id "
+        v-for="selection in $store.getters.groupedSelections"
+        :key="selection.id "
       >
         <span>
-          {{ selection.type.spec.selection.text }}
+          {{ selection.text }}
         </span>
       </p>
     </aside>
