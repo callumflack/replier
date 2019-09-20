@@ -48,25 +48,20 @@
         @input="handleOutroInput"
       >{{ $store.state.repliesOutro }}</textarea>
 
-      <div class="ActionButton">
-        <button
-          class="Button font-title"
-          @click="exportReply"
-        >
-          Export
-        </button>
-      </div>
+      <ButtonExport :groupedSelections="groupedSelections" />
     </div>
   </div>
 </template>
 
 <script>
 import draggable from 'vuedraggable';
+import ButtonExport from '@/components/ButtonExport.vue';
 
 export default {
   name: 'reply',
   components: {
     draggable,
+    ButtonExport,
   },
   data() {
     return {
@@ -151,22 +146,6 @@ export default {
     },
     handleOutroInput(event) {
       this.$store.commit('setRepliesOutro', event.target.value);
-    },
-    async exportReply() {
-      // Copy exported contents to clipboard
-      // Display UI feedback
-      const exportText = this.groupedSelections
-        .map((selection) => {
-          const reply = this.$store.state.replies[selection.id] || '';
-          return `> ${selection.text}\n${reply}`;
-        })
-        .join('\n\n');
-
-      try {
-        await navigator.clipboard.writeText(exportText);
-      } catch (err) {
-        console.error('Could not copy text to clipboard: ', err);
-      }
     },
   },
   mounted() {
