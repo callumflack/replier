@@ -147,28 +147,6 @@ export default {
     handleOutroInput(event) {
       this.$store.commit('setRepliesOutro', event.target.value);
     },
-    async exportReply() {
-      // Copy exported contents to clipboard
-      // Display UI feedback
-      const repliesText = this.groupedSelections
-        .map((selection) => {
-          const reply = this.$store.state.replies[selection.id] || '';
-          return `> ${selection.text}\n${reply}`;
-        })
-        .join('\n\n');
-
-      const exportText = [
-        this.$store.state.repliesIntro,
-        repliesText,
-        this.$store.state.repliesOutro,
-      ].join('\n\n');
-
-      try {
-        await navigator.clipboard.writeText(exportText);
-      } catch (err) {
-        console.error('Could not copy text to clipboard: ', err);
-      }
-    },
   },
   mounted() {
     this.goBackIfSelectionsEmpty();
