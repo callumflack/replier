@@ -6,7 +6,7 @@
       </router-link>
       <div class="mt-px">
         <span v-if="!$store.state.timestamp" class="Timestamp Text-xs text-brand-primary">
-          Click + cmd selects sentences
+          Cmd + click selects sentences
         </span>
         <span v-else class="Timestamp Text-xs">
           {{ $store.state.timestamp }}
