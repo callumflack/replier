@@ -2,50 +2,60 @@
   <div class="container Block-sm max-w-3xl">
     <!-- <router-link to="/" class="Link mb-8 block opacity-75">Return to Editor</router-link> -->
 
-    <draggable v-model="groupedSelections" handle=".handle" @end="end">
-      <div
-        class="selection"
-        v-for="selection in groupedSelections"
-        :key="selection.id"
-      >
-        <div class="selection__options">
-          <button class="option-button handle">
-            <icon name="grip" />
-          </button>
-          <button
-            @click="(event) => deleteSelection(event, selection)"
-            class="option-button delete-button"
-          >
-            <icon name="delete" />
-          </button>
-        </div>
-        <div class="selection-content">
-          <textarea
-            class="reply-input Input"
-            placeholder="Add an intro…"
-            rows="3"
-            @input="(event) => handleIntroInput(event, selection)"
-          >{{ findReplyIntro(selection) }}</textarea>
-          <div class="selection-header s-p">
-            {{ selection.text }}
-          </div>
-          <textarea
-            class="reply-input Input"
-            placeholder="Summarise your reply…"
-            rows="3"
-            @input="(event) => handleOutroInput(event, selection)"
-          >{{ findReplyOutro(selection) }}</textarea>
-        </div>
-      </div>
-    </draggable>
+    <div class="px-6">
+      <textarea
+        class="reply-input Input"
+        placeholder="Add an intro…"
+        rows="3"
+        @input="handleIntroInput"
+      >{{ $store.state.repliesIntro }}</textarea>
 
-    <div class="ActionButton">
-      <button
-        class="Button font-title"
-        @click="exportReply"
-      >
-        Export
-      </button>
+      <draggable v-model="groupedSelections" handle=".handle" @end="end">
+        <div
+          class="selection"
+          v-for="selection in groupedSelections"
+          :key="selection.id"
+        >
+          <div class="selection__options">
+            <button class="option-button handle">
+              <icon name="grip" />
+            </button>
+            <button
+              @click="(event) => deleteSelection(event, selection)"
+              class="option-button delete-button"
+            >
+              <icon name="delete" />
+            </button>
+          </div>
+          <div class="selection-content">
+            <div class="selection-header s-p">
+              {{ selection.text }}
+            </div>
+            <textarea
+              class="reply-input Input"
+              placeholder="Reply"
+              rows="3"
+              @input="(event) => handleReplyInput(event, selection)"
+            >{{ findReply(selection) }}</textarea>
+          </div>
+        </div>
+      </draggable>
+
+      <textarea
+        class="reply-input Input"
+        placeholder="Summarise your reply…"
+        rows="3"
+        @input="handleOutroInput"
+      >{{ $store.state.repliesOutro }}</textarea>
+
+      <div class="ActionButton">
+        <button
+          class="Button font-title"
+          @click="exportReply"
+        >
+          Export
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -130,25 +140,17 @@ export default {
     findReply(selection) {
       return this.$store.state.replies[selection.id];
     },
-    findReplyIntro(selection) {
-      const reply = this.findReply(selection);
-      return reply && reply.intro;
-    },
-    findReplyOutro(selection) {
-      const reply = this.findReply(selection);
-      return reply && reply.outro;
-    },
-    handleIntroInput(event, selection) {
-      this.$store.commit('updateOrCreateReply', {
+    handleReplyInput(event, selection) {
+      this.$store.commit('setReply', {
         id: selection.id,
-        intro: event.target.value,
+        text: event.target.value,
       });
     },
-    handleOutroInput(event, selection) {
-      this.$store.commit('updateOrCreateReply', {
-        id: selection.id,
-        outro: event.target.value,
-      });
+    handleIntroInput(event) {
+      this.$store.commit('setRepliesIntro', event.target.value);
+    },
+    handleOutroInput(event) {
+      this.$store.commit('setRepliesOutro', event.target.value);
     },
     async exportReply() {
       // Copy exported contents to clipboard
@@ -156,7 +158,7 @@ export default {
       const exportText = this.groupedSelections
         .map((selection) => {
           const reply = this.$store.state.replies[selection.id] || '';
-          return `> ${selection.text}\n${reply.intro}\n${reply.outro}`;
+          return `> ${selection.text}\n${reply}`;
         })
         .join('\n\n');
 
@@ -177,7 +179,7 @@ export default {
 
 <style lang="postcss" scoped>
 .selection {
-  @apply relative flex px-6;
+  @apply relative flex;
   @apply cursor-default;
 }
 .selection:not(:last-of-type) {
@@ -199,7 +201,7 @@ export default {
  */
 .selection__options {
   @apply absolute inset-0 right-auto text-right;
-  left: -2rem;
+  left: -3.5rem;
 }
 
 .selection .option-button {

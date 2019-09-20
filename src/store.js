@@ -11,6 +11,8 @@ export default new Vuex.Store({
     // Keyed by selection ids
     orders: {},
     replies: {},
+    repliesIntro: '',
+    repliesOutro: '',
   },
   mutations: {
     setEditorState(state, editorState) {
@@ -52,14 +54,14 @@ export default new Vuex.Store({
         Vue.delete(state.selections, index);
       });
     },
-    updateOrCreateReply(state, updates) {
-      const reply = {
-        intro: '',
-        outro: '',
-        ...state.replies[updates.id],
-        ...updates,
-      };
-      Vue.set(state.replies, updates.id, reply);
+    setReply(state, reply) {
+      Vue.set(state.replies, reply.id, reply.text);
+    },
+    setRepliesIntro(state, text) {
+      state.repliesIntro = text;
+    },
+    setRepliesOutro(state, text) {
+      state.repliesOutro = text;
     },
   },
   actions: {
