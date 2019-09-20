@@ -167,7 +167,7 @@ export default {
         id: selection.id,
         intro: event.target.value,
       });
-    },  
+    },
     handleIntroInput(event) {
       this.$store.commit('setRepliesIntro', event.target.value);
     },
