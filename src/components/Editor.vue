@@ -174,17 +174,23 @@ export default {
 */
 .ProseMirror {
   --vertical-padding: 1.8rem;
-
   @apply h-full outline-none overflow-y-scroll;
   @apply whitespace-pre-wrap; /* 1 */
   @apply px-6 pt-1;
   /* padding: var(--vertical-padding) theme(spacing.6); */
 }
-
 .ProseMirror:after {
   @apply block w-full;
   content: "";
   height: var(--vertical-padding); /* 2 */
+}
+.ProseMirror a {
+  @apply border-b border-gray-mid;
+  text-decoration: none !important;
+  transition: color 250ms ease;
+}
+.ProseMirror a:hover {
+  @apply border-black;
 }
 
 .editor__sentence {
