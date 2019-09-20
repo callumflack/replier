@@ -4,7 +4,7 @@
       v-if="!$store.state.timestamp"
       class="Placeholder Text-lg"
     >
-      Paste here…
+      Paste here &amp; click to select…
     </div>
     <div
       class="editor z-10"
