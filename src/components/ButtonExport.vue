@@ -38,6 +38,11 @@ const GmailFormatter = {
   blockquote(text) {
     return `<blockquote style="margin-left: 0; padding: 15px; background: rgb(238, 238, 238); border-radius: 5px; color: rgb(51, 51, 51); font-family: sans-serif; font-size: 14.4px;">${text}</blockquote>`;
   },
+  joinSections(intro, replies, outro) {
+    const introPadded = intro ? `${intro}\n\n` : '';
+    const outroPadded = outro ? `\n\n${outro}` : '';
+    return `${introPadded}${replies}${outroPadded}`;
+  },
 };
 
 const BasecampFormatter = {
@@ -45,12 +50,22 @@ const BasecampFormatter = {
   blockquote(text) {
     return `<blockquote>${text}</blockquote>\n`;
   },
+  joinSections(...args) {
+    return args
+      .filter(section => section && section !== '')
+      .join('\n\n');
+  },
 };
 
 const SlackFormatter = {
   // Uses text/plain
   blockquote(text) {
     return `> ${text}\n`;
+  },
+  joinSections(...args) {
+    return args
+      .filter(section => section && section !== '')
+      .join('\n\n');
   },
 };
 
@@ -74,17 +89,20 @@ export default {
     async exportReply(formatter) {
       // Copy exported contents to clipboard
       // Display UI feedback
-      const exportText = this.groupedSelections
+      const repliesText = this.groupedSelections
         .map((selection) => {
           const reply = this.$store.state.replies[selection.id] || '';
-          const intro = reply.intro ? `${reply.intro}\n` : '';
-          const outro = reply.outro ? `${reply.outro}\n` : '';
 
-          return `${formatter.blockquote(selection.text)}${intro}${outro}`;
+          return `${formatter.blockquote(selection.text)}${reply}`;
         })
-        .join('\n\n')
+        .join('\n\n');
+
+      const exportText = formatter.joinSections(
         // Remove trailing new line displayed in some inputs
-        .trim()
+        this.$store.state.repliesIntro.trim(),
+        repliesText.trim(),
+        this.$store.state.repliesOutro.trim(),
+      )
         // All supported apps supportes new lines formatted as br tags
         // but not all support "\n"
         .replace(/\n/g, '<br />');

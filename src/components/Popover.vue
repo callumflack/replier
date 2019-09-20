@@ -51,7 +51,6 @@ export default {
   },
   methods: {
     toggle() {
-      console.log('toggle');
       this.isVisible = !this.isVisible;
     },
     close() {
