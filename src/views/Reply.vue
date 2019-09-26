@@ -127,7 +127,7 @@ export default {
     handleReplyInput(event, selection) {
       this.$store.commit('setReply', {
         id: selection.id,
-        intro: event.target.value,
+        text: event.target.value,
       });
     },
     handleIntroInput(event) {
