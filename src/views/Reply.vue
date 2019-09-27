@@ -73,8 +73,19 @@
         @input="handleOutroInput"
       >{{ $store.state.repliesOutro }}</textarea>
 
-      <ButtonExport :groupedSelections="groupedSelections" />
+      <ButtonExport @onExport="handleExport" :groupedSelections="groupedSelections" />
     </div>
+    <portal to="modals">
+      <Modal :show="isResetModalOpen" @close="isResetModalOpen = false" ref="resetModal">
+        <div class="max-w-xl">
+          <p class="s-p">Successfully copied to your clipboard!</p>
+          <div class="flex">
+            <button class="mr-2 w-1/2 Button" @click="resetState">Start again</button>
+            <button class="ml-2 w-1/2 Button Button--outline" @click="dismiss">Keep Editing</button>
+          </div>
+        </div>
+      </Modal>
+    </portal>
   </div>
 </template>
 
@@ -82,6 +93,7 @@
 import draggable from 'vuedraggable';
 import ButtonExport from '@/components/ButtonExport.vue';
 import Tooltip from '@/components/Tooltip.vue';
+import Modal from '@/components/Modal.vue';
 
 export default {
   name: 'reply',
@@ -89,6 +101,12 @@ export default {
     draggable,
     ButtonExport,
     Tooltip,
+    Modal,
+  },
+  data() {
+    return {
+      isResetModalOpen: false,
+    };
   },
   computed: {
     groupedSelections: {
@@ -101,6 +119,18 @@ export default {
     },
   },
   methods: {
+    dismiss() {
+      this.$refs.resetModal.dismiss();
+    },
+    async resetState() {
+      await this.$store.commit('resetState');
+      this.$refs.resetModal.dismiss();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      this.$router.push('/');
+    },
+    handleExport() {
+      this.isResetModalOpen = true;
+    },
     handleDragEnd() {
     },
     goBackIfSelectionsEmpty() {
@@ -229,4 +259,21 @@ export default {
   min-width: 150px;
   transform: translate(-50%, 100%);
 } */
+
+
+/*
+ * Modal
+ */
+
+.Modal-backdrop {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+>>> .Modal {
+  box-shadow: 0 0 6px 4px #eaeaea;
+}
+
+>>> .Modal .Button {
+  white-space: nowrap;
+}
 </style>

@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VuePageTransition from 'vue-page-transition';
+import PortalVue from 'portal-vue';
 import SvgIcon from 'vue-svgicon';
 import App from './App.vue';
 import router from './router';
@@ -9,6 +10,7 @@ import './assets/css/tailwind.css';
 
 Vue.config.productionTip = false;
 
+Vue.use(PortalVue);
 Vue.use(VuePageTransition);
 
 Vue.use(SvgIcon, {

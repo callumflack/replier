@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
+    "portal-vue": "2.1.6",
     "postcss-import": "12.0.1",
     "prosemirror-example-setup": "1.0.1",
     "prosemirror-model": "1.7.2",

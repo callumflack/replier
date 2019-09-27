@@ -3,17 +3,19 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
+const defaultState = {
+  timestamp: null,
+  editorState: null,
+  selections: [],
+  // Keyed by selection ids
+  orders: {},
+  replies: {},
+  repliesIntro: '',
+  repliesOutro: '',
+};
+
 export default new Vuex.Store({
-  state: {
-    timestamp: null,
-    editorState: null,
-    selections: [],
-    // Keyed by selection ids
-    orders: {},
-    replies: {},
-    repliesIntro: '',
-    repliesOutro: '',
-  },
+  state: Object.assign({}, defaultState),
   mutations: {
     setEditorState(state, editorState) {
       state.editorState = editorState;
@@ -62,6 +64,11 @@ export default new Vuex.Store({
     },
     setRepliesOutro(state, text) {
       state.repliesOutro = text;
+    },
+    // eslint-disable-next-line no-unused-vars
+    resetState(state) {
+      // eslint-disable-next-line no-param-reassign
+      state = Object.assign(state, defaultState);
     },
   },
   actions: {
