@@ -71,6 +71,7 @@ module.exports = {
     fontFamily: {
       title: [
         '"SF Mono"',
+        'Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace',
       ],
       sans: [
         '-apple-system',
@@ -86,7 +87,7 @@ module.exports = {
         '"Segoe UI Symbol"',
         '"Noto Color Emoji"',
       ],
-      serif: ['"PictureHouse One"', 'Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
+      serif: ['Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
       mono: ['Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace'],
     },
     fontSize: {
