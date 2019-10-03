@@ -1,31 +1,27 @@
 <template>
   <div class="container Block-sm max-w-3xl">
-    <!-- <router-link to="/" class="Link mb-8 block opacity-75">Return to Editor</router-link> -->
-
+    <!-- tabindex starting with a positive value and
+    ending with the highest possible value: tiny.cc/txtudz -->
     <div class="px-6">
       <textarea
         class="reply-input reply-input--contextual Input"
         placeholder="Say hi…"
         rows="2"
+        tabindex="1"
         @input="handleIntroInput"
       >{{ $store.state.repliesIntro }}</textarea>
 
-      <draggable v-model="groupedSelections" handle=".handle" @end="handleDragEnd">
+      <draggable
+        v-model="groupedSelections"
+        handle=".handle"
+        @end="handleDragEnd"
+      >
         <div
           class="selection"
-          v-for="selection in groupedSelections"
+          v-for="(selection, index) in groupedSelections"
           :key="selection.id"
         >
           <div class="selection__options">
-            <!-- <button class="option-button handle">
-              <icon name="grip" />
-            </button> -->
-            <!-- <button
-              @click="(event) => deleteSelection(event, selection)"
-              class="option-button delete-button"
-            >
-              <icon name="delete" />
-            </button> -->
             <Tooltip>
               <button class="option-button handle">
                 <icon name="grip" />
@@ -44,13 +40,12 @@
           </div>
 
           <div class="selection-content">
-            <div class="selection-header s-p">
-              {{ selection.text }}
-            </div>
+            <div class="selection-header s-p">{{ selection.text }}</div>
             <textarea
               class="reply-input Input"
               placeholder="Reply…"
               rows="3"
+              :tabindex="index + 2"
               @input="(event) => handleReplyInput(event, selection)"
             >{{ findReply(selection) }}</textarea>
             <!-- <Tooltip class="tooltip--reply">
@@ -61,7 +56,7 @@
                 @input="(event) => handleReplyInput(event, selection)"
               >{{ findReply(selection) }}</textarea>
               <span class="ui-label" slot="content">Click to start writing</span>
-            </Tooltip> -->
+            </Tooltip>-->
           </div>
         </div>
       </draggable>
@@ -70,6 +65,7 @@
         class="reply-input reply-input--contextual Input"
         placeholder="Add a summary…"
         rows="3"
+        tabindex="32767"
         @input="handleOutroInput"
       >{{ $store.state.repliesOutro }}</textarea>
 
@@ -131,8 +127,7 @@ export default {
     handleExport() {
       this.isResetModalOpen = true;
     },
-    handleDragEnd() {
-    },
+    handleDragEnd() {},
     goBackIfSelectionsEmpty() {
       if (!this.$store.state.selections.length) {
         this.$router.push('/');
@@ -144,7 +139,9 @@ export default {
 
       if (selection.groupId) {
         selectionsToDelete = this.$store.state.selections
-          .filter(deco => deco.type.spec.selection.groupId === selection.groupId)
+          .filter(
+            deco => deco.type.spec.selection.groupId === selection.groupId,
+          )
           .map(deco => deco.type.spec.selection.id);
       }
 
@@ -176,8 +173,13 @@ export default {
 
 <style lang="postcss" scoped>
 .selection {
+  --inset: 12px;
   @apply relative flex;
   @apply cursor-default;
+  @apply rounded-lg;
+  /* @apply border border-form-bad; */
+  padding: var(--inset);
+  margin: calc(-1 * var(--inset));
 }
 .selection:not(:last-of-type) {
   /* less than Block-sm-b */
@@ -189,15 +191,19 @@ export default {
 
 /*
   Affordance buttons
- */
+*/
 .selection__options {
   @apply absolute inset-0 right-auto text-right;
+  top: var(--inset);
   left: -3.5rem;
 }
 .selection .option-button {
   @apply opacity-0;
   @apply text-black;
   transition: opacity 250ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+.selection .option-button:focus {
+  @apply outline-none;
 }
 .selection .option-button + .option-button {
   @apply ml-2px;
@@ -224,7 +230,7 @@ export default {
 
 /*
   Inputs
- */
+*/
 .reply-input {
   --button-padding-x: 0;
   @apply font-title font-medium text-brand-primary;
@@ -235,15 +241,15 @@ export default {
   transition: border-color 0.2s;
 }
 .reply-input:focus {
-  border-color: theme('colors.brand.primary');
+  border-color: theme("colors.brand.primary");
 }
 .reply-input--contextual::placeholder {
-  --input-placeholder-color: theme('colors.gray.mid');
+  --input-placeholder-color: theme("colors.gray.mid");
 }
 
 /*
   UI label
- */
+*/
 .ui-label {
   @apply py-1 px-2 rounded;
   @apply bg-black text-white text-center;
@@ -260,11 +266,9 @@ export default {
   transform: translate(-50%, 100%);
 } */
 
-
 /*
- * Modal
+   Modal
  */
-
 .Modal-backdrop {
   background: rgba(255, 255, 255, 0.7);
 }
@@ -275,5 +279,14 @@ export default {
 
 >>> .Modal .Button {
   white-space: nowrap;
+
+/*
+  Draggable
+*/
+.sortable-chosen {
+  @apply shadow-md border border-gray-light;
+}
+.sortable-ghost {
+  /* background-color: rgba(0, 123, 255, 0.025); */
 }
 </style>

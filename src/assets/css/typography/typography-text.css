@@ -43,6 +43,11 @@ body,
   font-size: calc(theme(fontSize.xl) * var(--text-ratio));
 }
 
+ol {
+  list-style-type: decimal;
+  padding-left: calc(theme(spacing.6) * var(--text-ratio));
+}
+
 /*
 
   Color schema

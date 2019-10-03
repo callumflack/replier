@@ -13,6 +13,8 @@ Vue.config.productionTip = false;
 Vue.use(PortalVue);
 Vue.use(VuePageTransition);
 
+Vue.use(PortalVue);
+
 Vue.use(SvgIcon, {
   tagName: 'icon',
   defaultWidth: '1em',
