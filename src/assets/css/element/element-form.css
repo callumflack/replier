@@ -48,15 +48,17 @@ select::-ms-expand {
 */
 
 .Form-validation {
-  @apply font-medium justify-start w-full;
+  @apply font-normal justify-start w-full;
   @apply text-white mt-2px;
   @apply cursor-default;
 }
 .is-good {
-  @apply bg-form-good;
+  /* @apply bg-form-good; */
+  @apply text-form-good border-form-good !important;
 }
 .is-bad {
-  @apply bg-form-bad;
+  /* @apply bg-form-bad; */
+  @apply text-form-bad border-form-bad !important;
 }
 
 /*

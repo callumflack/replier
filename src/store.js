@@ -3,17 +3,25 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
+const defaultState = {
+  timestamp: null,
+  editorState: null,
+  selections: [],
+  // Keyed by selection ids
+  orders: {},
+  replies: {},
+  repliesIntro: '',
+  repliesOutro: '',
+};
+
 export default new Vuex.Store({
-  state: {
-    editorState: null,
-    selections: [],
-    // Keyed by selection ids
-    orders: {},
-    replies: {},
-  },
+  state: Object.assign({}, defaultState),
   mutations: {
     setEditorState(state, editorState) {
       state.editorState = editorState;
+    },
+    setTimestamp(state, timestamp) {
+      state.timestamp = timestamp;
     },
     setSelections(state, selections) {
       state.selections = selections;
@@ -51,7 +59,53 @@ export default new Vuex.Store({
     setReply(state, reply) {
       Vue.set(state.replies, reply.id, reply.text);
     },
+    setRepliesIntro(state, text) {
+      state.repliesIntro = text;
+    },
+    setRepliesOutro(state, text) {
+      state.repliesOutro = text;
+    },
+    // eslint-disable-next-line no-unused-vars
+    resetState(state) {
+      // eslint-disable-next-line no-param-reassign
+      state = Object.assign(state, defaultState);
+    },
   },
   actions: {
+  },
+  getters: {
+    groupedSelections(state) {
+      const groupedSelections = [];
+
+      state.selections.forEach((deco) => {
+        const selection = deco.type.spec.selection;
+        let index = -1;
+
+        if (selection.groupId) {
+          index = groupedSelections.findIndex(
+            sel => sel.groupId === selection.groupId,
+          );
+        }
+
+        // Create new object to avoid mutation
+        if (index !== -1) {
+          const groupedSelection = groupedSelections[index];
+          groupedSelections[index] = {
+            ...groupedSelection,
+            text: groupedSelection.text += ` ${selection.text}`,
+          };
+        } else {
+          groupedSelections.push({ ...selection });
+        }
+      });
+
+      groupedSelections.sort((a, b) => {
+        const orderA = state.orders[a.id];
+        const orderB = state.orders[b.id];
+        return orderA - orderB;
+      });
+
+      return groupedSelections;
+    },
   },
 });

@@ -1,16 +1,20 @@
 <template>
   <div id="app">
-    <div id="nav" class="container Block-sm max-w-5xl">
-      <router-link to="/">Corvid Writing</router-link>
-    </div>
+    <NavBar></NavBar>
     <vue-page-transition :name="transitionName">
-      <router-view/>
+      <router-view />
     </vue-page-transition>
+    <portal-target name="modals" multiple></portal-target>
   </div>
 </template>
 
 <script>
+import NavBar from '@/components/NavBar.vue';
+
 export default {
+  components: {
+    NavBar,
+  },
   data() {
     return {
       // Default for home page which doesn't trigger $route watcher
@@ -27,8 +31,19 @@ export default {
 };
 </script>
 
-<style>
-#nav a.router-link-active {
-  @apply text-brand-primary;
-}
+<style lang="postcss">
+  .fade-in-right .fade-in-right-enter-active,
+  .fade-in-right .fade-in-right-leave-active,
+  .fade-in-left .fade-in-left-enter-active,
+  .fade-in-left .fade-in-left-leave-active {
+    /* transition: all 10s ease !important; */
+  }
+
+  .vue-slick-popover__overlay {
+    /* Stop overlay creating horizontal scroll from "width: 100vw" */
+    height: auto;
+    width: auto;
+    bottom: 0;
+    right: 0;
+  }
 </style>

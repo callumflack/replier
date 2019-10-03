@@ -8,7 +8,7 @@ import { Decoration, DecorationSet } from 'prosemirror-view';
 import store from '../store';
 
 // End of sentence punctuation
-const EOSPuncRegex = /([.?!])/g;
+const EOSPuncRegex = /([.?!]) /g;
 const nonWhitespaceRegex = /[^\s\\]/;
 // Styled in Home.js
 const sentenceClasses = {
@@ -16,6 +16,8 @@ const sentenceClasses = {
   selected: 'sentence--selected',
   group: 'sentence--group',
 };
+// Track unique groupIds to set unique group class based number of groups
+const groupIds = [];
 
 function randomID() {
   return Math.floor(Math.random() * 0xffffffff);
@@ -73,8 +75,15 @@ function deco(from, to, selection) {
   }
 
   if (selection.groupId) {
+    let groupIndex = groupIds.indexOf(selection.groupId);
+
+    if (groupIndex === -1) {
+      groupIds.push(selection.groupId);
+      groupIndex = groupIds.length - 1;
+    }
+
     cls += ` ${sentenceClasses.group}`;
-    cls += ` ${sentenceClasses.group}-${selection.groupId}`;
+    cls += ` ${sentenceClasses.group}-${(groupIndex % 10) + 1}`;
   }
 
   return Decoration.inline(from, to, { class: cls }, { selection });
@@ -220,9 +229,10 @@ class SelectionState {
                 deco(prevSelectedDeco.from, prevSelectedDeco.to, updatedPrevSelection),
               ]);
             }
+
+            newSelection.groupId = g_group.id;
           }
 
-          newSelection.groupId = g_group.id;
           g_group.lastSelection = newSelection;
         }
       }
@@ -239,14 +249,14 @@ class SelectionState {
     }
 
     updateSelectionsInStore(decos);
-    return new SelectionState(decos);
+    return new SelectionState(decos, this.groupIds);
   }
 
   static init(config) {
     const activeDecos = config.selections;
     let decos = splitDeco(config.doc, activeDecos);
     decos = DecorationSet.create(config.doc, decos);
-    return new SelectionState(decos);
+    return new SelectionState(decos, this.groupIds);
   }
 }
 
@@ -263,24 +273,30 @@ export const selectionPlugin = new Plugin({
 // Selection UI
 
 export function selectionUI(dispatch) {
-  // Use document event listener because plugin handleKeyDown
-  // doesn't seem to trigger for every ctrl key press
-  function resetGroupOnCtrl(event) {
-    if (event.ctrlKey) {
+  function modiferPressed(event) {
+    return event.ctrlKey || event.metaKey;
+  }
+
+  function resetGroupOnModifierPress(event) {
+    if (modiferPressed(event)) {
       g_group.reset();
     }
   }
-  document.addEventListener('keydown', resetGroupOnCtrl);
-  document.addEventListener('keyup', resetGroupOnCtrl);
+
+  document.addEventListener('keydown', resetGroupOnModifierPress);
+  document.addEventListener('keyup', resetGroupOnModifierPress);
 
   function handleClick(view, _, event) {
-    // Remember return true to stop prosemirror parent selection on ctrl clicking
-    if (!event.target.className.includes(sentenceClasses.base)) {
-      // Ensure click is really on a decorator
-      // Using DecorationSet.find (selectionsAt) ProseMirror will return the last decorator
-      // on the same line even if it's not under the cursor.
-      return true;
-    }
+    // Remember to return true to stop prosemirror parent selection on ctrl clicking
+
+    // Only handle left clicks
+    if (event.button !== 0) return true;
+
+    // If click is not on a decoration element
+    // Using DecorationSet.find (selectionsAt) ProseMirror will return the last decorator
+    // on the same line even if it's not under the cursor.
+    const wasDecorationClick = event.target.className.includes(sentenceClasses.base);
+    if (!wasDecorationClick) return true;
 
     const sel = view.state.selection;
     if (!sel.empty) return true;
@@ -290,7 +306,8 @@ export function selectionUI(dispatch) {
 
     if (!selection) return true;
 
-    const wasGroupClick = event.ctrlKey;
+    // Ctrl for Windows & Linux, Cmd (metaKey) for Mac
+    const wasGroupClick = event.ctrlKey || event.metaKey;
     dispatch(view.state.tr.setMeta(selectionPlugin, { type: 'toggleSelect', selection, wasGroupClick }));
 
     return true;
