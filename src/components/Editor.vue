@@ -160,7 +160,7 @@ export default {
 
 <style lang="postcss">
 .Placeholder {
-  @apply font-title text-brand-primary pl-6;
+  @apply font-title text-brand-primary pl-6 mt-1;
   @apply absolute;
   margin-left: 3px;
 }
