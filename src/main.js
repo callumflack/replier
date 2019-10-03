@@ -10,6 +10,7 @@ import './assets/css/tailwind.css';
 
 Vue.config.productionTip = false;
 
+Vue.use(PortalVue);
 Vue.use(VuePageTransition);
 
 Vue.use(PortalVue);

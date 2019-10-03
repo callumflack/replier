@@ -107,6 +107,8 @@ export default {
 
       focused.focus();
       this.$refs.popover.close();
+
+      this.$emit('onExport');
     },
     exportGmail() {
       return this.exportReply(GmailFormatter);

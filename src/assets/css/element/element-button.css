@@ -196,7 +196,7 @@ textarea.Input {
 .ButtonComplex .Button--outline,
 .Button--outline,
 .Button--invisible {
-  --button-color: theme(colors.text);
+  --button-color: var(--button-invert-color);
   --button-bg-color: transparent;
   --button-bg-color-hover: transparent;
 }

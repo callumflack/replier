@@ -38,4 +38,12 @@ export default {
   .fade-in-left .fade-in-left-leave-active {
     /* transition: all 10s ease !important; */
   }
+
+  .vue-slick-popover__overlay {
+    /* Stop overlay creating horizontal scroll from "width: 100vw" */
+    height: auto;
+    width: auto;
+    bottom: 0;
+    right: 0;
+  }
 </style>
