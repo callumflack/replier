@@ -1,12 +1,13 @@
 <template>
   <div class="container Block-sm max-w-3xl">
-    <!-- <router-link to="/" class="Link mb-8 block opacity-75">Return to Editor</router-link> -->
-
+    <!-- tabindex starting with a positive value and
+    ending with the highest possible value: tiny.cc/txtudz -->
     <div class="px-6">
       <textarea
         class="reply-input reply-input--contextual Input"
         placeholder="Say hi…"
         rows="2"
+        tabindex="1"
         @input="handleIntroInput"
       >{{ $store.state.repliesIntro }}</textarea>
 
@@ -17,19 +18,10 @@
       >
         <div
           class="selection"
-          v-for="selection in groupedSelections"
+          v-for="(selection, index) in groupedSelections"
           :key="selection.id"
         >
           <div class="selection__options">
-            <!-- <button class="option-button handle">
-              <icon name="grip" />
-            </button>-->
-            <!-- <button
-              @click="(event) => deleteSelection(event, selection)"
-              class="option-button delete-button"
-            >
-              <icon name="delete" />
-            </button>-->
             <Tooltip>
               <button class="option-button handle">
                 <icon name="grip" />
@@ -53,6 +45,7 @@
               class="reply-input Input"
               placeholder="Reply…"
               rows="3"
+              :tabindex="index + 2"
               @input="(event) => handleReplyInput(event, selection)"
             >{{ findReply(selection) }}</textarea>
             <!-- <Tooltip class="tooltip--reply">
@@ -72,6 +65,7 @@
         class="reply-input reply-input--contextual Input"
         placeholder="Add a summary…"
         rows="3"
+        tabindex="32767"
         @input="handleOutroInput"
       >{{ $store.state.repliesOutro }}</textarea>
 
