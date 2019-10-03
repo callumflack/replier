@@ -13,10 +13,10 @@
       ref="infoIcon"
       @click.prevent="toggleMobileNav()"
     >
-      <icon v-if="mobileNavOpen" name="arrow-back"></icon>
-      <icon v-else name="info"></icon>
+      <icon v-if="mobileNavOpen" name="close" height="1.75em" width="1.75em"></icon>
+      <icon v-else name="info" height="1.25em" width="1.25em"></icon>
     </span>
-    <portal to="info">
+    <portal to="modals">
       <Modal :show="mobileNavOpen" @close="mobileNavOpen = false">
         <Info></Info>
       </Modal>
@@ -55,17 +55,17 @@ export default {
 </script>
 
 <style lang="postcss">
-  .Info {
-    @apply ml-4 text-gray-mid cursor-pointer;
-    @apply relative;
-    transition: opacity 0.5s ease-in;
-    z-index: 101;
-  }
-  .Info:hover {
-    @apply text-brand-primary;
-  }
-  .Info svg {
-    height: 1.25em !important;
-    width: 1.25em !important;
-  }
+.Info {
+  @apply ml-4 text-gray-mid cursor-pointer;
+  @apply relative;
+  transition: opacity 0.5s ease-in;
+  z-index: 101;
+}
+.Info:hover {
+  @apply text-brand-primary;
+}
+.Info svg {
+  /* height: 1.25em !important; */
+  /* width: 1.25em !important; */
+}
 </style>

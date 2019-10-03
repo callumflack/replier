@@ -4,7 +4,7 @@
     <vue-page-transition :name="transitionName">
       <router-view />
     </vue-page-transition>
-    <portal-target name="info"></portal-target>
+    <portal-target name="modals" multiple></portal-target>
   </div>
 </template>
 
