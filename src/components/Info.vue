@@ -29,6 +29,7 @@ export default {
   data() {
     return {
       thisTitle: 'What is this?',
+      /* eslint-disable max-len */
       thisOne:
           "Corvid Reply helps you reply to your project collaborators by choosing only what's most important in the conversation. It removes the superfluous and helps avoid important info falling through the cracks.",
       thisTwo:
@@ -42,6 +43,7 @@ export default {
       howThree:
           'Choose to export to Gmail, Slack or Basecamp.',
       version: 'Version 0.0.1 2019-10-01',
+      /* eslint-enable max-len */
     };
   },
 };
