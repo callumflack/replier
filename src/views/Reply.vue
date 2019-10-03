@@ -142,107 +142,107 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-  .selection {
-    --inset: 12px;
-    @apply relative flex;
-    @apply cursor-default;
-    @apply rounded-lg;
-    /* @apply border border-form-bad; */
-    padding: var(--inset);
-    margin: calc(-1 * var(--inset));
-  }
-  .selection:not(:last-of-type) {
-    /* less than Block-sm-b */
-    margin-bottom: calc(theme(spacing.10) * var(--block-size-ratio));
-  }
-  .selection-content {
-    flex-grow: 1;
-  }
+.selection {
+  --inset: 12px;
+  @apply relative flex;
+  @apply cursor-default;
+  @apply rounded-lg;
+  /* @apply border border-form-bad; */
+  padding: var(--inset);
+  margin: calc(-1 * var(--inset));
+}
+.selection:not(:last-of-type) {
+  /* less than Block-sm-b */
+  margin-bottom: calc(theme(spacing.10) * var(--block-size-ratio));
+}
+.selection-content {
+  flex-grow: 1;
+}
 
-  /*
-              Affordance buttons
-              */
-  .selection__options {
-    @apply absolute inset-0 right-auto text-right;
-    top: var(--inset);
-    left: -3.5rem;
-  }
-  .selection .option-button {
-    @apply opacity-0;
-    @apply text-black;
-    transition: opacity 250ms cubic-bezier(0.19, 1, 0.22, 1);
-  }
-  .selection .option-button:focus {
-    @apply outline-none;
-  }
-  .selection .option-button + .option-button {
-    @apply ml-2px;
-  }
-  .selection .option-button svg {
-    @apply bg-transparent rounded;
-    height: 1.25em !important;
-    width: 1.25em !important;
-    transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
-  }
-  .selection:hover .option-button {
-    @apply opacity-33;
-    @apply cursor-pointer;
-  }
-  .selection:hover .option-button:hover {
-    @apply opacity-100;
-  }
-  .selection .option-button:hover svg {
-    @apply bg-gray-light;
-  }
-  .selection .option-button.handle {
-    @apply cursor-move;
-  }
+/*
+  Affordance buttons
+*/
+.selection__options {
+  @apply absolute inset-0 right-auto text-right;
+  top: var(--inset);
+  left: -3.5rem;
+}
+.selection .option-button {
+  @apply opacity-0;
+  @apply text-black;
+  transition: opacity 250ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+.selection .option-button:focus {
+  @apply outline-none;
+}
+.selection .option-button + .option-button {
+  @apply ml-2px;
+}
+.selection .option-button svg {
+  @apply bg-transparent rounded;
+  height: 1.25em !important;
+  width: 1.25em !important;
+  transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+.selection:hover .option-button {
+  @apply opacity-33;
+  @apply cursor-pointer;
+}
+.selection:hover .option-button:hover {
+  @apply opacity-100;
+}
+.selection .option-button:hover svg {
+  @apply bg-gray-light;
+}
+.selection .option-button.handle {
+  @apply cursor-move;
+}
 
-  /*
-              Inputs
-              */
-  .reply-input {
-    --button-padding-x: 0;
-    @apply font-title font-medium text-brand-primary;
-    @apply leading-relaxed;
-    @apply bg-transparent;
-    /* @apply border-b border-gray-light; */
-    font-size: calc(theme(fontSize.xl) * var(--text-ratio) - 1px);
-    transition: border-color 0.2s;
-  }
-  .reply-input:focus {
-    border-color: theme("colors.brand.primary");
-  }
-  .reply-input--contextual::placeholder {
-    --input-placeholder-color: theme("colors.gray.mid");
-  }
+/*
+  Inputs
+*/
+.reply-input {
+  --button-padding-x: 0;
+  @apply font-title font-medium text-brand-primary;
+  @apply leading-relaxed;
+  @apply bg-transparent;
+  /* @apply border-b border-gray-light; */
+  font-size: calc(theme(fontSize.xl) * var(--text-ratio) - 1px);
+  transition: border-color 0.2s;
+}
+.reply-input:focus {
+  border-color: theme("colors.brand.primary");
+}
+.reply-input--contextual::placeholder {
+  --input-placeholder-color: theme("colors.gray.mid");
+}
 
-  /*
-              UI label
-              */
-  .ui-label {
-    @apply py-1 px-2 rounded;
-    @apply bg-black text-white text-center;
-    box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.15);
-    font-size: calc(theme(fontSize.xs) * var(--text-ratio));
-    padding-bottom: 0.375rem;
-  }
-  /* .tooltip--reply >>> .tooltip-content {
-              @apply absolute z-10;
-              @apply text-center;
-              top: -7px;
-              left: 50%;
-              min-width: 150px;
-              transform: translate(-50%, 100%);
-            } */
+/*
+  UI label
+*/
+.ui-label {
+  @apply py-1 px-2 rounded;
+  @apply bg-black text-white text-center;
+  box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.15);
+  font-size: calc(theme(fontSize.xs) * var(--text-ratio));
+  padding-bottom: 0.375rem;
+}
+/* .tooltip--reply >>> .tooltip-content {
+  @apply absolute z-10;
+  @apply text-center;
+  top: -7px;
+  left: 50%;
+  min-width: 150px;
+  transform: translate(-50%, 100%);
+} */
 
-  /*
-              Draggable
-              */
-  .sortable-chosen {
-    @apply shadow-md border border-gray-mid;
-  }
-  .sortable-ghost {
-    background-color: rgba(0, 123, 255, 0.05);
-  }
+/*
+  Draggable
+*/
+.sortable-chosen {
+  @apply shadow-md border border-gray-light;
+}
+.sortable-ghost {
+  /* background-color: rgba(0, 123, 255, 0.025); */
+}
 </style>
