@@ -5,6 +5,20 @@
 
 */
 
+:root {
+  --block-size-ratio: theme(responsiveScale.blockXs);
+}
+@screen sm {
+  :root {
+    --block-size-ratio: theme(responsiveScale.blockSm);
+  }
+}
+@screen lg {
+  :root {
+    --block-size-ratio: theme(responsiveScale.blockMd);
+  }
+}
+
 /* LG */
 
 .Block {
@@ -52,19 +66,3 @@
   margin-top: calc(theme(spacing.12) * var(--block-size-ratio));
 }
 
-
-/* SCALE */
-
-:root {
-  --block-size-ratio: theme(responsiveScale.blockXs);
-}
-@screen sm {
-  :root {
-    --block-size-ratio: theme(responsiveScale.blockSm);
-  }
-}
-@screen lg {
-  :root {
-    --block-size-ratio: theme(responsiveScale.blockMd);
-  }
-}

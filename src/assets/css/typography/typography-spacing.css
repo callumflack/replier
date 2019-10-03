@@ -27,18 +27,18 @@
 */
 
 .s-block-p:not(:last-child) {
-  margin-bottom: calc(theme(spacing.5) * var(--space-ratio));
+  margin-bottom: calc(theme(spacing.3) * var(--space-ratio));
 }
 
 .s-p {
-  margin-bottom: calc(theme(spacing.6) * var(--space-ratio));
+  margin-bottom: calc(theme(spacing.3) * var(--space-ratio));
 }
 .st-p {
-  margin-top: calc(theme(spacing.6) * var(--space-ratio));
+  margin-top: calc(theme(spacing.3) * var(--space-ratio));
 }
 .sy-p {
-  margin-top: calc(theme(spacing.6) * var(--space-ratio));
-  margin-bottom: calc(theme(spacing.6) * var(--space-ratio));
+  margin-top: calc(theme(spacing.3) * var(--space-ratio));
+  margin-bottom: calc(theme(spacing.3) * var(--space-ratio));
 }
 
 /*
@@ -49,14 +49,14 @@
 
 .s-block-h:not(:last-child),
 .s-h {
-  margin-bottom: calc(theme(spacing.4) * var(--space-ratio));
+  margin-bottom: calc(theme(spacing.6) * var(--space-ratio));
 }
 .st-h {
-  margin-top: calc(theme(spacing.4) * var(--space-ratio));
+  margin-top: calc(theme(spacing.6) * var(--space-ratio));
 }
 .sy-h {
-  margin-top: calc(theme(spacing.4) * var(--space-ratio));
-  margin-bottom: calc(theme(spacing.4) * var(--space-ratio));
+  margin-top: calc(theme(spacing.6) * var(--space-ratio));
+  margin-bottom: calc(theme(spacing.6) * var(--space-ratio));
 }
 
 .s-2xh {

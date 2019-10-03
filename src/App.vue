@@ -1,12 +1,10 @@
 <template>
   <div id="app">
-    <!-- <nav id="nav" class="container max-w-3xl Block-md-t Block-sm-b">
-      <router-link to="/" class="font-title">Corvid Writing</router-link>
-    </nav> -->
     <NavBar></NavBar>
     <vue-page-transition :name="transitionName">
       <router-view />
     </vue-page-transition>
+    <portal-target name="info"></portal-target>
   </div>
 </template>
 
