@@ -59,35 +59,35 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-  .Modal-backdrop {
-    @apply fixed inset-0 overflow-auto;
-    background-color: rgba(255, 255, 255, 0.96);
-    z-index: 99; /* below vue-headroom */
-  }
+.Modal-backdrop {
+  @apply fixed inset-0 overflow-auto;
+  background-color: rgba(255, 255, 255, 1);
+  z-index: 99; /* below vue-headroom */
+}
 
-  .Modal {
-    /* @apply h-full; */
-    /* @apply bg-white; */
-  }
+.Modal {
+  /* @apply h-full; */
+  /* @apply bg-white; */
+}
 
-  .Modal-close {
-    @apply absolute inset-0 p-4 z-10 cursor-pointer;
-  }
+.Modal-close {
+  @apply absolute inset-0 p-4 z-10 cursor-pointer;
+}
 
-  .Modal-close:focus,
-  .Modal-close:active {
-    @apply outline-none;
-  }
+.Modal-close:focus,
+.Modal-close:active {
+  @apply outline-none;
+}
 
-  /* Transition */
-  .Modal-enter-active,
-  .Modal-leave-active {
-    transition: opacity 500ms cubic-bezier(0.19, 1, 0.22, 1);
-  }
+/* Transition */
+.Modal-enter-active,
+.Modal-leave-active {
+  transition: opacity 500ms cubic-bezier(0.19, 1, 0.22, 1);
+}
 
-  .Modal-enter,
-  .Modal-leave-to {
-    @apply opacity-0;
-    /* transform: scale(1.05); */
-  }
+.Modal-enter,
+.Modal-leave-to {
+  @apply opacity-0;
+  /* transform: scale(1.05); */
+}
 </style>

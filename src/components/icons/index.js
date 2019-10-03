@@ -1,5 +1,6 @@
 /* eslint-disable */
 require('./arrow-back')
+require('./check-circle')
 require('./close')
 require('./delete')
 require('./edit')

@@ -2,7 +2,7 @@
   <div class="relative">
     <div
       v-if="!$store.state.timestamp"
-      class="Placeholder Text-lg"
+      class="Placeholder Text-lg font-medium"
     >
       Paste here &amp; click to select…
     </div>
@@ -162,7 +162,7 @@ export default {
 .Placeholder {
   @apply font-title text-brand-primary pl-6 mt-1;
   @apply absolute;
-  margin-left: 3px;
+  margin-left: 2px;
 }
 /*
 

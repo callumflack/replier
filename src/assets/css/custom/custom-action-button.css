@@ -22,5 +22,5 @@
 
 .ActionButton button[disabled],
 .ActionButton button:disabled {
-  --button-invert-color: theme(colors.gray.dark);
+  --button-invert-color: theme(colors.gray.mid);
 }

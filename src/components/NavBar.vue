@@ -6,7 +6,7 @@
         class="Text-xl font-title font-bold text-brand-primary"
       >
         <icon v-if="$route.name !== 'home'" name="arrow-back" class="mr-1" />
-        {{ homeLabel }}
+        <span>{{ homeLabel }}</span>
       </router-link>
       <NavBarInfo class="mt-px"></NavBarInfo>
     </nav>
@@ -22,7 +22,7 @@ export default {
   },
   computed: {
     homeLabel() {
-      return this.$route.name === 'home' ? 'Corvid Writing' : 'Corral mode';
+      return this.$route.name === 'home' ? 'Corvid Writing' : 'Revise selection';
     },
   },
 };

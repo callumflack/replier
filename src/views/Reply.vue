@@ -65,20 +65,30 @@
         class="reply-input reply-input--contextual Input"
         placeholder="Add a summary…"
         rows="3"
-        tabindex="32767"
+        tabindex="999"
         @input="handleOutroInput"
       >{{ $store.state.repliesOutro }}</textarea>
-
-      <ButtonExport @onExport="handleExport" :groupedSelections="groupedSelections" />
     </div>
+    <ButtonExport @onExport="handleExport" :groupedSelections="groupedSelections" />
+    <!-- success modal -->
     <portal to="modals">
-      <Modal :show="isResetModalOpen" @close="isResetModalOpen = false" ref="resetModal">
-        <div class="max-w-xl">
-          <p class="s-p">Successfully copied to your clipboard!</p>
-          <div class="flex">
-            <button class="mr-2 w-1/2 Button" @click="resetState">Start again</button>
-            <button class="ml-2 w-1/2 Button Button--outline" @click="dismiss">Keep Editing</button>
-          </div>
+      <Modal
+        :show="isResetModalOpen"
+        @close="isResetModalOpen = false"
+        ref="resetModal"
+      >
+        <p class="s-h font-title font-medium text-form-goo Text-base">
+          <icon name="check-circle" class="text-form-good mr-2px" height="1.25em" width="1.25em"></icon>
+          Copied to your clipboard
+        </p>
+        <hr class="s-h" />
+        <div class="flex pt-1">
+          <button class="mr-2 w-1/2 font-title font-semibold Button" @click="resetState">
+            Start again
+          </button>
+          <button class="ml-2 w-1/2 font-title font-semibold Button Button--outline" @click="dismiss">
+            Keep editing
+          </button>
         </div>
       </Modal>
     </portal>
@@ -183,7 +193,7 @@ export default {
 }
 .selection:not(:last-of-type) {
   /* less than Block-sm-b */
-  margin-bottom: calc(theme(spacing.10) * var(--block-size-ratio));
+  margin-bottom: calc(theme(spacing.8) * var(--block-size-ratio));
 }
 .selection-content {
   flex-grow: 1;
@@ -195,7 +205,7 @@ export default {
 .selection__options {
   @apply absolute inset-0 right-auto text-right;
   top: var(--inset);
-  left: -3.5rem;
+  left: -3rem;
 }
 .selection .option-button {
   @apply opacity-0;
@@ -267,18 +277,30 @@ export default {
 } */
 
 /*
-   Modal
+  Modal
+  1. Move it above everything incl the nav
  */
 .Modal-backdrop {
+  @apply flex justify-center items-start;
   background: rgba(255, 255, 255, 0.7);
+  background: rgba(250, 248, 245, 0.7);
+  background: rgba(244, 242, 240, 0.7);
+  z-index: 101; /* 1 */
 }
-
 >>> .Modal {
-  box-shadow: 0 0 6px 4px #eaeaea;
+  /* @apply max-w-sm;  */
+  @apply shadow-xl;
+  @apply rounded-lg bg-white;
+  /* @apply border border-form-good; */
+  @apply p-8;
+  padding: calc(theme(spacing.8) * var(--block-size-ratio));
+  margin-top: calc(theme(spacing.48) * var(--block-size-ratio));
+  margin-top: 25vh;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.05);
 }
-
 >>> .Modal .Button {
   white-space: nowrap;
+}
 
 /*
   Draggable

@@ -5,6 +5,7 @@
         <template v-slot:trigger>
           <button
             class="Button font-title"
+            tabindex="1000"
           >
             Export
           </button>
@@ -36,6 +37,7 @@ import Popover from '@/components/Popover.vue';
 const GmailFormatter = {
   // Uses text/html
   blockquote(text) {
+    // eslint-disable-next-line
     return `<blockquote style="margin-left: 0; padding: 15px; background: rgb(238, 238, 238); border-radius: 5px; color: rgb(51, 51, 51); font-family: sans-serif; font-size: 14.4px;">${text}</blockquote>`;
   },
 };

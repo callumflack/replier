@@ -22,7 +22,7 @@ module.exports = {
         blue: '#1b495a',
         blueneutral: '#f1f2f3',
         bluelight: blueLight,
-        neutral: '#FAF8F5',
+        neutral: '#f4f2f0',
       },
       group: {
         2: 'hsl(110, 63%, 43%)',

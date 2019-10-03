@@ -8,14 +8,14 @@
       <span v-else class="Timestamp Text-xs">{{ $store.state.timestamp }}</span>
     </template>
     <!-- info toggle -->
-    <span
+    <button
       class="Info Text-xs text-brand-primary"
       ref="infoIcon"
       @click.prevent="toggleMobileNav()"
     >
       <icon v-if="mobileNavOpen" name="close" height="1.75em" width="1.75em"></icon>
       <icon v-else name="info" height="1.25em" width="1.25em"></icon>
-    </span>
+    </button>
     <portal to="modals">
       <Modal :show="mobileNavOpen" @close="mobileNavOpen = false">
         <Info></Info>
@@ -64,8 +64,7 @@ export default {
 .Info:hover {
   @apply text-brand-primary;
 }
-.Info svg {
-  /* height: 1.25em !important; */
-  /* width: 1.25em !important; */
+.Info:focus {
+  @apply outline-none;
 }
 </style>

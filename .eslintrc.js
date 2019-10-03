@@ -13,6 +13,7 @@ module.exports = {
     'no-plusplus': 'off',
     'prefer-destructuring': 'off',
     'vue/no-textarea-mustache': 'off',
+    'max-len': ['error', 110],
   },
   parserOptions: {
     parser: 'babel-eslint',
