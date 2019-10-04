@@ -13,11 +13,9 @@
 
  */
 
-.Input,
-.Button {
+:root {
   --button-color: theme(colors.white);
-  --button-invert-color: theme(colors.brand.primary);
-
+  --button-invert-color: theme(colors.black);
   --button-bg-color: var(--button-invert-color);
   --button-bg-color-hover: var(--button-invert-color);
   --button-border-color: var(--button-invert-color);
@@ -29,13 +27,15 @@
   --button-box-shadow-stroke-inset: 1px;
   --button-disabled-opacity: 0.6;
   --button-font-case: initial;
-  --button-font-weight: 700;
+  --button-font-weight: 500;
   --button-height: 44px;
   --button-inline-spacing: 0;
   --button-padding-x: 2em;
-
   --input-placeholder-color: theme(colors.text);
+}
 
+.Input,
+.Button {
   align-items: center;
   background-color: var(--button-bg-color);
   border-color: var(--button-border-color);
@@ -184,8 +184,8 @@ textarea.Input {
   variations
  */
 
-.Button--blue {
-  --button-invert-color: theme(colors.brand.blue);
+.Button--brand {
+  --button-invert-color: theme(colors.brand.primary);
 }
 
 .Button--white {

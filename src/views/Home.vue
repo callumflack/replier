@@ -68,6 +68,7 @@ export default {
 }
 .aside-map p {
   @apply text-transparent mb-2;
+  @apply leading-relaxed;
   font-size: 0.4rem;
 }
 .aside-map span {

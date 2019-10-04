@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div class="ActionButton">
+    <div class="ActionButton opacity-100">
       <Popover ref='popover'>
         <template v-slot:trigger>
           <button
-            class="Button font-title"
+            class="Button Button--brand font-title"
             tabindex="1000"
           >
             Export
@@ -12,10 +12,16 @@
         </template>
 
         <template v-slot:content>
-          <h3 class="popover-headline">Copy to share:</h3>
-          <button class="export-option" @click="exportGmail()">Format for Gmail</button>
-          <button class="export-option" @click="exportBasecamp()">Format for Basecamp</button>
-          <button class="export-option" @click="exportSlack()">Format for Slack</button>
+          <h3 class="Meta text-brand-primary">Copy to share:</h3>
+          <button class="Button Button--invisible export-option" @click="exportGmail()">
+            Format for Gmail
+          </button>
+          <button class="Button Button--invisible export-option" @click="exportBasecamp()">
+            Format for Basecamp
+          </button>
+          <button class="Button Button--invisible export-option" @click="exportSlack()">
+            Format for Slack
+          </button>
         </template>
       </Popover>
     </div>
@@ -126,15 +132,45 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
+>>> .vue-slick-popover[x-placement^="bottom"] {
+  margin-top: 16px;
+}
 >>> .vue-slick-popover-content__body {
+  @apply shadow-xl;
+  @apply rounded-lg bg-white;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.05);
   width: 300px;
+  /* set button styles */
+  --button-height: 54px;
+  --button-border-radius: 0;
+  --button-box-shadow-color: transparent;
 }
 
 .vue-slick-popover-content__body > * {
-  @apply block py-4 px-8 w-full text-left border-b;
+  /* @apply block py-4 px-8 w-full text-left border-b; */
+  @apply inline-flex items-center justify-start w-full;
+  @apply border-b !important;
+  border-bottom-color: theme(colors.gray.light);
+  height: var(--button-height);
+  line-height: 1;
+  padding: 0 var(--button-padding-x);
+  padding-bottom: calc((1 / 15) * 1em); /* 2 */
 }
 
-.popover-headline {
-  @apply text-brand-primary font-bold uppercase;
+.export-option {
+  @apply font-title;
+  transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+.export-option:hover {
+  background-color: rgba(166, 101, 1, 0.05);
+}
+
+.Button--brand {
+  --button-invert-color: theme(colors.brand.primary);
+  --button-bg-color: var(--button-invert-color);
+  --button-bg-color-hover: var(--button-invert-color);
+  --button-border-color: var(--button-invert-color);
+  --button-box-shadow-color: var(--button-invert-color);
+  /* background-color: theme(colors.brand.primary); */
 }
 </style>

@@ -6,7 +6,7 @@
 
 @font-face {
   font-family: "IBMPlexSans";
-  src: url("~@/assets/fonts/IBMPlexSans-Text.woff") format("woff");
+  src: url("~@/assets/fonts/IBMPlexSans-Regular.woff") format("woff");
   font-style: normal;
   font-weight: 400;
 }
@@ -20,7 +20,7 @@
 @font-face {
   font-family: "IBMPlexMono";
   font-weight: 400;
-  src: url("~@/assets/fonts/IBMPlexMono-Text.woff") format("woff");
+  src: url("~@/assets/fonts/IBMPlexMono-Regular.woff") format("woff");
 }
 @font-face {
   font-family: "IBMPlexMono";

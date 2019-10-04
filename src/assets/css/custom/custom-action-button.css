@@ -8,16 +8,16 @@
 .ActionButton {
   @apply flex justify-end;
   @apply w-full border-t-2 pt-6;
-  @apply border-brand-primary;
-  /* @apply opacity-50; */
+  @apply border-black;
+  @apply opacity-0;
   margin-top: calc(theme(spacing.12) * var(--block-size-ratio)); /* Block-sm */
   margin-bottom: calc(theme(spacing.96) * var(--block-size-ratio)); /* Block ++ */
   transition: all 250ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .ActionButton.is-active {
-  @apply border-brand-primary;
-  /* @apply opacity-100; */
+  /* @apply border-black; */
+  @apply opacity-100;
 }
 
 .ActionButton button[disabled],

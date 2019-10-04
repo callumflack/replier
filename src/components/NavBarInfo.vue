@@ -3,13 +3,13 @@
     <template v-if="!mobileNavOpen">
       <span
         v-if="!$store.state.timestamp"
-        class="Timestamp Text-xs text-brand-primary"
+        class="Timestamp Text-xs"
       >{{ tip }}</span>
       <span v-else class="Timestamp Text-xs">{{ $store.state.timestamp }}</span>
     </template>
     <!-- info toggle -->
     <button
-      class="Info Text-xs text-brand-primary"
+      class="Info Text-xs"
       ref="infoIcon"
       @click.prevent="toggleMobileNav()"
     >
@@ -17,7 +17,12 @@
       <icon v-else name="info" height="1.25em" width="1.25em"></icon>
     </button>
     <portal to="modals">
-      <Modal :show="mobileNavOpen" @close="mobileNavOpen = false">
+      <Modal
+        :show="mobileNavOpen"
+        @close="mobileNavOpen = false"
+        info=true
+        class="info-modal"
+      >
         <Info></Info>
       </Modal>
     </portal>
@@ -55,14 +60,21 @@ export default {
 </script>
 
 <style lang="postcss">
+.Timestamp {
+  @apply inline-block self-end;
+  @apply font-title font-medium;
+  @apply text-black;
+  transition: opacity 0.5s ease-in;
+}
 .Info {
-  @apply ml-4 text-gray-mid cursor-pointer;
+  @apply ml-4 cursor-pointer;
+  @apply text-black;
   @apply relative;
   transition: opacity 0.5s ease-in;
   z-index: 101;
 }
 .Info:hover {
-  @apply text-brand-primary;
+  /* @apply text-brand-primary; */
 }
 .Info:focus {
   @apply outline-none;

@@ -35,6 +35,7 @@
 @import "./custom/custom-box";
 @import "./custom/custom-banner";
 @import "./custom/custom-action-button";
+@import "./custom/custom-info-modal";
 @import "./theme/theme-modal";
 @import "./theme/theme-slider";
 

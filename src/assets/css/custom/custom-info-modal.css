@@ -1,0 +1,18 @@
+.info-modal {
+  --info-modal-bg: theme(colors.black);
+  --info-modal-text: theme(colors.white);
+  --info-modal-text-light: theme(colors.gray.mid);
+}
+
+.info-modal .Nav {
+  color: var(--info-modal-text);
+  border-color: var(--info-modal-text);
+  border-bottom-width: 1px;
+}
+.info-modal .Info {
+  color: var(--info-modal-text);
+}
+
+.info-modal .Modal-backdrop {
+  background-color: var(--info-modal-bg);
+}

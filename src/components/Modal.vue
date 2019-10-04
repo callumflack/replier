@@ -15,19 +15,25 @@ export default {
   props: {
     show: { required: true },
     preventBackgroundScrolling: { default: true },
+    info: { default: false },
   },
   watch: {
     show: {
-      // this watcher will run when first instaniated
+      // this watcher will run when first instantiated
       immediate: true,
       handler(show) {
         if (this.preventBackgroundScrolling) {
           if (show) {
             document.body.style.setProperty('overflow', 'hidden');
-            document.body.classList.add('modal-is-active');
+            document.documentElement.classList.add('modal-is-active');
           } else {
             document.body.style.removeProperty('overflow');
-            document.body.classList.remove('modal-is-active');
+            document.documentElement.classList.remove('modal-is-active');
+          }
+          if (show && this.info) {
+            document.documentElement.classList.add('info-modal');
+          } else {
+            document.documentElement.classList.remove('info-modal');
           }
         }
       },
@@ -47,7 +53,7 @@ export default {
   methods: {
     closeVideo() {
       // eslint-disable-next-line
-        const video = document.getElementsByTag("video");
+      const video = document.getElementsByTag("video");
       this.video.pause();
       this.video.currentTime = 0;
     },
