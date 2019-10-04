@@ -43,11 +43,4 @@ export default {
   /* Stop overlay creating horizontal scroll from "width: 100vw" */
   @apply h-auto w-auto bottom-0 right-0;
 }
-
-/* @font-face {
-  font-family: "Sans";
-  src: url("/assets/fonts/Chap-Medium.otf") format("woff");
-  font-style: normal;
-  font-weight: 400;
-} */
 </style>
