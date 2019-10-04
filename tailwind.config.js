@@ -70,6 +70,7 @@ module.exports = {
     },
     fontFamily: {
       title: [
+        'IBMPlexSans-Text',
         '"SF Mono"',
         'Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace',
       ],
