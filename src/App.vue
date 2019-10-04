@@ -32,18 +32,22 @@ export default {
 </script>
 
 <style lang="postcss">
-  .fade-in-right .fade-in-right-enter-active,
-  .fade-in-right .fade-in-right-leave-active,
-  .fade-in-left .fade-in-left-enter-active,
-  .fade-in-left .fade-in-left-leave-active {
-    /* transition: all 10s ease !important; */
-  }
+.fade-in-right .fade-in-right-enter-active,
+.fade-in-right .fade-in-right-leave-active,
+.fade-in-left .fade-in-left-enter-active,
+.fade-in-left .fade-in-left-leave-active {
+  /* transition: all 10s ease !important; */
+}
 
-  .vue-slick-popover__overlay {
-    /* Stop overlay creating horizontal scroll from "width: 100vw" */
-    height: auto;
-    width: auto;
-    bottom: 0;
-    right: 0;
-  }
+.vue-slick-popover__overlay {
+  /* Stop overlay creating horizontal scroll from "width: 100vw" */
+  @apply h-auto w-auto bottom-0 right-0;
+}
+
+/* @font-face {
+  font-family: "Sans";
+  src: url("/assets/fonts/Chap-Medium.otf") format("woff");
+  font-style: normal;
+  font-weight: 400;
+} */
 </style>

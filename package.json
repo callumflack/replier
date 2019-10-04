@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
+    "inspect": "vue-cli-service inspect",
     "dev": "npm run serve",
     "icons": "vsvg -s src/assets/icons -t src/components/icons",
     "build": "vue-cli-service build",
