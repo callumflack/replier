@@ -5,12 +5,8 @@
  */
 
 @font-face {
-  font-family: "Sans";
-  /* src: url("http://localhost:8080/assets/fonts/IBMPlexSans-Text.woff2") format("woff2"); */
-  /* src: url("~/assets/fonts/IBMPlexSans-Text.otf") format("woff"); */
-  /* src: url("~/assets/fonts/IBMPlexSans-Text.woff") format("woff"); */
-  src: url("/assets/fonts/IBMPlexSans-Text.woff") format("woff");
-  /* src: url("/assets/fonts/Chap-Medium.woff") format("woff"); */
+  font-family: "IBMPlexSans";
+  src: url("~@/assets/fonts/IBMPlexSans-Text.woff") format("woff");
   font-style: normal;
   font-weight: 400;
 }
@@ -18,28 +14,27 @@
 /*
 
   Mono
-  https://gist.github.com/AndrewBarba/2c0f6612ceef30f5f55d
 
  */
 
 @font-face {
-  font-family: "SF Mono";
+  font-family: "IBMPlexMono";
   font-weight: 400;
-  src: url("https://sf.abarba.me/SFMono-Regular.otf");
+  src: url("~@/assets/fonts/IBMPlexMono-Text.woff") format("woff");
 }
 @font-face {
-  font-family: "SF Mono";
+  font-family: "IBMPlexMono";
   font-weight: 500;
-  src: url("https://sf.abarba.me/SFMono-Medium.otf");
+  src: url("~@/assets/fonts/IBMPlexMono-Medium.woff") format("woff");
 }
 @font-face {
-  font-family: "SF Mono";
+  font-family: "IBMPlexMono";
+  font-weight: 600;
+  src: url("~@/assets/fonts/IBMPlexMono-SemiBold.woff") format("woff");
+}
+@font-face {
+  font-family: "IBMPlexMono";
   font-weight: 700;
-  src: url("https://sf.abarba.me/SFMono-Bold.otf");
-}
-@font-face {
-  font-family: "SF Mono";
-  font-weight: 800;
-  src: url("https://sf.abarba.me/SFMono-Heavy.otf");
+  src: url("~@/assets/fonts/IBMPlexMono-Bold.woff") format("woff");
 }
 

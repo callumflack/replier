@@ -70,11 +70,11 @@ module.exports = {
     },
     fontFamily: {
       title: [
-        '"SF Mono"',
+        'IBMPlexMono',
         'Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace',
       ],
       sans: [
-        'Sans',
+        'IBMPlexSans',
         '-apple-system',
         'BlinkMacSystemFont',
         '"Segoe UI"',
@@ -148,7 +148,8 @@ module.exports = {
       tighter: '-0.05em',
       tight: '-0.0125em',
       normal: '0',
-      wide: '0.025em',
+      subtitle: '0.005em',
+      wide: '0.01em',
       wider: '0.05em',
       widest: '0.1em',
     },
