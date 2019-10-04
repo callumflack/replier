@@ -13,43 +13,46 @@
 
       <draggable
         v-model="groupedSelections"
+        v-bind="dragOptions"
         handle=".handle"
         @end="handleDragEnd"
       >
-        <div
-          class="selection"
-          v-for="(selection, index) in groupedSelections"
-          :key="selection.id"
-        >
-          <div class="selection__options">
-            <Tooltip>
-              <button class="option-button handle">
-                <icon name="grip" />
-              </button>
-              <span class="ui-label" slot="content">Drag to move</span>
-            </Tooltip>
-            <Tooltip>
-              <button
-                @click="(event) => deleteSelection(event, selection)"
-                class="option-button delete-button"
-              >
-                <icon name="delete" />
-              </button>
-              <span class="ui-label" slot="content">Delete</span>
-            </Tooltip>
-          </div>
+        <transition-group type="transition" name="flip-list">
+          <div
+            class="selection"
+            v-for="(selection, index) in groupedSelections"
+            :key="selection.id"
+          >
+            <div class="selection__options">
+              <Tooltip>
+                <button class="option-button handle">
+                  <icon name="grip" />
+                </button>
+                <span class="ui-label" slot="content">Drag to move</span>
+              </Tooltip>
+              <Tooltip>
+                <button
+                  @click="(event) => deleteSelection(event, selection)"
+                  class="option-button delete-button"
+                >
+                  <icon name="delete" />
+                </button>
+                <span class="ui-label" slot="content">Delete</span>
+              </Tooltip>
+            </div>
 
-          <div class="selection-content">
-            <div class="selection-header s-p">{{ selection.text }}</div>
-            <textarea
-              class="reply-input Input"
-              placeholder="Reply…"
-              rows="2"
-              :tabindex="index + 2"
-              @input="(event) => handleReplyInput(event, selection)"
-            >{{ findReply(selection) }}</textarea>
+            <div class="selection-content">
+              <div class="selection-header s-p">{{ selection.text }}</div>
+              <textarea
+                class="reply-input Input"
+                placeholder="Reply…"
+                rows="2"
+                :tabindex="index + 2"
+                @input="(event) => handleReplyInput(event, selection)"
+              >{{ findReply(selection) }}</textarea>
+            </div>
           </div>
-        </div>
+        </transition-group>
       </draggable>
 
       <textarea
@@ -103,6 +106,7 @@ export default {
   data() {
     return {
       isResetModalOpen: false,
+      drag: false,
     };
   },
   computed: {
@@ -113,6 +117,20 @@ export default {
       set(value) {
         this.$store.commit('updateOrders', value);
       },
+    },
+    /*
+      See:
+      * https://sortablejs.github.io/Vue.Draggable/#/transition-example-2
+      * https://github.com/SortableJS/Vue.Draggable/blob/master/example/components/transition-example-2.vue
+      * https://github.com/SortableJS/Vue.Draggable/blob/master/example/components/transition-example.vue
+
+    */
+    dragOptions() {
+      return {
+        animation: 0,
+        group: 'description',
+        disabled: false,
+      };
     },
   },
   methods: {
@@ -311,5 +329,11 @@ export default {
 }
 .sortable-ghost {
   /* background-color: rgba(0, 123, 255, 0.025); */
+}
+.flip-list-move {
+  transition: transform 0.5s;
+}
+.no-move {
+  transition: transform 0s;
 }
 </style>
