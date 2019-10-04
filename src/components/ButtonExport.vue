@@ -26,7 +26,7 @@
       </Popover>
     </div>
 
-    <div ref="hiddenContainer" class="absolute opacity-0"></div>
+    <div ref="hiddenContainer" class="Text-reset absolute opacity-0"></div>
   </div>
 </template>
 
@@ -44,14 +44,7 @@ const GmailFormatter = {
   // Uses text/html
   blockquote(text) {
     // eslint-disable-next-line
-    return `<blockquote style="margin-left: 0; padding: 15px; background: rgb(238, 238, 238); border-radius: 5px; color: rgb(51, 51, 51); font-family: sans-serif; font-size: 14.4px;">${text}</blockquote>`;
-  },
-};
-
-const BasecampFormatter = {
-  // Uses text/plain
-  blockquote(text) {
-    return `<blockquote>${text}</blockquote>\n`;
+    return `<blockquote style="margin: 0px 0px 0px 0.8ex; border-left: 1px solid rgb(204,204,204); padding-left: 1ex; border-radius: 0; background-color: initial;">${text}</blockquote>\n`;
   },
 };
 
@@ -59,6 +52,13 @@ const SlackFormatter = {
   // Uses text/plain
   blockquote(text) {
     return `> ${text}\n`;
+  },
+};
+
+const BasecampFormatter = {
+  // Uses text/plain
+  blockquote(text) {
+    return `<blockquote>${text}</blockquote>\n`;
   },
 };
 
@@ -98,7 +98,7 @@ export default {
       ]
         .filter(section => section && section !== '')
         .join('\n\n')
-        // All supported apps supportes new lines formatted as br tags
+        // All supported apps support new lines formatted as br tags
         // but not all support "\n"
         .replace(/\n/g, '<br />');
 
@@ -127,6 +127,7 @@ export default {
     exportSlack() {
       return this.exportReply(SlackFormatter);
     },
+
   },
 };
 </script>
@@ -140,14 +141,12 @@ export default {
   @apply rounded-lg bg-white;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.05);
   width: 300px;
-  /* set button styles */
+  /* set button styles for `--body > *` below */
   --button-height: 54px;
   --button-border-radius: 0;
   --button-box-shadow-color: transparent;
 }
-
 .vue-slick-popover-content__body > * {
-  /* @apply block py-4 px-8 w-full text-left border-b; */
   @apply inline-flex items-center justify-start w-full;
   @apply border-b !important;
   border-bottom-color: theme(colors.gray.light);
@@ -166,11 +165,21 @@ export default {
 }
 
 .Button--brand {
+  /* seems we have to be very explicit here… */
   --button-invert-color: theme(colors.brand.primary);
   --button-bg-color: var(--button-invert-color);
   --button-bg-color-hover: var(--button-invert-color);
   --button-border-color: var(--button-invert-color);
   --button-box-shadow-color: var(--button-invert-color);
   /* background-color: theme(colors.brand.primary); */
+}
+
+.Text-reset,
+.Text-reset > * {
+  /* @apply bg-transparent !important; */
+  background-color: none !important;
+  color: black;
+  font: small/1.5 Arial,Helvetica,sans-serif;
+  letter-spacing: normal;
 }
 </style>
