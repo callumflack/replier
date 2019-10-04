@@ -22,7 +22,7 @@ export default {
   },
   computed: {
     homeLabel() {
-      return this.$route.name === 'home' ? 'Corvid Writing' : 'Revise selection';
+      return this.$route.name === 'home' ? 'Corvid Reply' : 'Revise selection';
     },
   },
 };
