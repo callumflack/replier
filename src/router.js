@@ -20,6 +20,7 @@ export default new Router({
       // this generates a separate chunk (reply.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "reply" */ './views/Reply.vue'),
+      meta: { transitionName: 'slide' },
     },
   ],
 });

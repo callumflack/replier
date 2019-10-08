@@ -14,3 +14,9 @@
     padding-right: 14vw !important;
   }
 }
+
+/* editor inset */
+.container-inset {
+  padding-left: calc(theme(spacing.10) * var(--block-size-ratio));
+  padding-right: calc(theme(spacing.10) * var(--block-size-ratio));
+}

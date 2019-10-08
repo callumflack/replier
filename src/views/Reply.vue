@@ -2,9 +2,9 @@
   <div class="container Block-sm max-w-3xl">
     <!-- tabindex starting with a positive value and
     ending with the highest possible value: tiny.cc/txtudz -->
-    <div class="px-6">
+    <div class="container-inset">
       <textarea
-        class="reply-input reply-input--contextual Input"
+        class="reply-input reply-input--contextual reply-input--intro Input"
         placeholder="Say hi…"
         rows="2"
         tabindex="1"
@@ -13,56 +13,50 @@
 
       <draggable
         v-model="groupedSelections"
+        v-bind="dragOptions"
         handle=".handle"
         @end="handleDragEnd"
       >
-        <div
-          class="selection"
-          v-for="(selection, index) in groupedSelections"
-          :key="selection.id"
-        >
-          <div class="selection__options">
-            <Tooltip>
-              <button class="option-button handle">
-                <icon name="grip" />
-              </button>
-              <span class="ui-label" slot="content">Drag to move</span>
-            </Tooltip>
-            <Tooltip>
-              <button
-                @click="(event) => deleteSelection(event, selection)"
-                class="option-button delete-button"
-              >
-                <icon name="delete" />
-              </button>
-              <span class="ui-label" slot="content">Delete</span>
-            </Tooltip>
-          </div>
+        <transition-group type="transition" name="flip-list">
+          <div
+            class="selection"
+            v-for="(selection, index) in groupedSelections"
+            :key="selection.id"
+          >
+            <div class="selection__options">
+              <Tooltip>
+                <button class="option-button handle">
+                  <icon name="grip" />
+                </button>
+                <span class="ui-label" slot="content">Drag to move</span>
+              </Tooltip>
+              <Tooltip>
+                <button
+                  @click="(event) => deleteSelection(event, selection)"
+                  class="option-button delete-button"
+                >
+                  <icon name="delete" />
+                </button>
+                <span class="ui-label" slot="content">Delete</span>
+              </Tooltip>
+            </div>
 
-          <div class="selection-content">
-            <div class="selection-header s-p">{{ selection.text }}</div>
-            <textarea
-              class="reply-input Input"
-              placeholder="Reply…"
-              rows="3"
-              :tabindex="index + 2"
-              @input="(event) => handleReplyInput(event, selection)"
-            >{{ findReply(selection) }}</textarea>
-            <!-- <Tooltip class="tooltip--reply">
+            <div class="selection-content">
+              <div class="selection-header s-p">{{ selection.text }}</div>
               <textarea
                 class="reply-input Input"
                 placeholder="Reply…"
-                rows="3"
+                rows="2"
+                :tabindex="index + 2"
                 @input="(event) => handleReplyInput(event, selection)"
               >{{ findReply(selection) }}</textarea>
-              <span class="ui-label" slot="content">Click to start writing</span>
-            </Tooltip>-->
+            </div>
           </div>
-        </div>
+        </transition-group>
       </draggable>
 
       <textarea
-        class="reply-input reply-input--contextual Input"
+        class="reply-input reply-input--contextual reply-input--outro Input"
         placeholder="Add a summary…"
         rows="3"
         tabindex="999"
@@ -77,7 +71,7 @@
         @close="isResetModalOpen = false"
         ref="resetModal"
       >
-        <p class="s-h font-title font-medium text-form-goo Text-base">
+        <p class="s-h Meta">
           <icon name="check-circle" class="text-form-good mr-2px" height="1.25em" width="1.25em"></icon>
           Copied to your clipboard
         </p>
@@ -112,6 +106,7 @@ export default {
   data() {
     return {
       isResetModalOpen: false,
+      drag: false,
     };
   },
   computed: {
@@ -122,6 +117,20 @@ export default {
       set(value) {
         this.$store.commit('updateOrders', value);
       },
+    },
+    /*
+      See:
+      * https://sortablejs.github.io/Vue.Draggable/#/transition-example-2
+      * https://github.com/SortableJS/Vue.Draggable/blob/master/example/components/transition-example-2.vue
+      * https://github.com/SortableJS/Vue.Draggable/blob/master/example/components/transition-example.vue
+
+    */
+    dragOptions() {
+      return {
+        animation: 0,
+        group: 'description',
+        disabled: false,
+      };
     },
   },
   methods: {
@@ -193,7 +202,11 @@ export default {
 }
 .selection:not(:last-of-type) {
   /* less than Block-sm-b */
-  margin-bottom: calc(theme(spacing.8) * var(--block-size-ratio));
+  margin-bottom: calc(theme(spacing.2) * var(--block-size-ratio));
+}
+.selection-header {
+  @apply text-brand-primary;
+  @apply text-gray-dark;
 }
 .selection-content {
   flex-grow: 1;
@@ -243,7 +256,8 @@ export default {
 */
 .reply-input {
   --button-padding-x: 0;
-  @apply font-title font-medium text-brand-primary;
+  @apply font-title font-medium;
+  @apply text-black;
   @apply leading-relaxed;
   @apply bg-transparent;
   /* @apply border-b border-gray-light; */
@@ -254,7 +268,14 @@ export default {
   border-color: theme("colors.brand.primary");
 }
 .reply-input--contextual::placeholder {
-  --input-placeholder-color: theme("colors.gray.mid");
+  --input-placeholder-color: theme("colors.black");
+}
+.reply-input--intro {
+  margin-bottom: calc(theme(spacing.4) * var(--block-size-ratio));
+}
+.reply-input--outro {
+  @apply pt-2;
+  margin-top: calc(theme(spacing.4) * var(--block-size-ratio));
 }
 
 /*
@@ -288,11 +309,9 @@ export default {
   z-index: 101; /* 1 */
 }
 >>> .Modal {
-  /* @apply max-w-sm;  */
   @apply shadow-xl;
   @apply rounded-lg bg-white;
   /* @apply border border-form-good; */
-  @apply p-8;
   padding: calc(theme(spacing.8) * var(--block-size-ratio));
   margin-top: calc(theme(spacing.48) * var(--block-size-ratio));
   margin-top: 25vh;
@@ -310,5 +329,11 @@ export default {
 }
 .sortable-ghost {
   /* background-color: rgba(0, 123, 255, 0.025); */
+}
+.flip-list-move {
+  transition: transform 0.5s;
+}
+.no-move {
+  transition: transform 0s;
 }
 </style>

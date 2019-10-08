@@ -2,7 +2,8 @@
 // https://github.com/tailwindcss/tailwindcss/blob/master/stubs/defaultConfig.stub.js
 
 const blueLight = '#00CDFB';
-const hue = '211';
+// const hue = '211';
+const hue = '36';
 
 module.exports = {
   prefix: '',
@@ -18,7 +19,9 @@ module.exports = {
         // primary: '#00A7FF',
         // primary: 'hsl(201, 100%, 50%)',
         // primary: 'hsl(214, 100%, 50%)',
-        primary: `hsl(${hue}, 100%, 50%)`,
+        // primary: `hsl(${hue}, 100%, 50%)`,
+        primary: `hsl(${hue}, 100%, 33%)`,
+        // primary: 'rgb(166, 101, 1)', // brown
         blue: '#1b495a',
         blueneutral: '#f1f2f3',
         bluelight: blueLight,
@@ -30,7 +33,7 @@ module.exports = {
       },
       gray: {
         light: 'rgba(0,0,0,0.1)',
-        mid: '#aaa',
+        mid: '#a5a5a5',
         dark: '#858585',
       },
       form: {
@@ -70,10 +73,11 @@ module.exports = {
     },
     fontFamily: {
       title: [
-        '"SF Mono"',
+        'IBMPlexMono',
         'Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace',
       ],
       sans: [
+        'IBMPlexSans',
         '-apple-system',
         'BlinkMacSystemFont',
         '"Segoe UI"',
@@ -147,7 +151,8 @@ module.exports = {
       tighter: '-0.05em',
       tight: '-0.0125em',
       normal: '0',
-      wide: '0.025em',
+      subtitle: '0.02em',
+      wide: '0.0333em',
       wider: '0.05em',
       widest: '0.1em',
     },

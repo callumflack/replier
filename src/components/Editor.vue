@@ -2,13 +2,13 @@
   <div class="relative">
     <div
       v-if="!$store.state.timestamp"
-      class="Placeholder Text-lg font-medium"
+      class="Placeholder Subtitle font-normal container-inset"
     >
       Paste here &amp; click to select…
     </div>
     <div
       class="editor z-10"
-      :class="{ 'text-brand-primary': !$store.state.timestamp}"
+      :class="{ 'text-brand-primary font-bold': !$store.state.timestamp}"
       ref="editor"
     >
     </div>
@@ -160,9 +160,11 @@ export default {
 
 <style lang="postcss">
 .Placeholder {
-  @apply font-title text-brand-primary pl-6 mt-1;
+  @apply mt-1;
+  @apply text-brand-primary;
+  @apply text-gray-mid;
   @apply absolute;
-  margin-left: 2px;
+  margin-left: 3px;
 }
 /*
 
@@ -176,8 +178,9 @@ export default {
   --vertical-padding: 1.8rem;
   @apply h-full outline-none overflow-y-scroll;
   @apply whitespace-pre-wrap; /* 1 */
-  @apply px-6 pt-1;
-  /* padding: var(--vertical-padding) theme(spacing.6); */
+  @apply pt-1;
+  padding-left: calc(theme(spacing.10) * var(--block-size-ratio));
+  padding-right: calc(theme(spacing.10) * var(--block-size-ratio));
 }
 .ProseMirror:after {
   @apply block w-full;

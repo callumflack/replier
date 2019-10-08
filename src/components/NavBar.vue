@@ -3,7 +3,7 @@
     <nav class="Nav flex justify-between">
       <router-link
         to="/"
-        class="Text-xl font-title font-bold text-brand-primary"
+        class="Title"
       >
         <icon v-if="$route.name !== 'home'" name="arrow-back" class="mr-1" />
         <span>{{ homeLabel }}</span>
@@ -22,27 +22,18 @@ export default {
   },
   computed: {
     homeLabel() {
-      return this.$route.name === 'home' ? 'Corvid Writing' : 'Revise selection';
+      return this.$route.name === 'home' ? 'Corvid Reply' : 'Revise selection';
     },
   },
 };
 </script>
 
 <style lang="postcss">
-  #nav {
-    @apply relative;
-    z-index: 100;
-  }
-
-  .Nav {
-    @apply w-full border-b-2 border-brand-primary pb-4;
-  }
-
-  .Timestamp {
-    @apply inline-block self-end;
-    @apply font-title font-medium;
-    @apply text-gray-mid;
-    /* @apply text-brand-primary; */
-    transition: opacity 0.5s ease-in;
-  }
+#nav {
+  @apply relative;
+  z-index: 100;
+}
+.Nav {
+  @apply w-full border-b-2 border-black pb-4;
+}
 </style>

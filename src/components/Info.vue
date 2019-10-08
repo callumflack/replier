@@ -1,15 +1,14 @@
 <template>
   <div class="container max-w-3xl Block">
-    <div class="px-6 pt-2">
+    <div class="container-inset pt-1 text-scope">
       <h1
-        class="Text-lg font-title font-bold text-brand-primary s-p"
+        class="Subtitle s-p"
       >{{ thisTitle }}</h1>
       <p class="s-p">{{ thisOne }}</p>
-      <!-- <p class="s-p">{{ thisTwo }}</p> -->
-      <p class="s-p">{{ thisThree }}</p>
-      <h1
-        class="Text-lg font-title font-bold text-brand-primary s-p st-2xh"
-      >{{ howTitle }}</h1>
+      <p class="s-p">{{ thisTwo }}</p>
+      <h2
+        class="Subtitle s-p st-2xh"
+      >{{ howTitle }}</h2>
       <ol>
         <li class="s-p">{{ howOne }}</li>
         <li class="s-p">{{ howTwo }}</li>
@@ -21,8 +20,6 @@
 </template>
 
 <script>
-// import Modal from '@/components/Modal.vue';
-
 export default {
   components: {},
   props: [],
@@ -33,8 +30,6 @@ export default {
       thisOne:
           "Corvid Reply helps you reply to your project collaborators by choosing only what's most important in the conversation. It removes the superfluous and helps avoid important info falling through the cracks.",
       thisTwo:
-          'It removes the superfluous and helps avoid important info falling through the cracks.',
-      thisThree:
           "We also give you custom formatted responses to paste into for your favourite project mangement apps. So it's clear who said what.",
       howTitle: 'How does it work?',
       howOne: 'Click on the line you wish to reply to.',
@@ -50,8 +45,20 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-  .Block {
-    margin-top: calc(theme(spacing.40) * var(--block-size-ratio));
-    margin-bottom: calc(theme(spacing.24) * var(--block-size-ratio));
-  }
+.Block {
+  margin-top: calc(theme(spacing.40) * var(--block-size-ratio));
+  margin-bottom: calc(theme(spacing.24) * var(--block-size-ratio));
+}
+
+/*
+  Scoped to css vars under `custom-info-modal.css`
+ */
+.text-scope h1,
+.text-scope h2 {
+  color: var(--info-modal-text);
+}
+.text-scope p,
+.text-scope ol {
+  color: var(--info-modal-text-light);
+}
 </style>
