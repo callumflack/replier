@@ -203,14 +203,18 @@ class SelectionState {
         action.selection.active,
       );
 
-      if (action.wasGroupClick) {
-        if (!active) {
-          // Clear last selection on group deselection
-          // to avoid updating it on next selection
-          g_group.lastSelection = null;
+      if (!active) {
+        // If deselecting (not active) clear last selection
+        // to avoid updating it on next selection
+        g_group.lastSelection = null;
+      } else {
+        if (!action.wasGroupClick) {
+          // New selection without a group
+          g_group.reset();
         } else {
-          // Add new selection to group
           if (g_group.lastSelection) {
+            // Add new selection to group
+
             // Update last selected deco to be in group the if it's not
             const prevSelectedDeco = this.findDecoOfSelection(g_group.lastSelection.id);
             const prevSelection = prevSelectedDeco.type.spec.selection;
@@ -229,12 +233,12 @@ class SelectionState {
                 deco(prevSelectedDeco.from, prevSelectedDeco.to, updatedPrevSelection),
               ]);
             }
-
-            newSelection.groupId = g_group.id;
           }
 
-          g_group.lastSelection = newSelection;
+          newSelection.groupId = g_group.id;
         }
+
+        g_group.lastSelection = newSelection;
       }
 
       decos = decos.remove([selectedDeco]);
@@ -273,19 +277,6 @@ export const selectionPlugin = new Plugin({
 // Selection UI
 
 export function selectionUI(dispatch) {
-  function modiferPressed(event) {
-    return event.ctrlKey || event.metaKey;
-  }
-
-  function resetGroupOnModifierPress(event) {
-    if (modiferPressed(event)) {
-      g_group.reset();
-    }
-  }
-
-  document.addEventListener('keydown', resetGroupOnModifierPress);
-  document.addEventListener('keyup', resetGroupOnModifierPress);
-
   function handleClick(view, _, event) {
     // Remember to return true to stop prosemirror parent selection on ctrl clicking
 
