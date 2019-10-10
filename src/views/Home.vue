@@ -72,7 +72,8 @@ export default {
   width: 150px;
 }
 .aside-map p {
-  @apply text-transparent mb-2;
+  @apply text-transparent;
+  @apply mb-2;
   @apply leading-relaxed;
   font-size: 0.4rem;
 }

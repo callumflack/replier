@@ -211,32 +211,21 @@ export default {
   background-color: var(--color-selected);
   border-color: var(--color-normal);
 }
-
-
 /*
 
   Groups of sentences
 
  */
-
 .sentence--group {
   @apply relative;
 }
-.sentence--group:first-of-type {
-  /* @apply border-l; */
-}
-.sentence--group:last-of-type {
-  /* @apply border-r; */
-}
-.sentence--group:not(:first-of-type):before,
-.sentence--group + a .sentence--group:before,
-.sentence--group + a + .sentence--group:before {
+
+.sentence--group:before {
   @apply absolute top-0 left-0;
   @apply font-bold not-italic text-white;
   @apply rounded-full;
   @apply flex justify-center text-center;
   @apply z-10;
-  content: "+";
   background-color: var(--color-normal);
   border-color: var(--color-normal);
   font-size: 60%;
@@ -244,6 +233,27 @@ export default {
   height: 13px;
   width: 13px;
   transform: translate(-8px, -6px);
+}
+
+.editor [class*="-1"] + [class*="-1"]:before,
+.editor [class*="-1"] + a [class*="-1"]:before,
+.editor [class*="-1"] + a + [class*="-1"]:before,
+.editor [class*="-2"] + [class*="-2"]:before,
+.editor [class*="-2"] + a [class*="-2"]:before,
+.editor [class*="-2"] + a + [class*="-2"]:before,
+.editor [class*="-3"] + [class*="-3"]:before,
+.editor [class*="-3"] + a [class*="-3"]:before,
+.editor [class*="-3"] + a + [class*="-3"]:before,
+.editor [class*="-4"] + [class*="-4"]:before,
+.editor [class*="-4"] + a [class*="-4"]:before,
+.editor [class*="-4"] + a + [class*="-4"]:before,
+.editor [class*="-5"] + [class*="-5"]:before,
+.editor [class*="-5"] + a [class*="-5"]:before,
+.editor [class*="-5"] + a + [class*="-5"]:before,
+.editor [class*="-6"] + [class*="-6"]:before,
+.editor [class*="-6"] + a [class*="-6"]:before,
+.editor [class*="-6"] + a + [class*="-6"]:before {
+  content: "+";
 }
 </style>
 
