@@ -252,16 +252,16 @@ export default {
 .editor [class*="-5"] + a + [class*="-5"]:before,
 .editor [class*="-6"] + [class*="-6"]:before,
 .editor [class*="-6"] + a [class*="-6"]:before,
-.editor [class*="-6"] + a + [class*="-6"]:before
+.editor [class*="-6"] + a + [class*="-6"]:before,
 .editor [class*="-7"] + [class*="-7"]:before,
 .editor [class*="-7"] + a [class*="-7"]:before,
-.editor [class*="-7"] + a + [class*="-7"]:before
+.editor [class*="-7"] + a + [class*="-7"]:before,
 .editor [class*="-8"] + [class*="-8"]:before,
 .editor [class*="-8"] + a [class*="-8"]:before,
-.editor [class*="-8"] + a + [class*="-8"]:before
+.editor [class*="-8"] + a + [class*="-8"]:before,
 .editor [class*="-9"] + [class*="-9"]:before,
 .editor [class*="-9"] + a [class*="-9"]:before,
-.editor [class*="-9"] + a + [class*="-9"]:before
+.editor [class*="-9"] + a + [class*="-9"]:before,
 .editor [class*="-10"] + [class*="-10"]:before,
 .editor [class*="-10"] + a [class*="-10"]:before,
 .editor [class*="-10"] + a + [class*="-10"]:before {
