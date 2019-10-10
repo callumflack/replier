@@ -4,6 +4,8 @@
 
 */
 html {
+  @apply bg-white;
+  transition: background-color 750ms ease-in-out;
 }
 
 body {

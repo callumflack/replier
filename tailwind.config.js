@@ -20,7 +20,7 @@ module.exports = {
         // primary: 'hsl(201, 100%, 50%)',
         // primary: 'hsl(214, 100%, 50%)',
         // primary: `hsl(${hue}, 100%, 50%)`,
-        primary: `hsl(${hue}, 100%, 33%)`,
+        primary: `hsl(${hue}, 100%, 33%)`, // brown HSL
         // primary: 'rgb(166, 101, 1)', // brown
         blue: '#1b495a',
         blueneutral: '#f1f2f3',
@@ -33,7 +33,7 @@ module.exports = {
       },
       gray: {
         light: 'rgba(0,0,0,0.1)',
-        mid: '#a5a5a5',
+        mid: '#bbb',
         dark: '#858585',
       },
       form: {

@@ -50,15 +50,20 @@ export default {
       this.$router.push({ path: 'reply' });
     },
   },
-  mounted() {
-    document.documentElement.classList.remove('bg-brand-neutral');
-  },
+  /* mounted() {
+    document.documentElement.classList.add('bg-brand-neutral');
+  }, */
 };
 </script>
 
 <style lang="postcss" scoped>
 .editor {
-  min-height: 40vh;
+  min-height: 70vh;
+}
+@screen xl {
+  .editor {
+    min-height: 40vh;
+  }
 }
 
 .aside-map {

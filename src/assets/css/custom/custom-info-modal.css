@@ -1,5 +1,6 @@
 .info-modal {
-  --info-modal-bg: theme(colors.black);
+  /* --info-modal-bg: theme(colors.black); */
+  --info-modal-bg: rgb(41, 40, 35);
   --info-modal-text: theme(colors.white);
   --info-modal-text-light: theme(colors.gray.mid);
 }

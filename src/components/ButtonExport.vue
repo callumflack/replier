@@ -4,7 +4,7 @@
       <Popover ref='popover'>
         <template v-slot:trigger>
           <button
-            class="Button Button--brand font-title"
+            class="Button Button--bran font-title"
             tabindex="1000"
           >
             Export
@@ -141,14 +141,13 @@ export default {
   @apply rounded-lg bg-white;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.05);
   width: 300px;
-  /* set button styles for `--body > *` below */
+}
+>>> .vue-slick-popover-content__body > * {
+  @apply inline-flex items-center justify-start w-full;
+  @apply border-b !important;
   --button-height: 54px;
   --button-border-radius: 0;
   --button-box-shadow-color: transparent;
-}
-.vue-slick-popover-content__body > * {
-  @apply inline-flex items-center justify-start w-full;
-  @apply border-b !important;
   border-bottom-color: theme(colors.gray.light);
   height: var(--button-height);
   line-height: 1;
@@ -156,12 +155,16 @@ export default {
   padding-bottom: calc((1 / 15) * 1em); /* 2 */
 }
 
+>>> .vue-slick-popover__overlay {
+  background-color: rgba(166, 101, 1, 0.2);
+}
+
 .export-option {
   @apply font-title;
   transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 .export-option:hover {
-  background-color: rgba(166, 101, 1, 0.05);
+  background-color: rgba(166, 101, 1, 0.1);
 }
 
 .Button--brand {
@@ -175,9 +178,10 @@ export default {
 }
 
 .Text-reset,
-.Text-reset > * {
+.Text-reset > *,
+.Text-reset >>> > * {
   /* @apply bg-transparent !important; */
-  background-color: none !important;
+  background-color: initial !important;
   color: black;
   font: small/1.5 Arial,Helvetica,sans-serif;
   letter-spacing: normal;

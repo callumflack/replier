@@ -161,10 +161,10 @@ export default {
 <style lang="postcss">
 .Placeholder {
   @apply mt-1;
-  @apply text-brand-primary;
   @apply text-gray-mid;
+  @apply text-brand-primary;
   @apply absolute;
-  margin-left: 3px;
+  margin-left: 4px;
 }
 /*
 
