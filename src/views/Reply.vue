@@ -71,8 +71,8 @@
         @close="isResetModalOpen = false"
         ref="resetModal"
       >
-        <p class="s-h Meta">
-          <icon name="check-circle" class="text-form-good mr-2px" height="1.25em" width="1.25em"></icon>
+        <p class="s-h Meta text-brand-primary">
+          <icon name="check-circle" class="text-brand-primary mr-2px" height="1.25em" width="1.25em"></icon>
           Copied to your clipboard
         </p>
         <hr class="s-h" />
@@ -185,7 +185,7 @@ export default {
   },
   mounted() {
     this.goBackIfSelectionsEmpty();
-    document.documentElement.classList.add('bg-brand-neutral');
+    // document.documentElement.classList.add('bg-brand-neutral');
   },
 };
 </script>
@@ -261,7 +261,8 @@ export default {
   @apply leading-relaxed;
   @apply bg-transparent;
   /* @apply border-b border-gray-light; */
-  font-size: calc(theme(fontSize.xl) * var(--text-ratio) - 1px);
+  /* font-size: calc(theme(fontSize.xl) * var(--text-ratio) - 1px); */
+  font-size: calc(theme(fontSize.xl) * var(--text-ratio));
   transition: border-color 0.2s;
 }
 .reply-input:focus {
@@ -303,15 +304,24 @@ export default {
  */
 .Modal-backdrop {
   @apply flex justify-center items-start;
-  background: rgba(255, 255, 255, 0.7);
-  background: rgba(250, 248, 245, 0.7);
-  background: rgba(244, 242, 240, 0.7);
+  @apply bg-transparent;
+  /* background: rgba(255, 255, 255, 0.7); */
+  /* background: rgba(250, 248, 245, 0.7); */
+  /* background: rgba(244, 242, 240, 0.7); */
+  /* background-color: rgba(166, 101, 1, 0.2); */
+  /* transition: background-color 500ms cubic-bezier(0.19, 1, 0.22, 1); */
   z-index: 101; /* 1 */
 }
+.modal-is-active .Modal-backdrop {
+  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(166, 101, 1, 0.2);
+}
+
 >>> .Modal {
   @apply shadow-xl;
   @apply rounded-lg bg-white;
   /* @apply border border-form-good; */
+  /* @apply border-2 border-black; */
   padding: calc(theme(spacing.8) * var(--block-size-ratio));
   margin-top: calc(theme(spacing.48) * var(--block-size-ratio));
   margin-top: 25vh;

@@ -3,10 +3,13 @@
     <nav class="Nav flex justify-between">
       <router-link
         to="/"
-        class="Title"
+        class="Title relative w-2/3"
       >
-        <icon v-if="$route.name !== 'home'" name="arrow-back" class="mr-1" />
-        <span>{{ homeLabel }}</span>
+        <span :class="{ home: $route.name === 'home' }">Corvid Reply</span>
+        <span :class="{ reply: $route.name !== 'home' }">
+          <icon name="arrow-back" class="mr-1" />
+          <span>Revise selection</span>
+        </span>
       </router-link>
       <NavBarInfo class="mt-px"></NavBarInfo>
     </nav>
@@ -20,11 +23,6 @@ export default {
   components: {
     NavBarInfo,
   },
-  computed: {
-    homeLabel() {
-      return this.$route.name === 'home' ? 'Corvid Reply' : 'Revise selection';
-    },
-  },
 };
 </script>
 
@@ -35,5 +33,18 @@ export default {
 }
 .Nav {
   @apply w-full border-b-2 border-black pb-4;
+}
+
+.Title > span {
+  @apply absolute left-0 opacity-0 inline-block;
+  transition:
+    opacity 200ms cubic-bezier(0.19, 1, 0.22, 1),
+    transform 750ms cubic-bezier(0.19, 1, 0.22, 1);
+  transform: translateX(-5%);
+}
+.Title span.home,
+.Title span.reply {
+  @apply opacity-100;
+  transform: translateX(0);
 }
 </style>
