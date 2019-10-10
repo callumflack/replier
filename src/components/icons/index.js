@@ -1,10 +1,13 @@
 /* eslint-disable */
 require('./arrow-back')
+require('./basecamp')
 require('./check-circle')
 require('./close')
 require('./delete')
 require('./edit')
+require('./gmail')
 require('./grip')
 require('./info')
 require('./link')
 require('./send')
+require('./slack')

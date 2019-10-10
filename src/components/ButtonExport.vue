@@ -4,7 +4,7 @@
       <Popover ref='popover'>
         <template v-slot:trigger>
           <button
-            class="Button Button--bran font-title"
+            class="Button Button--export font-title z-50"
             tabindex="1000"
           >
             Export
@@ -12,15 +12,18 @@
         </template>
 
         <template v-slot:content>
-          <h3 class="Meta text-brand-primary">Copy to share:</h3>
+          <h3 class="Meta">Copy formatted for:</h3>
           <button class="Button Button--invisible export-option" @click="exportGmail()">
-            Format for Gmail
+            <icon name="gmail" height="1.25em" width="1.25em" class="mr-2"></icon>
+            Gmail
           </button>
           <button class="Button Button--invisible export-option" @click="exportBasecamp()">
-            Format for Basecamp
+            <icon name="basecamp" height="1.25em" width="1.25em" class="mr-2"></icon>
+            Basecamp
           </button>
           <button class="Button Button--invisible export-option" @click="exportSlack()">
-            Format for Slack
+            <icon name="slack" height="1.25em" width="1.25em" class="mr-2"></icon>
+            Slack
           </button>
         </template>
       </Popover>
@@ -137,14 +140,14 @@ export default {
   margin-top: 16px;
 }
 >>> .vue-slick-popover-content__body {
-  @apply shadow-xl;
   @apply rounded-lg bg-white;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.05);
+  /* @apply shadow-xl; */
+  box-shadow: 0 0 40px 3px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.05);
   width: 300px;
 }
 >>> .vue-slick-popover-content__body > * {
   @apply inline-flex items-center justify-start w-full;
-  @apply border-b !important;
+  @apply border-b;
   --button-height: 54px;
   --button-border-radius: 0;
   --button-box-shadow-color: transparent;
@@ -154,27 +157,30 @@ export default {
   padding: 0 var(--button-padding-x);
   padding-bottom: calc((1 / 15) * 1em); /* 2 */
 }
-
->>> .vue-slick-popover__overlay {
-  background-color: rgba(166, 101, 1, 0.2);
+>>> .vue-slick-popover-content__body > *:last-child {
+  @apply border-0;
 }
 
+/* >>> .vue-slick-popover__overlay {
+  background-color: rgba(166, 101, 1, 0.2);
+} */
+
 .export-option {
-  @apply font-title;
+  @apply font-title font-semibold text-brand-primary;
   transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 .export-option:hover {
   background-color: rgba(166, 101, 1, 0.1);
 }
 
-.Button--brand {
-  /* seems we have to be very explicit here… */
+.Button--export:hover,
+.Button--export:active,
+.Button--export:focus {
   --button-invert-color: theme(colors.brand.primary);
   --button-bg-color: var(--button-invert-color);
   --button-bg-color-hover: var(--button-invert-color);
   --button-border-color: var(--button-invert-color);
   --button-box-shadow-color: var(--button-invert-color);
-  /* background-color: theme(colors.brand.primary); */
 }
 
 .Text-reset,

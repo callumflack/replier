@@ -313,8 +313,8 @@ export default {
   z-index: 101; /* 1 */
 }
 .modal-is-active .Modal-backdrop {
-  background-color: rgba(255, 255, 255, 0.9);
-  background-color: rgba(166, 101, 1, 0.2);
+  /* background-color: rgba(255, 255, 255, 0.9); */
+  background-color: rgba(166, 101, 1, 0.5);
 }
 
 >>> .Modal {
