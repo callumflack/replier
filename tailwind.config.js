@@ -77,7 +77,7 @@ module.exports = {
         'Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace',
       ],
       sans: [
-        'IBMPlexSans',
+        'Graphik',
         '-apple-system',
         'BlinkMacSystemFont',
         '"Segoe UI"',
