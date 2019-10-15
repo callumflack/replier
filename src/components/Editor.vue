@@ -175,10 +175,9 @@ export default {
 
 */
 .ProseMirror {
-  --vertical-padding: 1.8rem;
   @apply h-full outline-none overflow-y-scroll;
   @apply whitespace-pre-wrap; /* 1 */
-  @apply pt-1;
+  @apply pt-2;
   padding-left: calc(theme(spacing.10) * var(--block-size-ratio));
   padding-right: calc(theme(spacing.10) * var(--block-size-ratio));
 }
@@ -206,7 +205,7 @@ export default {
 
 .sentence--selected {
   @apply border-l;
-  border-left-width: 2px;
+  border-left-width: 3px;
   padding-left: 4px;
   background-color: var(--color-selected);
   border-color: var(--color-normal);
@@ -223,19 +222,19 @@ export default {
 .sentence--group:before {
   @apply absolute top-0 left-0;
   @apply font-bold not-italic text-white;
-  @apply rounded-full;
+  @apply bg-brand-primary rounded-full;
   @apply flex justify-center text-center;
   @apply z-10;
-  background-color: var(--color-normal);
-  border-color: var(--color-normal);
-  font-size: 60%;
-  line-height: 1.1;
-  height: 13px;
-  width: 13px;
-  transform: translate(-8px, -6px);
+  content: "+";
+  font-size: 80%;
+  letter-spacing: -1px;
+  line-height: 1;
+  height: 14px;
+  width: 14px;
+  transform: translate(-9px, -6px);
 }
 
-.editor [class*="-1"] + [class*="-1"]:before,
+/* .editor [class*="-1"] + [class*="-1"]:before,
 .editor [class*="-1"] + a [class*="-1"]:before,
 .editor [class*="-1"] + a + [class*="-1"]:before,
 .editor [class*="-2"] + [class*="-2"]:before,
@@ -264,7 +263,8 @@ export default {
 .editor [class*="-9"] + a + [class*="-9"]:before,
 .editor [class*="-10"] + [class*="-10"]:before,
 .editor [class*="-10"] + a [class*="-10"]:before,
-.editor [class*="-10"] + a + [class*="-10"]:before {
+.editor [class*="-10"] + a + [class*="-10"]:before, */
+.editor span[class*="-1"]:not(:first-child):before {
   content: "+";
 }
 </style>
