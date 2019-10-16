@@ -30,7 +30,7 @@ export default {
       thisOne:
           "Corvid Reply helps you reply to your project collaborators by choosing only what's most important in the conversation. It removes the superfluous and helps avoid important info falling through the cracks.",
       thisTwo:
-          "We also give you custom formatted responses to paste into for your favourite project mangement apps. So it's clear who said what.",
+          "We also give you custom formatted responses to paste into for your favourite project management apps. So it's clear who said what.",
       howTitle: 'How does it work?',
       howOne: 'Click on the line you wish to reply to.',
       howTwo:
