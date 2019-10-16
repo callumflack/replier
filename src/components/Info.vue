@@ -28,7 +28,7 @@ export default {
       thisTitle: 'What is this?',
       /* eslint-disable max-len */
       thisOne:
-          "Corvid Reply helps you reply to your project collaborators by choosing only what's most important in the conversation. It removes the superfluous and helps avoid important info falling through the cracks.",
+          "Corvid Write helps you reply to your project collaborators by choosing only what's most important in the conversation. It removes the superfluous and helps avoid important info falling through the cracks.",
       thisTwo:
           "We also give you custom formatted responses to paste into for your favourite project management apps. So it's clear who said what.",
       howTitle: 'How does it work?',

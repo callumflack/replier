@@ -5,7 +5,7 @@
         to="/"
         class="Title relative w-2/3"
       >
-        <span :class="{ home: $route.name === 'home' }">Corvid Reply</span>
+        <span :class="{ home: $route.name === 'home' }">Corvid Write</span>
         <span :class="{ reply: $route.name !== 'home' }">
           <icon name="arrow-back" class="mr-1" />
           <span>Revise selection</span>
