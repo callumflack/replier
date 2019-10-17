@@ -6,7 +6,6 @@
       <textarea
         class="reply-input reply-input--contextual reply-input--intro Input"
         placeholder="Say hi…"
-        rows="2"
         tabindex="1"
         @input="handleIntroInput"
       >{{ $store.state.repliesIntro }}</textarea>
@@ -46,7 +45,6 @@
               <textarea
                 class="reply-input Input"
                 placeholder="Reply…"
-                rows="2"
                 :tabindex="index + 2"
                 @input="(event) => handleReplyInput(event, selection)"
               >{{ findReply(selection) }}</textarea>
@@ -58,7 +56,6 @@
       <textarea
         class="reply-input reply-input--contextual reply-input--outro Input"
         placeholder="Add a summary…"
-        rows="3"
         tabindex="999"
         @input="handleOutroInput"
       >{{ $store.state.repliesOutro }}</textarea>
@@ -169,16 +166,26 @@ export default {
     findReply(selection) {
       return this.$store.state.replies[selection.id];
     },
+    resizeTextarea(element) {
+      /* eslint-disable no-param-reassign */
+      element.style.height = '1px';
+      element.style.height = `${element.scrollHeight}px`;
+      /* eslint-enable no-param-reassign */
+    },
     handleReplyInput(event, selection) {
+      this.resizeTextarea(event.target);
+
       this.$store.commit('setReply', {
         id: selection.id,
         text: event.target.value,
       });
     },
     handleIntroInput(event) {
+      this.resizeTextarea(event.target);
       this.$store.commit('setRepliesIntro', event.target.value);
     },
     handleOutroInput(event) {
+      this.resizeTextarea(event.target);
       this.$store.commit('setRepliesOutro', event.target.value);
     },
   },
@@ -255,6 +262,10 @@ export default {
 */
 .reply-input {
   --button-padding-x: 0;
+  /* Input changes size to fit it's content */
+  --min-height: 90px;
+  min-height: var(--min-height);
+  height: var(--min-height);
   @apply font-title font-medium;
   @apply text-black;
   @apply leading-relaxed;
@@ -274,6 +285,7 @@ export default {
   margin-bottom: calc(theme(spacing.4) * var(--block-size-ratio));
 }
 .reply-input--outro {
+  --min-height: 120px;
   @apply pt-2;
   margin-top: calc(theme(spacing.4) * var(--block-size-ratio));
 }
