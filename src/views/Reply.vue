@@ -140,7 +140,6 @@ export default {
     async resetState() {
       await this.$store.commit('resetState');
       this.$refs.resetModal.dismiss();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
       this.$router.push('/');
     },
     handleExport() {
