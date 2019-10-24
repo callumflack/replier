@@ -52,11 +52,11 @@
   justify-content: center;
   /* margin: 0; */ /* 1 */
   padding: 0 var(--button-padding-x);
+  padding-bottom: calc((1 / 15) * 1em); /* 2 */
   position: relative;
   text-decoration: none;
   text-transform: var(--button-font-case);
   user-select: none;
-  padding-bottom: calc((1 / 15) * 1em); /* 2 */
 }
 
 /*
@@ -109,6 +109,7 @@ button:disabled {
 
   Input
   Same styles as .Button with minor differences
+  1. Let inputs *input*…
 
  */
 
@@ -120,6 +121,7 @@ button:disabled {
   --button-font-weight: 400;
   /* unlike buttons, inputs are full width */
   @apply w-full cursor-text leading-normal;
+  user-select: text; /* 1 */
 }
 
 .Input::placeholder {
