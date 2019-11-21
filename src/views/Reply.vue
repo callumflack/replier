@@ -93,7 +93,7 @@ import Tooltip from '@/components/Tooltip.vue';
 import Modal from '@/components/Modal.vue';
 
 export default {
-  name: 'reply',
+  name: 'page-reply',
   components: {
     draggable,
     ButtonExport,

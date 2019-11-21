@@ -30,7 +30,7 @@
 import Editor from '@/components/Editor.vue';
 
 export default {
-  name: 'home',
+  name: 'page-home',
   components: {
     Editor,
   },

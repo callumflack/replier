@@ -1,9 +1,13 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import * as auth from './lib/auth';
 
 Vue.use(Vuex);
 
 const defaultState = {
+  auth: {
+    user: {},
+  },
   timestamp: null,
   editorState: null,
   selections: [],
@@ -17,6 +21,9 @@ const defaultState = {
 export default new Vuex.Store({
   state: Object.assign({}, defaultState),
   mutations: {
+    setUser(state, user) {
+      state.auth.user = user;
+    },
     setEditorState(state, editorState) {
       state.editorState = editorState;
     },
@@ -72,6 +79,47 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    async getUser(context) {
+      let { user } = this.state.auth;
+
+      if (user) {
+        return user;
+      }
+
+      // If no user in store attempt to fetch it
+      const response = await auth.getUser();
+
+      if (response.error) {
+        context.commit('setUser', null);
+        return null;
+      }
+
+      user = response.user;
+      context.commit('setUser', user);
+
+      return user;
+    },
+    async loginUser(context, credentials) {
+      const response = await auth.login(credentials);
+      const user = (response && response.user) || null;
+
+      context.commit('setUser', user);
+      return response;
+    },
+    async registerUser(context, credentials) {
+      const response = await auth.register(credentials);
+      const user = (response && response.user) || null;
+
+      context.commit('setUser', user);
+      return response;
+    },
+    async logoutUser(context) {
+      // Destroy session + cookies
+      await auth.logout();
+
+      // Nullify in store
+      return context.commit('setUser', null);
+    },
   },
   getters: {
     groupedSelections(state) {

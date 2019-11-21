@@ -1,17 +1,29 @@
 <template>
   <div id="nav" class="container max-w-3xl Block-md-t Block-sm-b">
     <nav class="Nav flex justify-between">
-      <router-link
-        to="/"
-        class="Title relative w-2/3"
-      >
-        <span :class="{ home: $route.name === 'home' }">Corvid Reply</span>
-        <span :class="{ reply: $route.name !== 'home' }">
-          <icon name="arrow-back" class="mr-1" />
-          <span>Revise selection</span>
-        </span>
-      </router-link>
-      <NavBarInfo class="mt-px"></NavBarInfo>
+      <template v-if="$store.state.auth.user">
+        <router-link
+          to="/"
+          class="Title relative w-1/3"
+        >
+          <span :class="{ home: $route.name === 'home' }">Corvid Reply</span>
+          <span :class="{ reply: $route.name !== 'home' }">
+            <icon name="arrow-back" class="mr-1" />
+            <span>Revise selection</span>
+          </span>
+        </router-link>
+        <div class="flex">
+          <NavBarInfo class="mt-px nav__item"></NavBarInfo>
+          <a href="#" @click.prevent="logout">Logout</a>
+        </div>
+      </template>
+      <template v-else-if="$store.state.auth.user === null">
+        <div />
+        <div>
+          <router-link to="/login">Login</router-link>
+          <router-link to="/register">Register</router-link>
+        </div>
+      </template>
     </nav>
   </div>
 </template>
@@ -27,6 +39,15 @@ export default {
 </script>
 
 <style lang="postcss">
+#nav {
+  @apply flex justify-between;
+}
+
+#nav a:not(:last-child),
+#nav .nav__item:not(:last-child) {
+  @apply mr-10;
+}
+
 #nav {
   @apply relative;
   z-index: 100;

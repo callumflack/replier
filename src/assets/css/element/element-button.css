@@ -119,9 +119,14 @@ button:disabled {
   --button-border-width: 0;
   --button-box-shadow-color: theme(colors.brand.blue);
   --button-font-weight: 400;
+  background-color: transparent;
   /* unlike buttons, inputs are full width */
   @apply w-full cursor-text leading-normal;
   user-select: text; /* 1 */
+}
+
+.Input--bordered {
+  --button-border-width: 1px;
 }
 
 .Input::placeholder {

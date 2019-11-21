@@ -12,6 +12,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-plusplus': 'off',
     'prefer-destructuring': 'off',
+    'import/extensions': ['error', 'ignorePackages'],
     'vue/no-textarea-mustache': 'off',
     'max-len': ['error', 110],
   },
@@ -22,6 +23,7 @@ module.exports = {
     {
       files: [
         '**/__tests__/*.{j,t}s?(x)',
+        '**test*.{j,t}s?(x)',
       ],
       env: {
         jest: true,
