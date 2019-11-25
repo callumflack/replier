@@ -20,6 +20,11 @@ export default {
       return;
     }
 
+    if (!user.stripeCustomerId && this.$route.path !== '/pay') {
+      // this.$router.push('/pay');
+      // return;
+    }
+
     this.loaded = true;
   },
 };

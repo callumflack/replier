@@ -5,6 +5,7 @@ import Login from './views/Login.vue';
 // App routes
 import Register from './views/Register.vue';
 import Home from './views/Home.vue';
+import Pay from './views/Pay.vue';
 
 Vue.use(Router);
 
@@ -27,6 +28,11 @@ export default new Router({
         layout: 'auth',
       },
       component: Register,
+    },
+    {
+      path: '/pay',
+      name: 'pay',
+      component: Pay,
     },
     {
       path: '/',

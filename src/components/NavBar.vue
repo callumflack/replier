@@ -35,6 +35,12 @@ export default {
   components: {
     NavBarInfo,
   },
+  methods: {
+    async logout() {
+      await this.$store.dispatch('logoutUser');
+      this.$router.push('/login');
+    },
+  },
 };
 </script>
 

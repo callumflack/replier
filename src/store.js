@@ -6,7 +6,7 @@ Vue.use(Vuex);
 
 const defaultState = {
   auth: {
-    user: {},
+    user: null,
   },
   timestamp: null,
   editorState: null,
@@ -79,11 +79,14 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    async getUser(context) {
-      let { user } = this.state.auth;
+    async getUser(context, force = false) {
+      if (!force) {
+        // Attempt to grab user from store
+        const { user } = this.state.auth;
 
-      if (user) {
-        return user;
+        if (user) {
+          return user;
+        }
       }
 
       // If no user in store attempt to fetch it
@@ -94,7 +97,7 @@ export default new Vuex.Store({
         return null;
       }
 
-      user = response.user;
+      const user = response.user;
       context.commit('setUser', user);
 
       return user;
