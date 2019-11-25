@@ -7,9 +7,17 @@ import Register from './views/Register.vue';
 import Home from './views/Home.vue';
 import Pay from './views/Pay.vue';
 
+import store from './store.js';
+
 Vue.use(Router);
 
-export default new Router({
+const LAYOUTS = {
+  // Values must match the name of layout components registered in App.vue
+  AUTH: 'auth',
+  DEFAULT: 'default',
+};
+
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
@@ -17,7 +25,7 @@ export default new Router({
       path: '/login',
       name: 'login',
       meta: {
-        layout: 'auth',
+        layout: LAYOUTS.AUTH,
       },
       component: Login,
     },
@@ -25,7 +33,7 @@ export default new Router({
       path: '/register',
       name: 'register',
       meta: {
-        layout: 'auth',
+        layout: LAYOUTS.AUTH,
       },
       component: Register,
     },
@@ -57,3 +65,36 @@ export default new Router({
     return { x: 0, y: 0 };
   },
 });
+
+router.beforeEach(async (to, from, next) => {
+  if (to.meta.layout === LAYOUTS.AUTH) {
+    //
+    // AUTH LAYOUT
+    //
+
+    // Redirect to index page if user is already authed
+    const user = await store.dispatch('getUser');
+
+    if (user) {
+      return next('/');
+    }
+  } else {
+    //
+    // DEFAULT LAYOUT
+    //
+
+    // Redirect to login page if user isn't authed
+    const user = await store.dispatch('getUser');
+
+    if (!user) {
+      return next('/login');
+    }
+
+    if (!user.stripeCustomerId && to.path !== '/pay') {
+      return next('/pay');
+    }
+  }
+
+  return next();
+});
+export default router;

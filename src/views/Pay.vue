@@ -8,7 +8,7 @@
 import PaymentForm from '@/components/PaymentForm.vue';
 
 export default {
-  name: 'page-login',
+  name: 'page-pay',
   components: {
     PaymentForm,
   },

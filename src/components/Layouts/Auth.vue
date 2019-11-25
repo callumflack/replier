@@ -1,29 +1,8 @@
 <template>
-  <div v-if="loaded" class="body">
+  <div class="body">
     <slot />
   </div>
 </template>
-
-<script>
-export default {
-  data() {
-    return {
-      loaded: false,
-    };
-  },
-  async created() {
-    // Redirect to index page if user is already authed
-    const user = await this.$store.dispatch('getUser');
-
-    if (user) {
-      this.$router.push('/');
-      return;
-    }
-
-    this.loaded = true;
-  },
-};
-</script>
 
 <style scoped>
 .body {
