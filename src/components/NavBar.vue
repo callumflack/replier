@@ -14,6 +14,7 @@
         </router-link>
         <div class="flex">
           <NavBarInfo class="mt-px nav__item"></NavBarInfo>
+          <router-link to="/settings">Settings</router-link>
           <a href="#" @click.prevent="logout">Logout</a>
         </div>
       </template>

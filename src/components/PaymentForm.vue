@@ -35,6 +35,7 @@ export default {
       stripe: null,
       error: false,
       success: false,
+      loading: false,
     };
   },
   mounted() {
@@ -51,7 +52,7 @@ export default {
         email: this.$store.state.auth.user.email,
       });
 
-      if (response instanceof Error || response.error) {
+      if (response.error) {
         console.error('Failed to subscribe user');
         this.error = true;
         this.success = false;
@@ -62,6 +63,7 @@ export default {
       this.success = true;
       this.loading = false;
 
+      // Update user in vuex store
       await this.$store.dispatch('getUser', true);
 
       setTimeout(() => {

@@ -1,5 +1,5 @@
 <template>
-  <div class="container Block-sm max-w-xl">
+  <div class="container Block-sm max-w-3xl">
     <PaymentForm />
   </div>
 </template>

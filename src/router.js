@@ -2,10 +2,14 @@ import Vue from 'vue';
 import Router from 'vue-router';
 // Auth routes
 import Login from './views/Login.vue';
-// App routes
 import Register from './views/Register.vue';
-import Home from './views/Home.vue';
+// Account management routes
 import Pay from './views/Pay.vue';
+import Settings from './views/Settings.vue';
+
+// App routes
+import Home from './views/Home.vue';
+import Reply from './views/Reply.vue';
 
 import store from './store.js';
 
@@ -43,6 +47,11 @@ const router = new Router({
       component: Pay,
     },
     {
+      path: '/settings',
+      name: 'settings',
+      component: Settings,
+    },
+    {
       path: '/',
       name: 'home',
       component: Home,
@@ -53,7 +62,7 @@ const router = new Router({
       // route level code-splitting
       // this generates a separate chunk (reply.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "reply" */ './views/Reply.vue'),
+      component: Reply,
       meta: { transitionName: 'slide' },
     },
   ],
@@ -86,12 +95,14 @@ router.beforeEach(async (to, from, next) => {
     // Redirect to login page if user isn't authed
     const user = await store.dispatch('getUser');
 
+    // Unauthorized
     if (!user) {
       return next('/login');
     }
 
-    if (!user.stripeCustomerId && to.path !== '/pay') {
-      return next('/pay');
+    // New customer
+    if (!user.stripeCustomerId || !user.stripeSubscriptionId) {
+      if (to.path !== '/pay') return next('/pay');
     }
   }
 
