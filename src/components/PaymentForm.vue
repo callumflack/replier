@@ -1,5 +1,5 @@
 <template>
-  <form action="/charge" method="post" id="payment-form">
+  <form action="/charge" method="post" id="payment-form" @submit="handleSubmit">
     <div class="mb-6">
       <div v-if="success && !loading" class="text-form-good mb-4">
         Your payment was successful! You will be redirected in 5 seconds.
@@ -9,15 +9,31 @@
         There was an error processing your payment. Please try again.
       </div>
 
-      <label for="card-element" class="block mb-4">
-        Credit or debit card
-      </label>
+      <div class="Form__field">
+        <label for="billing-email" class="block mb-2">
+          Email
+        </label>
+        <input id="billing-email" class="Input Input--bordered" v-model="formData.email" required />
+      </div>
 
-      <!-- A Stripe Element will be inserted here. -->
-      <div id="card-element" />
+      <div class="Form__field">
+        <label for="card-name" class="block mb-2">
+          Fullname On Card
+        </label>
+        <input id="card-name" class="Input Input--bordered" v-model="formData.cardName" required />
+      </div>
 
-      <!-- Used to display form errors. -->
-      <div id="card-errors" role="alert" />
+      <div class="Form__field">
+        <label for="card-element" class="block mb-2">
+          Credit or debit card
+        </label>
+        <!-- A Stripe Element will be inserted here. -->
+        <div id="card-element" />
+
+        <!-- Used to display form errors. -->
+        <div id="card-errors" role="alert" />
+      </div>
+
     </div>
 
     <button :disabled="loading" class="Button">Submit Payment</button>
@@ -33,9 +49,15 @@ export default {
     return {
       // Stripe library instance on window
       stripe: null,
+      // Stripe card object
+      card: null,
       error: false,
       success: false,
       loading: false,
+      formData: {
+        cardName: '',
+        email: this.$store.state.auth.user.email,
+      },
     };
   },
   mounted() {
@@ -46,10 +68,10 @@ export default {
     script.onload = this.initStripeElements;
   },
   methods: {
-    async stripeTokenHandler(token) {
+    async subscribeToPlan(token) {
       const response = await api.post('/pay/subscribe', {
         cardToken: token.id,
-        email: this.$store.state.auth.user.email,
+        ...this.formData,
       });
 
       if (response.error) {
@@ -96,13 +118,13 @@ export default {
       };
 
       // Create an instance of the card Element.
-      const card = elements.create('card', { style });
+      this.card = elements.create('card', { style });
 
       // Add an instance of the card Element into the `card-element` <div>.
-      card.mount('#card-element');
+      this.card.mount('#card-element');
 
       // Handle real-time validation errors from the card Element.
-      card.addEventListener('change', (event) => {
+      this.card.addEventListener('change', (event) => {
         const displayError = document.getElementById('card-errors');
         if (event.error) {
           displayError.textContent = event.error.message;
@@ -110,41 +132,23 @@ export default {
           displayError.textContent = '';
         }
       });
-
-      // Handle form submission.
-      const form = document.getElementById('payment-form');
-      form.addEventListener('submit', (event) => {
-        event.preventDefault();
-
-        this.error = false;
-        this.success = false;
-        this.loading = true;
-
-        this.stripe.createToken(card).then((result) => {
-          if (result.error) {
-            // Inform the user if there was an error.
-            const errorElement = document.getElementById('card-errors');
-            errorElement.textContent = result.error.message;
-          } else {
-            // Send the token to your server.
-            this.stripeTokenHandler(result.token);
-          }
-        });
-      });
     },
     async handleSubmit() {
-      this.error = null;
-      this.submitting = true;
-      const response = await this.$store.dispatch('pay', this.formData);
+      this.error = false;
+      this.success = false;
+      this.loading = true;
 
-      if (response.error) {
-        this.error = response.error;
-        this.submitting = false;
+      const tokenResult = await this.stripe.createToken(this.card, { name: this.formData.cardName });
+
+      if (tokenResult.error) {
+        // Inform the user if there was an error.
+        const errorElement = document.getElementById('card-errors');
+        errorElement.textContent = tokenResult.error.message;
         return;
       }
 
-      // Redirect to /
-      this.$router.push('/');
+      // Send the token to your server.
+      this.subscribeToPlan(tokenResult.token);
     },
   },
 };
@@ -181,5 +185,9 @@ export default {
 
 .StripeElement--webkit-autofill {
   background-color: #fefde5 !important;
+}
+
+.Form__field {
+  @apply mb-8;
 }
 </style>
