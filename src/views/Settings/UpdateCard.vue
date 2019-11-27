@@ -1,6 +1,6 @@
 <template>
   <div class="container Block-sm max-w-3xl">
-    <PaymentForm :onSubmit="subscribeToPlan" @success="handleSuccess" />
+    <PaymentForm :onSubmit="updateCard" @success="handleSuccess" />
   </div>
 </template>
 
@@ -19,16 +19,15 @@ export default {
     }
   },
   methods: {
-    async subscribeToPlan(token, formData) {
-      const response = await api.post('/pay/subscribe', {
+    async updateCard(token) {
+      const response = await api.put('/pay/subscribe', {
         cardToken: token.id,
-        ...formData,
       });
 
       if (response.error) {
-        console.error('Failed to subscribe user');
-        const error = new Error('Failed to subscribe user');
-        error.code = 'SUBSCRIBE_FAILED';
+        console.error('Failed to update card details');
+        const error = new Error('Failed to update card details');
+        error.code = 'CARD_UPDATE_FAILED';
         return error;
       }
 

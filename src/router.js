@@ -5,7 +5,7 @@ import Login from './views/Login.vue';
 import Register from './views/Register.vue';
 // Account management routes
 import Pay from './views/Pay.vue';
-import Settings from './views/Settings.vue';
+import Settings from './views/Settings/Index.vue';
 
 // App routes
 import Home from './views/Home.vue';

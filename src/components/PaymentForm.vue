@@ -1,5 +1,5 @@
 <template>
-  <form action="/charge" method="post" id="payment-form" @submit="handleSubmit">
+  <form method="post" id="payment-form" @submit.prevent="handleSubmit">
     <div class="mb-6">
       <div v-if="success && !loading" class="text-form-good mb-4">
         Your payment was successful! You will be redirected in 5 seconds.
@@ -41,10 +41,19 @@
 </template>
 
 <script>
-import api from '@/lib/api.js';
-
 export default {
   name: 'PaymentForm',
+  props: {
+    /**
+     * This function will be called on a successful submission and token generation
+     * If an Error object is returned it's treated as though the submission failed
+     * Passed arguments: (cardToken, formData)
+     */
+    onSubmit: {
+      type: Function,
+      required: true,
+    },
+  },
   data() {
     return {
       // Stripe library instance on window
@@ -68,36 +77,12 @@ export default {
     script.onload = this.initStripeElements;
   },
   methods: {
-    async subscribeToPlan(token) {
-      const response = await api.post('/pay/subscribe', {
-        cardToken: token.id,
-        ...this.formData,
-      });
-
-      if (response.error) {
-        console.error('Failed to subscribe user');
-        this.error = true;
-        this.success = false;
-        this.loading = false;
-        return;
-      }
-
-      this.success = true;
-      this.loading = false;
-
-      // Update user in vuex store
-      await this.$store.dispatch('getUser', true);
-
-      setTimeout(() => {
-        this.$router.push('/');
-      }, 5000);
-    },
     initStripeElements() {
       // Create a Stripe client.
-      this.stripe = window.Stripe(process.env.VUE_APP_STRIPE_PUBLISHABLE_KEY);
+      const stripe = window.Stripe(process.env.VUE_APP_STRIPE_PUBLISHABLE_KEY);
 
       // Create an instance of Elements.
-      const elements = this.stripe.elements();
+      const elements = stripe.elements();
 
       // Custom styling can be passed to options when creating an Element.
       // (Note that this demo uses a wider set of styles than the guide below.)
@@ -138,7 +123,8 @@ export default {
       this.success = false;
       this.loading = true;
 
-      const tokenResult = await this.stripe.createToken(this.card, { name: this.formData.cardName });
+      const stripe = window.Stripe(process.env.VUE_APP_STRIPE_PUBLISHABLE_KEY);
+      const tokenResult = await stripe.createToken(this.card, { name: this.formData.cardName });
 
       if (tokenResult.error) {
         // Inform the user if there was an error.
@@ -147,8 +133,19 @@ export default {
         return;
       }
 
-      // Send the token to your server.
-      this.subscribeToPlan(tokenResult.token);
+      const response = await this.onSubmit(tokenResult.token, this.formData);
+
+      if (response instanceof Error) {
+        this.error = true;
+        this.success = false;
+      } else {
+        this.error = false;
+        this.success = true;
+      }
+
+      this.loading = false;
+
+      this.$emit('success');
     },
   },
 };
