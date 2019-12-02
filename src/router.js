@@ -6,6 +6,7 @@ import Register from './views/Register.vue';
 // Account management routes
 import Pay from './views/Pay.vue';
 import Settings from './views/Settings/Index.vue';
+import UpdateCard from './views/Settings/UpdateCard.vue';
 
 // App routes
 import Home from './views/Home.vue';
@@ -50,6 +51,11 @@ const router = new Router({
       path: '/settings',
       name: 'settings',
       component: Settings,
+    },
+    {
+      path: '/settings/update-card',
+      name: 'update-card',
+      component: UpdateCard,
     },
     {
       path: '/',

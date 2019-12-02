@@ -13,14 +13,9 @@ export default {
   components: {
     PaymentForm,
   },
-  mounted() {
-    if (this.$store.state.auth.user.stripeSubscriptionId) {
-      this.$router.push('/settings');
-    }
-  },
   methods: {
     async updateCard(token) {
-      const response = await api.put('/pay/subscribe', {
+      const response = await api.put('/write/pay/subscribe', {
         cardToken: token.id,
       });
 

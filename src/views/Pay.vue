@@ -20,9 +20,9 @@ export default {
   },
   methods: {
     async subscribeToPlan(token, formData) {
-      const response = await api.post('/pay/subscribe', {
+      const response = await api.post('/write/pay/subscribe', {
         cardToken: token.id,
-        ...formData,
+        email: formData.email,
       });
 
       if (response.error) {

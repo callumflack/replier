@@ -13,7 +13,7 @@
         <label for="billing-email" class="block mb-2">
           Email
         </label>
-        <input id="billing-email" class="Input Input--bordered" v-model="formData.email" required />
+        <input id="billing-email" class="Input Input--bordered" v-model="formData.email" disabled required />
       </div>
 
       <div class="Form__field">
@@ -79,10 +79,10 @@ export default {
   methods: {
     initStripeElements() {
       // Create a Stripe client.
-      const stripe = window.Stripe(process.env.VUE_APP_STRIPE_PUBLISHABLE_KEY);
+      this.stripe = window.Stripe(process.env.VUE_APP_STRIPE_PUBLISHABLE_KEY);
 
       // Create an instance of Elements.
-      const elements = stripe.elements();
+      const elements = this.stripe.elements();
 
       // Custom styling can be passed to options when creating an Element.
       // (Note that this demo uses a wider set of styles than the guide below.)
@@ -123,8 +123,7 @@ export default {
       this.success = false;
       this.loading = true;
 
-      const stripe = window.Stripe(process.env.VUE_APP_STRIPE_PUBLISHABLE_KEY);
-      const tokenResult = await stripe.createToken(this.card, { name: this.formData.cardName });
+      const tokenResult = await this.stripe.createToken(this.card, { name: this.formData.cardName });
 
       if (tokenResult.error) {
         // Inform the user if there was an error.

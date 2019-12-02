@@ -1,6 +1,6 @@
 <template>
   <div class="container Block-sm max-w-3xl">
-    <div v-if="$store.state.auth.user.stripeSubscriptionId">
+    <div v-if="subscriptionStatus === 'ACTIVE'">
       <div class="s-h">
         <h3 class="Title">You're subscribed!</h3>
         <p class="s-p">Your subscription is currently active, you may cancel your plan by clicking below.</p>
@@ -11,10 +11,10 @@
         @click="cancelPayment"
       >Cancel payment</button>
     </div>
-    <div v-else>
+    <div v-if="subscriptionStatus === 'CANCELLED'">
       <div class="s-h">
-        <h3 class="Title">You're not subscribed</h3>
-        <p class="s-p">Your subscription is currently inactive, click below to resume your subscription.</p>
+        <h3 class="Title">You're subscription is paused</h3>
+        <p class="s-p">Your subscription is currently paused, click below to resume your subscription.</p>
       </div>
       <button
         :disabled="loadingResume"
@@ -34,22 +34,49 @@ export default {
     return {
       loadingCancel: false,
       loadingResume: false,
+      stripeSubscription: null,
     };
   },
+  async mounted() {
+    this.getStripeSubscription();
+  },
+  computed: {
+    subscriptionStatus() {
+      if (!this.stripeSubscription) {
+        return 'INACTIVE';
+      }
+
+      return this.stripeSubscription.cancel_at_period_end
+        ? 'CANCELLED'
+        : 'ACTIVE';
+    },
+  },
   methods: {
+    async getStripeSubscription() {
+      const response = await api.get('/write/pay/subscribe');
+      this.stripeSubscription = response.stripeSubscription;
+    },
     async cancelPayment() {
       this.loadingCancel = true;
 
-      const response = await api.delete('/pay/subscribe');
-      console.log(response);
+      await api.delete('/write/pay/subscribe');
 
       // Update user in vuex store
       await this.$store.dispatch('getUser', true);
+      await this.getStripeSubscription();
 
       this.loadingCancel = false;
     },
     async resumePayment() {
-      this.$router.push('/pay');
+      this.loadingResume = true;
+
+      await api.post('/write/pay/resume');
+
+      // Update user in vuex store
+      await this.$store.dispatch('getUser', true);
+      await this.getStripeSubscription();
+
+      this.loadingResume = false;
     },
     async handleSubmit() {
       this.error = null;
