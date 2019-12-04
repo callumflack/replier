@@ -14,11 +14,9 @@
  */
 
 :root {
-  --button-color: theme(colors.white);
   --button-invert-color: theme(colors.black);
   --button-bg-color: var(--button-invert-color);
   --button-bg-color-hover: var(--button-invert-color);
-  --button-border-color: var(--button-invert-color);
   --button-border-width: 1px;
   --button-border-radius: 2px;
   --button-box-shadow-color: var(--button-invert-color);
@@ -38,7 +36,6 @@
 .Button {
   align-items: center;
   background-color: var(--button-bg-color);
-  border-color: var(--button-border-color);
   border-radius: var(--button-border-radius);
   border-style: solid;
   border-width: var(--button-border-width);
@@ -62,6 +59,11 @@
 /*
   UI states
  */
+
+.Button {
+  --button-color: theme(colors.white);
+  border-color: var(--button-border-color);
+}
 
 .ButtonComplex:hover .Button,
 .ButtonComplex:focus .Button,
@@ -114,7 +116,7 @@ button:disabled {
  */
 
 .Input {
-  --button-color: theme(colors.text);
+  --button-color: inherit;
   --button-invert-color: white;
   --button-border-width: 0;
   --button-box-shadow-color: theme(colors.brand.blue);

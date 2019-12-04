@@ -3,7 +3,7 @@
  * @module api
  */
 
-const urlBase = '/api';
+const urlBase = `${process.env.VUE_APP_AUTH_SERVER_URL || ''}/api`;
 
 /**
  * Parse api response
