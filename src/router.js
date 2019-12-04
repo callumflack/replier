@@ -4,7 +4,6 @@ import Router from 'vue-router';
 import Login from './views/Login.vue';
 import Register from './views/Register.vue';
 // Account management routes
-import Pay from './views/Pay.vue';
 import Settings from './views/Settings/Index.vue';
 import UpdateCard from './views/Settings/UpdateCard.vue';
 
@@ -41,11 +40,6 @@ const router = new Router({
         layout: LAYOUTS.AUTH,
       },
       component: Register,
-    },
-    {
-      path: '/pay',
-      name: 'pay',
-      component: Pay,
     },
     {
       path: '/settings',
@@ -104,11 +98,6 @@ router.beforeEach(async (to, from, next) => {
     // Unauthorized
     if (!user) {
       return next('/login');
-    }
-
-    // New customer
-    if (!user.stripeCustomerId || !user.stripeSubscriptionId) {
-      if (to.path !== '/pay') return next('/pay');
     }
   }
 

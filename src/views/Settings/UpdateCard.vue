@@ -9,7 +9,7 @@ import PaymentForm from '@/components/PaymentForm.vue';
 import api from '@/lib/api.js';
 
 export default {
-  name: 'page-settings',
+  name: 'page-settings-update-card',
   components: {
     PaymentForm,
   },
@@ -30,11 +30,6 @@ export default {
       this.$store.dispatch('getUser', true);
 
       return null;
-    },
-    async handleSuccess() {
-      setTimeout(() => {
-        this.$router.push('/');
-      }, 5000);
     },
   },
 };

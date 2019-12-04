@@ -1,26 +1,34 @@
 <template>
-  <div class="container Block-sm max-w-3xl">
-    <div v-if="subscriptionStatus === 'ACTIVE'">
-      <div class="s-h">
-        <h3 class="Title">You're subscribed!</h3>
-        <p class="s-p">Your subscription is currently active, you may cancel your plan by clicking below.</p>
+  <div class="container max-w-3xl">
+    <div class="Block-sm">
+      <div v-if="subscriptionStatus === 'ACTIVE'">
+        <div class="s-h">
+          <h3 class="Title">You're subscribed!</h3>
+          <p class="s-p">
+            Your subscription is currently active, you may cancel your plan by clicking below.
+          </p>
+        </div>
+        <button
+          :disabled="loadingCancel"
+          class="Button Button--lg"
+          @click="cancelPayment"
+        >Cancel payment</button>
       </div>
-      <button
-        :disabled="loadingCancel"
-        class="Button Button--lg"
-        @click="cancelPayment"
-      >Cancel payment</button>
+      <div v-if="subscriptionStatus === 'CANCELLED'">
+        <div class="s-h">
+          <h3 class="Title">You're subscription is paused</h3>
+          <p class="s-p">Your subscription is currently paused, click below to resume your subscription.</p>
+        </div>
+        <button
+          :disabled="loadingResume"
+          class="Button Button--lg"
+          @click="resumePayment"
+        >Resume payment</button>
+      </div>
     </div>
-    <div v-if="subscriptionStatus === 'CANCELLED'">
-      <div class="s-h">
-        <h3 class="Title">You're subscription is paused</h3>
-        <p class="s-p">Your subscription is currently paused, click below to resume your subscription.</p>
-      </div>
-      <button
-        :disabled="loadingResume"
-        class="Button Button--lg"
-        @click="resumePayment"
-      >Resume payment</button>
+
+    <div class="Block-sm">
+      <router-link to="/settings/update-card" class="Link">Update your payment details</router-link>
     </div>
   </div>
 </template>
