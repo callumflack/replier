@@ -3,33 +3,12 @@
  * @module api
  */
 
-const urlBase = `${process.env.VUE_APP_AUTH_SERVER_URL || ''}/api`;
+import axios from 'axios';
 
-/**
- * Parse api response
- *
- * @private
- * @async
- *
- * @param {object} response
- * @returns {object|null} - JSON data or null
- */
-async function parseAPIResponse(response) {
-  if (response.status === 500) {
-    return {
-      error: 'An unknown error occured. Please try again.',
-    };
-  }
-
-  const contentType = response.headers.get('content-type');
-  const isJson = contentType && contentType.includes('application/json');
-
-  if (isJson) {
-    return response.json();
-  }
-
-  return null;
-}
+const axiosAuth = axios.create({
+  baseURL: `${process.env.VUE_APP_AUTH_SERVER_URL || ''}/api`,
+  withCredentials: true,
+});
 
 /**
  * Generic request template
@@ -41,24 +20,29 @@ async function parseAPIResponse(response) {
  * @param {object} data
  * @param {object} options
  * @param {string} options.method
- * @param {string} options.bearerToken
  * @returns {object}
  */
 async function basicRequest(url, data, { method = 'POST' } = {}) {
-  const requestOptions = {
-    method,
-    headers: new Headers({
-      'Content-Type': 'application/json',
-    }),
-  };
+  let response;
 
-  if (method !== 'GET') {
-    requestOptions.body = JSON.stringify(data);
+  try {
+    response = await axiosAuth(url, {
+      method,
+      url,
+      data,
+    });
+  } catch (error) {
+    response = error.response;
+
+    if (response.status === 500) {
+      console.log('Error during request:', error);
+      return {
+        error: 'An unknown error occured. Please try again.',
+      };
+    }
   }
 
-  const response = await fetch(`${urlBase}${url}`, requestOptions);
-
-  return parseAPIResponse(response);
+  return response.data || null;
 }
 
 export default Object.freeze({
