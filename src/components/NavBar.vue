@@ -18,7 +18,7 @@
           <a href="#" @click.prevent="logout">Logout</a>
         </div>
       </template>
-      <template v-else-if="$store.state.auth.user === null">
+      <template v-else-if="!$store.state.auth.user">
         <div />
         <div>
           <router-link to="/login">Login</router-link>

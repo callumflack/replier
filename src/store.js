@@ -104,6 +104,7 @@ export default new Vuex.Store({
     },
     async loginUser(context, credentials) {
       const response = await auth.login(credentials);
+      console.log('RES:', response);
       const user = (response && response.user) || null;
 
       context.commit('setUser', user);

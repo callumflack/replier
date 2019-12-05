@@ -29,7 +29,7 @@
 
     </div>
 
-    <button :disabled="loading" class="Button">Submit Payment</button>
+    <button :disabled="loading" class="Button">Update details</button>
   </form>
 </template>
 

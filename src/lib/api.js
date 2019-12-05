@@ -24,13 +24,23 @@ const axiosAuth = axios.create({
  */
 async function basicRequest(url, data, { method = 'POST' } = {}) {
   let response;
+  const config = {
+    method,
+    url,
+    data,
+  };
+
+  const bearerToken = localStorage.getItem('bearerToken');
+
+  if (bearerToken) {
+    config.headers = {
+      Authorization: `Bearer ${bearerToken}`,
+    };
+  }
+
 
   try {
-    response = await axiosAuth(url, {
-      method,
-      url,
-      data,
-    });
+    response = await axiosAuth(url, config);
   } catch (error) {
     response = error.response;
 
