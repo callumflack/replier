@@ -105,7 +105,6 @@ export default {
         return;
       }
 
-      console.log(tokenResult);
       const response = await this.$store.dispatch('registerUser', {
         cardToken: tokenResult.token.id,
         user: {
@@ -118,7 +117,7 @@ export default {
 
       if (response.error) {
         console.error('Failed to subscribe user');
-        this.error = response.error;
+        this.error = response.error.message;
         this.loading = false;
         return;
       }

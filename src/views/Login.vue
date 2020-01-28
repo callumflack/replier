@@ -53,7 +53,7 @@ export default {
       const response = await this.$store.dispatch('loginUser', this.formData);
 
       if (response.error) {
-        this.error = response.error;
+        this.error = response.error.message;
         this.submitting = false;
         return;
       }
