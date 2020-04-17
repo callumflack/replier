@@ -14,7 +14,7 @@
       @click.prevent="toggleMobileNav()"
     >
       <icon v-if="mobileNavOpen" name="close" height="1.75em" width="1.75em"></icon>
-      <icon v-else name="info" height="1.25em" width="1.25em"></icon>
+      <icon v-else name="info" height="1.5em" width="1.5em"></icon>
     </button>
     <portal to="modals">
       <Modal
@@ -67,9 +67,7 @@ export default {
   transition: opacity 0.5s ease-in;
 }
 .Info {
-  @apply ml-4 cursor-pointer;
-  @apply text-black;
-  @apply relative;
+  @apply ml-4 cursor-pointer text-black relative;
   transition: opacity 0.5s ease-in;
   z-index: 101;
 }

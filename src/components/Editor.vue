@@ -2,12 +2,13 @@
   <div class="relative">
     <div
       v-if="!$store.state.timestamp"
-      class="Placeholder Subtitle font-normal container-inset"
+      class="Placeholder Subtitle font-normal px-inset"
     >
+      <!-- <span class="mr-2px">|</span> -->
       Paste here &amp; click to select…
     </div>
     <div
-      class="editor z-10"
+      class="editor z-10 mb-2"
       :class="{ 'text-brand-primary font-bold': !$store.state.timestamp}"
       ref="editor"
     >
@@ -160,11 +161,35 @@ export default {
 
 <style lang="postcss">
 .Placeholder {
-  @apply mt-1;
-  @apply text-gray-mid;
+  @apply mt-2;
   @apply text-brand-primary;
   @apply absolute;
-  margin-left: 4px;
+  margin-left: 3px;
+}
+.Placeholder span {
+  animation-name: blink;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+  @apply w-px;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  49% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 /*
 
@@ -177,9 +202,9 @@ export default {
 .ProseMirror {
   @apply h-full outline-none overflow-y-scroll;
   @apply whitespace-pre-wrap; /* 1 */
-  @apply pt-2;
-  padding-left: calc(theme(spacing.10) * var(--block-size-ratio));
-  padding-right: calc(theme(spacing.10) * var(--block-size-ratio));
+  /* padding-left: calc(theme(spacing.10) * var(--block-size-ratio));
+  padding-right: calc(theme(spacing.10) * var(--block-size-ratio)); */
+  @apply px-w4;
 }
 .ProseMirror:after {
   @apply block w-full;
@@ -219,7 +244,7 @@ export default {
   @apply relative;
 }
 
-.sentence--group:before {
+/* .sentence--group:before {
   @apply absolute top-0 left-0;
   @apply font-bold not-italic text-white;
   @apply bg-brand-primary rounded-full;
@@ -232,7 +257,7 @@ export default {
   height: 14px;
   width: 14px;
   transform: translate(-9px, -6px);
-}
+} */
 
 /* .editor [class*="-1"] + [class*="-1"]:before,
 .editor [class*="-1"] + a [class*="-1"]:before,

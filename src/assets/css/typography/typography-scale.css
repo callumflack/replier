@@ -1,12 +1,14 @@
 /* SCALE */
 
 :root {
+  --viewport-basis: 414;
   --text-ratio: theme(responsiveScale.textXs);
   --title-ratio: theme(responsiveScale.titleXs);
   --space-ratio: theme(responsiveScale.spaceXs);
 }
 @screen sm {
   :root {
+    --viewport-basis: 768;
     --text-ratio: theme(responsiveScale.textSm);
     --title-ratio: theme(responsiveScale.titleSm);
     --space-ratio: theme(responsiveScale.spaceSm);
@@ -14,8 +16,16 @@
 }
 @screen lg {
   :root {
+    --viewport-basis: 1024;
     --text-ratio: theme(responsiveScale.textMd);
     --title-ratio: theme(responsiveScale.titleMd);
     --space-ratio: theme(responsiveScale.spaceMd);
+  }
+}
+@screen 2xl {
+  :root {
+    --viewport-basis: 1680;
+    --text-ratio: theme(responsiveScale.textRg);
+    --heading-ratio: theme(responsiveScale.headingRg);
   }
 }

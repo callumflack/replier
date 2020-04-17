@@ -13,7 +13,6 @@
 @import "./theme/theme-color";
 @import "./theme/theme-fontface";
 
-@import "./layout/layout-base";
 @import "./layout/layout-grid";
 @import "./layout/layout-block";
 @import "./layout/layout-container";

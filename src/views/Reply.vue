@@ -1,8 +1,8 @@
 <template>
-  <div class="container Block-sm max-w-3xl">
+  <div class="pt-w5 pb-w8">
     <!-- tabindex starting with a positive value and
     ending with the highest possible value: tiny.cc/txtudz -->
-    <div class="container-inset">
+    <div class="px-inset">
       <textarea
         class="reply-input reply-input--contextual reply-input--intro Input"
         placeholder="Say hi…"
@@ -120,7 +120,6 @@ export default {
       * https://sortablejs.github.io/Vue.Draggable/#/transition-example-2
       * https://github.com/SortableJS/Vue.Draggable/blob/master/example/components/transition-example-2.vue
       * https://github.com/SortableJS/Vue.Draggable/blob/master/example/components/transition-example.vue
-
     */
     dragOptions() {
       return {
@@ -224,7 +223,7 @@ export default {
 .selection__options {
   @apply absolute inset-0 right-auto text-right;
   top: var(--inset);
-  left: -3rem;
+  left: -2.5rem;
 }
 .selection .option-button {
   @apply opacity-0;
@@ -266,11 +265,9 @@ export default {
   --min-height: 90px;
   min-height: var(--min-height);
   height: var(--min-height);
-  @apply font-title font-medium;
-  @apply text-black;
-  @apply leading-relaxed;
+  @apply font-title font-normal text-black leading-relaxed;
   @apply bg-transparent;
-  /* @apply border-b border-gray-light; */
+  /* @apply border border-gray-light; */
   /* font-size: calc(theme(fontSize.xl) * var(--text-ratio) - 1px); */
   font-size: calc(theme(fontSize.xl) * var(--text-ratio));
   transition: border-color 0.2s;
@@ -278,8 +275,9 @@ export default {
 .reply-input:focus {
   border-color: theme("colors.brand.primary");
 }
+.reply-input::placeholder,
 .reply-input--contextual::placeholder {
-  --input-placeholder-color: theme("colors.black");
+  --input-placeholder-color: theme("colors.brand.primary");
 }
 .reply-input--intro {
   margin-bottom: calc(theme(spacing.4) * var(--block-size-ratio));

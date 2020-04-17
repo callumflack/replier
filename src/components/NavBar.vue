@@ -1,14 +1,15 @@
 <template>
-  <div id="nav" class="container max-w-3xl Block-md-t Block-sm-b">
+  <div id="nav" class="pt-w6">
     <nav class="Nav flex justify-between">
       <router-link
         to="/"
         class="Title relative w-2/3"
       >
-        <span :class="{ home: $route.name === 'home' }">Corvid Write</span>
-        <span :class="{ reply: $route.name !== 'home' }">
+        <!-- <h1 :class="{ home: $route.name === 'home' }">Corvid Write</h1> -->
+        <h1 class="element" :class="{ home: $route.name === 'home' }">Write</h1>
+        <span class="element" :class="{ reply: $route.name !== 'home' }">
           <icon name="arrow-back" class="mr-1" />
-          <span>Revise selection</span>
+          <span>Revise</span>
         </span>
       </router-link>
       <NavBarInfo class="mt-px"></NavBarInfo>
@@ -35,15 +36,15 @@ export default {
   @apply w-full border-b-2 border-black pb-4;
 }
 
-.Title > span {
+.Title > .element {
   @apply absolute left-0 opacity-0 inline-block;
   transition:
     opacity 200ms cubic-bezier(0.19, 1, 0.22, 1),
     transform 750ms cubic-bezier(0.19, 1, 0.22, 1);
   transform: translateX(-5%);
 }
-.Title span.home,
-.Title span.reply {
+.Title .home,
+.Title .reply {
   @apply opacity-100;
   transform: translateX(0);
 }

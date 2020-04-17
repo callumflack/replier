@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pt-w5">
     <div class="ActionButton opacity-100">
       <Popover ref='popover'>
         <template v-slot:trigger>

@@ -1,12 +1,36 @@
 /*
 
+  Color schema
+  See: https://medium.com/@mwichary/dark-theme-in-a-day-3518dde2955a
+
+*/
+
+
+html[data-theme='dark'] {
+  --hue: 210; /* Blue */
+  --accent-hue: 25; /* Orange */
+  --text-color-normal: hsl(var(--hue), 10%, 62%);
+  --text-color-highlight: hsl(var(--accent-hue), 70%, 45%);
+}
+
+/* blue: hsl(201, 100%, 50%) or #00A7FF */
+
+/*
+
   Global
 
  */
 
+html {
+  @apply bg-gray-lightest;
+  transition: background-color 750ms ease-in-out;
+}
 body {
   @apply antialiased font-sans font-normal text-black;
   @apply leading-normal tracking-subtitle;
+}
+main {
+  @apply min-h-full;
 }
 
 /*
@@ -51,20 +75,3 @@ ol {
   list-style-type: decimal;
   padding-left: calc(theme(spacing.6) * var(--text-ratio));
 }
-
-/*
-
-  Color schema
-  See: https://medium.com/@mwichary/dark-theme-in-a-day-3518dde2955a
-
-*/
-
-
-html[data-theme='dark'] {
-  --hue: 210; /* Blue */
-  --accent-hue: 25; /* Orange */
-  --text-color-normal: hsl(var(--hue), 10%, 62%);
-  --text-color-highlight: hsl(var(--accent-hue), 70%, 45%);
-}
-
-/* blue: hsl(201, 100%, 50%) or #00A7FF */

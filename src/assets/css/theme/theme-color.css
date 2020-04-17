@@ -7,18 +7,42 @@
 
 :root {
   /* hues */
-  /* --hue: 211; */ /* Blue */
-  --hue: 36; /* Brown */
-  --accent-hue: 25; /* Orange */
+  --hue: 200; /* Blue */
+  --hue: 211; /* Blue */
+  --accent-hue: 25; /* orange */
+
+  /* yellwo */
+  --hue: 45;
+  --saturation: 80%;
+  --lightness: 50%;
+
+  /* browns */
+  --hue: 36;
+  --saturation: 100%;
+  --lightness: 33%;
+
+  --hue: 33;
+  --saturation: 89%;
+  --lightness: 42%;
+
+  --hue: 34;
+  --saturation: 100%;
+  --lightness: 40%;
 
   /* alphas */
-  --alpha-hover: 0.3;
-  --alpha-selected: 0.125;
+  --alpha-hover: 0.2;
+  --alpha-selected: 0.1;
 
   /* merged */
   /* --color-normal: hsla(var(--hue), 100%, 50%, 1); */
-  --color-normal: hsla(var(--hue), 100%, 33%, 1);
-  --color-hover: hsla(var(--hue), 100%, 33%, var(--alpha-hover));
-  --color-selected: hsla(var(--hue), 100%, 33%, var(--alpha-selected));
   /* --color-highlight: hsl(var(--accent-hue), 70%, 45%); */
+  /* --color-normal: hsla(var(--hue), 100%, 33%, 1);
+  --color-hover: hsla(var(--hue), 100%, 33%, var(--alpha-hover));
+  --color-selected: hsla(var(--hue), 100%, 33%, var(--alpha-selected)); */
+  /* --color-normal: hsla(var(--hue), var(--saturation), var(--lightness), 1);
+  --color-hover: hsla(var(--hue), var(--saturation), var(--lightness), var(--alpha-hover));
+  --color-selected: hsla(var(--hue), var(--saturation), var(--lightness), var(--alpha-selected)); */
+  --color-normal: hsla(theme(colors.brand.primarys), 1);
+  --color-hover: hsla(theme(colors.brand.primarys), var(--alpha-hover));
+  --color-selected: hsla(theme(colors.brand.primarys), var(--alpha-selected));
 }

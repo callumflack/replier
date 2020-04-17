@@ -5,7 +5,7 @@ module.exports = {
   },
   extends: [
     'plugin:vue/essential',
-    '@vue/airbnb',
+    "eslint:recommended"
   ],
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
@@ -13,7 +13,7 @@ module.exports = {
     'no-plusplus': 'off',
     'prefer-destructuring': 'off',
     'vue/no-textarea-mustache': 'off',
-    'max-len': ['error', 110],
+    'max-len': ['error', { "code": 150 }],
   },
   parserOptions: {
     parser: 'babel-eslint',
