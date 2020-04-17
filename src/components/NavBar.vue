@@ -3,7 +3,7 @@
     <nav class="Nav flex justify-between">
       <router-link
         to="/"
-        class="Title relative w-2/3"
+        class="Title relative w-1/2"
       >
         <!-- <h1 :class="{ home: $route.name === 'home' }">Corvid Write</h1> -->
         <h1 class="element" :class="{ home: $route.name === 'home' }">Write</h1>
@@ -12,7 +12,7 @@
           <span>Revise</span>
         </span>
       </router-link>
-      <NavBarInfo class="mt-px"></NavBarInfo>
+      <NavBarInfo class="transform translate-y-1"></NavBarInfo>
     </nav>
   </div>
 </template>

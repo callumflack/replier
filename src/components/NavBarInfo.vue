@@ -1,25 +1,27 @@
 <template>
   <div>
-    <template v-if="!mobileNavOpen">
-      <span
-        v-if="!$store.state.timestamp"
-        class="Timestamp Text-xs"
-      >{{ tip }}</span>
-      <span v-else class="Timestamp Text-xs">{{ $store.state.timestamp }}</span>
-    </template>
+    <span v-if="!showDialog" class="Timestamp Text-xs font-title font-medium mr-2">
+      {{ $store.state.timestamp }}
+    </span>
     <!-- info toggle -->
     <button
-      class="Info Text-xs"
+      class="Info Text-xs font-title font-medium"
       ref="infoIcon"
-      @click.prevent="toggleMobileNav()"
+      @click.prevent="showDialog = !showDialog"
     >
-      <icon v-if="mobileNavOpen" name="close" height="1.75em" width="1.75em"></icon>
-      <icon v-else name="info" height="1.5em" width="1.5em"></icon>
+      <template v-if="!showDialog">
+        <span v-if="!$store.state.timestamp" class="inline-block mr-2">
+          <!-- Cmd + click selects sentences -->
+          What is Write?
+        </span>
+      </template>
+      <icon v-if="showDialog" name="close" height="1.75em" width="1.75em"></icon>
+      <icon v-else name="info" height="1.75em" width="1.75em"></icon>
     </button>
     <portal to="modals">
       <Modal
-        :show="mobileNavOpen"
-        @close="mobileNavOpen = false"
+        :show="showDialog"
+        @close="showDialog = false"
         info=true
         class="info-modal"
       >
@@ -39,21 +41,15 @@ export default {
     Info,
   },
   data: () => ({
-    mobileNavOpen: false,
-    tip: 'Cmd + click selects sentences',
+    showDialog: false,
   }),
-  methods: {
-    toggleMobileNav() {
-      this.mobileNavOpen = !this.mobileNavOpen;
-    },
-  },
   watch: {
-    // eslint-disable-next-line
+      // eslint-disable-next-line
       $route(to, from) {
-      if (this.mobileNavOpen) {
+      if (this.showDialog) {
         this.$refs.infoIcon.toggle();
       }
-      this.mobileNavOpen = false;
+      this.showDialog = false;
     },
   },
 };
@@ -62,12 +58,10 @@ export default {
 <style lang="postcss">
 .Timestamp {
   @apply inline-block self-end;
-  @apply font-title font-medium;
-  @apply text-black;
   transition: opacity 0.5s ease-in;
 }
 .Info {
-  @apply ml-4 cursor-pointer text-black relative;
+  @apply cursor-pointer text-black relative;
   transition: opacity 0.5s ease-in;
   z-index: 101;
 }

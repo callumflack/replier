@@ -80,7 +80,7 @@ module.exports = {
       base: '15px',
       lg: '17px',
       xl: '18px',
-      '2xl': '20px',
+      '2xl': '19px',
       '3xl': '21px',
       '4xl': '24px',
       '5xl': '36px',
