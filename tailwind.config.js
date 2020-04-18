@@ -13,30 +13,35 @@ module.exports = {
   separator: ':',
   hsl: {
     hue: '39',
-    saturation: '100',
-    lightness: '40',
+    saturation: '100%',
+    lightness: '40%',
   },
   theme: {
     colors: {
       transparent: 'transparent',
       white: '#fdfdfd',
-      // black: 'rgb(55,53,47)',
       black: 'rgb(49, 48, 45)',
       blackgray: 'rgba(49, 48, 45, 0.6)',
+      scheme: {
+        text: "var(--scheme-text)",
+        "text-gray": "var(--scheme-text-gray)",
+        "text-border": "var(--scheme-text-border)",
+        border: "var(--scheme-border)",
+        bg: "var(--scheme-bg)",
+        "bg-html": "var(--scheme-bg-html)",
+        "bg-tint": "var(--scheme-bg-tint)",
+        "bg-dark": "var(--scheme-bg-dark)",
+      },
       brand: {
         // primary: `hsl(36, 100%, 33%)`, // brown HSL original
         primary: `hsl(44, 100%, 40%)`, // brown HSL
-        primarys: `44, 100%, 40%`, // brown HSL
+        primarys: `44, 100%, 40%`, // brown HSL values
         // primary: `hsl(272, 80%, 46%)`, // brown HSL
         complement: `hsl(${hue}, 100%, 40%)`, // brown HSL
         blue: '#1b495a',
         blueneutral: '#f1f2f3',
         bluelight: blueLight,
         neutral: '#f4f2f0',
-      },
-      group: {
-        2: 'hsl(110, 63%, 43%)',
-        3: 'hsl(179, 63%, 43%)',
       },
       gray: {
         lightest: 'rgba(0,0,0,0.03)',
@@ -48,6 +53,9 @@ module.exports = {
         good: '#38a169',
         bad: '#e53e3e',
       },
+    },
+    bezier: {
+      thisalso: "cubic-bezier(0.19, 1, 0.22, 1)",
     },
     screens: {
       sm: '640px',

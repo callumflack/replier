@@ -42,7 +42,7 @@ export default {
     return {
       isVisible: false,
       options: {
-        animation: 'scale-fade',
+        animation: 'fade',
         popoverReference: null,
         placement: 'bottom',
         offset: '0,0',

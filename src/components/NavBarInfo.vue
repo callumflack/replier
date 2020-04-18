@@ -5,7 +5,7 @@
     </span>
     <!-- info toggle -->
     <button
-      class="Info Text-xs font-title font-medium"
+      class="Info-button Text-xs font-title font-medium"
       ref="infoIcon"
       @click.prevent="showDialog = !showDialog"
     >
@@ -22,8 +22,7 @@
       <Modal
         :show="showDialog"
         @close="showDialog = false"
-        info=true
-        class="info-modal"
+        info
       >
         <Info></Info>
       </Modal>
@@ -46,9 +45,9 @@ export default {
   watch: {
       // eslint-disable-next-line
       $route(to, from) {
-      if (this.showDialog) {
-        this.$refs.infoIcon.toggle();
-      }
+      // if (this.showDialog) {
+      //   this.$refs.infoIcon.toggle();
+      // }
       this.showDialog = false;
     },
   },
@@ -60,15 +59,15 @@ export default {
   @apply inline-block self-end;
   transition: opacity 0.5s ease-in;
 }
-.Info {
-  @apply cursor-pointer text-black relative;
+.Info-button {
+  @apply cursor-pointer relative;
   transition: opacity 0.5s ease-in;
   z-index: 101;
 }
-.Info:hover {
+.Info-button:hover {
   /* @apply text-brand-primary; */
 }
-.Info:focus {
+.Info-button:focus {
   @apply outline-none;
 }
 </style>

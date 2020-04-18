@@ -2,6 +2,8 @@
 
 :root {
   --viewport-basis: 414;
+  --messagebar-height: 61px;
+  --info-block-position: 205px; /* pt-w8 ? */
   --text-ratio: theme(responsiveScale.textXs);
   --title-ratio: theme(responsiveScale.titleXs);
   --space-ratio: theme(responsiveScale.spaceXs);

@@ -68,18 +68,20 @@
         @close="isResetModalOpen = false"
         ref="resetModal"
       >
-        <p class="s-h Meta text-brand-primary">
-          <icon name="check-circle" class="text-brand-primary mr-2px" height="1.25em" width="1.25em"></icon>
-          Copied to your clipboard
-        </p>
-        <hr class="s-h" />
-        <div class="flex pt-1">
-          <button class="mr-2 w-1/2 font-title font-semibold Button" @click="resetState">
-            Start again
-          </button>
-          <button class="ml-2 w-1/2 font-title font-semibold Button Button--outline" @click="dismiss">
-            Keep editing
-          </button>
+        <div class="Modal-body">
+          <p class="s-h Meta text-brand-primary">
+            <icon name="check-circle" class="text-brand-primary mr-2px" height="1.25em" width="1.25em"></icon>
+            Copied to your clipboard
+          </p>
+          <hr class="my-4" />
+          <div class="flex pt-1">
+            <button class="mr-2 w-1/2 font-title font-semibold Button" @click="resetState">
+              Start again
+            </button>
+            <button class="ml-2 w-1/2 font-title font-semibold Button Button--outline" @click="dismiss">
+              Keep editing
+            </button>
+          </div>
         </div>
       </Modal>
     </portal>
@@ -322,21 +324,21 @@ export default {
   z-index: 101; /* 1 */
 }
 .modal-is-active .Modal-backdrop {
-  /* background-color: rgba(255, 255, 255, 0.9); */
   background-color: rgba(166, 101, 1, 0.5);
 }
+@media (prefers-color-scheme: dark) {
+  .modal-is-active .Modal-backdrop {
+    background-color: rgba(166, 101, 1, 0.25);
+  }
+}
 
->>> .Modal {
-  @apply shadow-xl;
-  @apply rounded-lg bg-white;
-  /* @apply border border-form-good; */
-  /* @apply border-2 border-black; */
-  padding: calc(theme(spacing.8) * var(--block-size-ratio));
-  margin-top: calc(theme(spacing.48) * var(--block-size-ratio));
+.Modal-body {
+  @apply bg-white rounded-lg shadow-xl;
+  @apply p-inset;
   margin-top: 25vh;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.05);
 }
->>> .Modal .Button {
+.Modal-body .Button {
   white-space: nowrap;
 }
 

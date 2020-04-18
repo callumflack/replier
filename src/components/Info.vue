@@ -1,6 +1,6 @@
 <template>
-  <div class="container bg-transparent pt-w8">
-    <div class="px-inset">
+  <div class="container bg-transparent pb-w5 info-block">
+    <div class="px-w4">
       <vue-markdown class="Markdown" :source="copy"></vue-markdown>
     </div>
   </div>
@@ -19,7 +19,7 @@ export default {
       copy: `
 ## What is Write?
 
-Corvid Write helps you reply to your friends, clients, colleagues and collaborators by choosing only what's most important in the conversation. It removes the superfluous and helps you to avoid losing important info to the vortex of chat messages and email chains.
+Corvid Write helps you reply to your friends, clients, colleagues and collaborators by choosing only what's most important in the conversation. It removes the superfluous and helps you avoid losing important information to the vortex of chat messages and email chains.
 
 We also give you custom formatted responses to paste into for your favourite project management apps. So it's clear who said what.
 
@@ -32,9 +32,9 @@ We also give you custom formatted responses to paste into for your favourite pro
 
 ## Who made it?
 
-Jeremy, Callum &amp; Barry.
+[Jeremy](https://jackywinter.com), [Callum](https://callumflack.design) &amp; Barry.
 
-<small>Version 0.0.1 2019-10-01</small>`
+<small>Version 0.0.2 2020-04-18</small>`
       /* eslint-enable max-len */
     };
   },
@@ -42,23 +42,27 @@ Jeremy, Callum &amp; Barry.
 </script>
 
 <style lang="postcss" scoped>
-.Block {
-  margin-top: calc(theme(spacing.40) * var(--block-size-ratio));
-  margin-bottom: calc(theme(spacing.24) * var(--block-size-ratio));
-}
-
-/*
-  Scoped to css vars under `custom-info-modal.css`
- */
+/* presumed to be within the info modal */
 .Markdown >>> h1,
 .Markdown >>> h2 {
-  color: var(--info-modal-text);
+  @apply text-scheme-text;
 }
 .Markdown >>> p,
 .Markdown >>> ol {
-  color: var(--info-modal-text-light);
+  @apply text-scheme-text-gray;
 }
 .Markdown >>> small {
   @apply opacity-50;
+}
+</style>
+
+<style lang="postcss">
+/* MODAL POSITIONS */
+.info-block {
+  padding-top: var(--info-block-position);
+}
+/* avoid any padding-top transitions */
+.messagebar-is-active .info-block {
+  transform: translateY(var(--messagebar-height));
 }
 </style>

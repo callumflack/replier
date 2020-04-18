@@ -1,15 +1,19 @@
 <template>
   <div id="app" class="Site">
-    <div class="Site-content container bg-white">
-      <MessageBar>
-        <span class="font-bold">It's your data, not ours.</span>
-        We don't store anything you paste nor type here.
-        <span class="Link">Opt out of all tracking.</span>
-      </MessageBar>
-      <NavBar></NavBar>
-      <transition-page>
-        <router-view />
-      </transition-page>
+    <div class="Site-content">
+      <div class="container bg-transparent">
+        <MessageBar>
+          <span class="font-bold">It's your data, not ours.</span>
+          We don't store anything you paste nor type here.
+          <span class="Link">Opt out of all tracking.</span>
+        </MessageBar>
+      </div>
+      <div class="container h-full">
+        <NavBar></NavBar>
+        <transition-page>
+          <router-view />
+        </transition-page>
+      </div>
     </div>
     <portal-target name="modals" multiple></portal-target>
   </div>
@@ -43,7 +47,9 @@ export default {
   /* @apply flex-1; */
 }
 .Site-content {
+  /* Setting a height of 1px allows children to use height 100%
+  to inherit this elements height */
+  @apply h-px min-h-screen;
   @apply flex-1;
-  /* margin-top: var(--message-bar-height); */
 }
 </style>

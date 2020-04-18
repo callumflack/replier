@@ -1,6 +1,6 @@
 <template>
   <div class="relative">
-    <Editor class="editor py-w5" :editor.sync="editor" />
+    <Editor class="editor py-w5 px-w4" :editor.sync="editor" />
 
     <div
       class="ActionButton"

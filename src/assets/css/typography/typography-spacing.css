@@ -28,6 +28,7 @@
 .Markdown h2:not(:first-child),
 .Markdown h3:not(:first-child),
 .Markdown h4:not(:first-child),
-.Markdown h5:not(:first-child) {
+.Markdown h5:not(:first-child),
+.Markdown small {
   @apply mt-w3;
 }

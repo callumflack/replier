@@ -2,9 +2,8 @@
   <div class="relative">
     <div
       v-if="!$store.state.timestamp"
-      class="Placeholder Subtitle font-normal px-inset"
+      class="ml-2px Placeholder Subtitle font-normal"
     >
-      <!-- <span class="mr-2px">|</span> -->
       Paste here &amp; click to select…
     </div>
     <div
@@ -161,10 +160,9 @@ export default {
 
 <style lang="postcss">
 .Placeholder {
-  @apply mt-2;
+  @apply absolute -mt-px;
   @apply text-brand-primary;
-  @apply absolute;
-  margin-left: 3px;
+  /* margin-left: 1px; */
 }
 .Placeholder span {
   animation-name: blink;
@@ -202,9 +200,6 @@ export default {
 .ProseMirror {
   @apply h-full outline-none overflow-y-scroll;
   @apply whitespace-pre-wrap; /* 1 */
-  /* padding-left: calc(theme(spacing.10) * var(--block-size-ratio));
-  padding-right: calc(theme(spacing.10) * var(--block-size-ratio)); */
-  @apply px-w4;
 }
 .ProseMirror:after {
   @apply block w-full;
@@ -231,7 +226,7 @@ export default {
 .sentence--selected {
   @apply border-l;
   border-left-width: 3px;
-  padding-left: 4px;
+  padding-left: 5px;
   background-color: var(--color-selected);
   border-color: var(--color-normal);
 }
@@ -258,6 +253,21 @@ export default {
   width: 14px;
   transform: translate(-9px, -6px);
 } */
+.sentence--group:before {
+  @apply absolute top-0 inset-y-0;
+  @apply not-italic text-white;
+  @apply bg-brand-primary;
+  @apply px-px;
+  /* @apply flex justify-center text-center; */
+  @apply z-10;
+  content: "+";
+  font-size: 70%;
+  letter-spacing: -1px;
+  line-height: 22px;
+  height: 22px;
+  /* width: 14px; */
+  transform: translate(-8px, 0px);
+}
 
 /* .editor [class*="-1"] + [class*="-1"]:before,
 .editor [class*="-1"] + a [class*="-1"]:before,

@@ -1,9 +1,7 @@
 <template>
   <transition name="Modal">
     <div v-show="show" class="Modal-backdrop">
-      <div class="Modal">
-        <slot></slot>
-      </div>
+      <slot></slot>
     </div>
   </transition>
 </template>
@@ -13,9 +11,18 @@
 
 export default {
   props: {
-    show: { required: true },
-    preventBackgroundScrolling: { default: true },
-    info: { default: false },
+    show: {
+      type: Boolean,
+      required: true
+    },
+    preventBackgroundScrolling: {
+      type: Boolean,
+      default: true
+    },
+    info: {
+      type: Boolean,
+      default: false
+    },
   },
   watch: {
     show: {
@@ -67,33 +74,42 @@ export default {
 <style lang="postcss" scoped>
 .Modal-backdrop {
   @apply fixed inset-0 overflow-auto;
-  background-color: rgba(255, 255, 255, 1);
-  z-index: 99; /* below vue-headroom */
+  /* background-color: rgba(255, 255, 255, 1); */
+  /* background-color: rgba(49, 48, 45, 0.51); */
+  z-index: 99; /* below headroom */
 }
-
-.Modal {
-  /* @apply h-full; */
-  /* @apply bg-white; */
-}
-
 .Modal-close {
   @apply absolute inset-0 p-4 z-10 cursor-pointer;
 }
-
 .Modal-close:focus,
 .Modal-close:active {
   @apply outline-none;
 }
 
-/* Transition */
+
+
+/* TRANSITION */
 .Modal-enter-active,
 .Modal-leave-active {
-  transition: opacity 500ms cubic-bezier(0.19, 1, 0.22, 1);
+  transition: opacity 1000ms theme(bezier.thisalso);
 }
-
 .Modal-enter,
 .Modal-leave-to {
   @apply opacity-0;
   /* transform: scale(1.05); */
+}
+</style>
+
+<style lang="postcss">
+/* INFO THEME */
+.info-modal .Modal-backdrop {
+  @apply bg-scheme-bg-html;
+}
+.info-modal .Nav {
+  @apply border-brand-primary;
+}
+.info-modal .Title,
+.info-modal .Info-button {
+  @apply text-brand-primary;
 }
 </style>

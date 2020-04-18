@@ -54,3 +54,14 @@
   background-repeat: repeat-x;
   text-decoration: none;
 }
+@media (prefers-color-scheme: dark) {
+  .Link:not(.Button),
+  .Link-block a:not(.Button),
+  .Link--span span,
+  .Link--hoverSpan:hover span,
+  .nuxt-link-active span,
+  .nuxt-link-exact-active span {
+    background-image: linear-gradient(to right,rgba(255, 255, 255, 0.5) 100%,rgba(255, 255, 255, 0.5) 0);
+    background-image: url('data:image/svg+xml;utf8,<svg preserveAspectRatio="none" viewBox="0 0 1 1" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="0" x2="1" y2="1" stroke="rgba(255, 255, 255, 0.5)" /></svg>');
+  }
+}

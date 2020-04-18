@@ -1,20 +1,23 @@
 <template>
-  <div id="nav" class="pt-w6">
-    <nav class="Nav flex justify-between">
-      <router-link
-        to="/"
-        class="Title relative w-1/2"
-      >
-        <!-- <h1 :class="{ home: $route.name === 'home' }">Corvid Write</h1> -->
-        <h1 class="element" :class="{ home: $route.name === 'home' }">Write</h1>
-        <span class="element" :class="{ reply: $route.name !== 'home' }">
-          <icon name="arrow-back" class="mr-1" />
-          <span>Revise</span>
-        </span>
-      </router-link>
-      <NavBarInfo class="transform translate-y-1"></NavBarInfo>
-    </nav>
-  </div>
+  <nav id="nav" class="Nav flex justify-between">
+    <router-link
+      to="/"
+      class="Title relative w-1/2"
+    >
+      <!-- <h1 :class="{ home: $route.name === 'home' }">Corvid Write</h1> -->
+      <h1 class="element" :class="{ home: $route.name === 'home' }">
+        Write
+        <span
+          v-if="$store.state.timestamp && $store.state.selections.length < 1" class="Title-direction text-brand-primary font-normal"
+        >click to select…</span>
+      </h1>
+      <span class="element" :class="{ reply: $route.name !== 'home' }">
+        <icon name="arrow-back" class="mr-1" />
+        <span>Revise</span>
+      </span>
+    </router-link>
+    <NavBarInfo class="transform translate-y-1"></NavBarInfo>
+  </nav>
 </template>
 
 <script>
@@ -28,24 +31,24 @@ export default {
 </script>
 
 <style lang="postcss">
-#nav {
-  @apply relative;
-  z-index: 100;
-}
 .Nav {
-  @apply w-full border-b-2 border-black pb-4;
+  @apply relative z-100 w-full border-b-2 border-scheme-text-border pt-w6 pb-4;
 }
 
-.Title > .element {
+.Title .element {
   @apply absolute left-0 opacity-0 inline-block;
   transition:
-    opacity 200ms cubic-bezier(0.19, 1, 0.22, 1),
-    transform 750ms cubic-bezier(0.19, 1, 0.22, 1);
+    opacity 250ms theme(bezier.thisalso),
+    transform 1000ms theme(bezier.thisalso);
   transform: translateX(-5%);
 }
 .Title .home,
 .Title .reply {
   @apply opacity-100;
   transform: translateX(0);
+}
+
+.modal-is-active .Title-direction {
+  @apply opacity-0;
 }
 </style>

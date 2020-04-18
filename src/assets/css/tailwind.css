@@ -6,10 +6,9 @@
  */
 
 
-/* Tailwind base & components */
-@import "./tailwind/base.css";
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
 
-/* CFd standard components */
 @import "./theme/theme-color";
 @import "./theme/theme-fontface";
 
@@ -29,17 +28,14 @@
 @import "./element/element-button";
 @import "./element/element-form";
 @import "./element/element-icon";
+@import "./element/element-aria";
 
-/* CFd custom components */
-@import "./custom/custom-box";
-@import "./custom/custom-banner";
+/* @import "./custom/custom-box"; */
+/* @import "./custom/custom-banner"; */
 @import "./custom/custom-action-button";
-@import "./custom/custom-info-modal";
-@import "./theme/theme-modal";
-@import "./theme/theme-slider";
+/* @import "./custom/custom-info-modal"; */
+/* @import "./theme/theme-modal"; */
+/* @import "./theme/theme-slider"; */
 
 /* Tailwind utils */
-@import "./tailwind/utilities.css";
-
-/* CFd custom utils */
-@import "./element/element-aria";
+@import 'tailwindcss/utilities';
