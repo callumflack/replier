@@ -55,5 +55,10 @@
       "vue-cli-service lint",
       "git add"
     ]
-  }
+  },
+  "browserslist": [
+    ">1%",
+    "not ie 10",
+    "not op_mini all"
+  ]
 }
