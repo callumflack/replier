@@ -58,6 +58,7 @@ module.exports = {
       thisalso: "cubic-bezier(0.19, 1, 0.22, 1)",
     },
     screens: {
+      mobile: { max: "639px" },
       sm: '640px',
       md: '768px',
       lg: '1024px',
@@ -66,10 +67,10 @@ module.exports = {
     },
     /* Corresponding to breakpoints */
     responsiveScale: {
-      textXs: '0.8',
-      textSm: '0.9',
+      textXs: '0.857142857', // 14 > 12
+      textSm: '0.909090909',
       textMd: '1',
-      titleXs: '0.666',
+      titleXs: '0.842105263', // 19 > 16
       titleSm: '0.9',
       titleMd: '1',
       blockXs: '0.5',
@@ -122,7 +123,7 @@ module.exports = {
     spacing: {
       px: '1px',
       '2px': '2px',
-      'inset': '2rem',
+      'inset': 'var(--grid-inset)',
       0: '0',
       1: '0.25rem',
       2: '0.5rem',

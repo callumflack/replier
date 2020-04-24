@@ -164,14 +164,13 @@ export default {
   @apply text-brand-primary;
   /* margin-left: 1px; */
 }
-.Placeholder span {
+/* .Placeholder span {
   animation-name: blink;
   animation-duration: 1s;
   animation-iteration-count: infinite;
   animation-fill-mode: both;
   @apply w-px;
 }
-
 @keyframes blink {
   0% {
     opacity: 0;
@@ -188,7 +187,7 @@ export default {
   100% {
     opacity: 0;
   }
-}
+} */
 /*
 
   Unscoped styles for ProseMirror elements

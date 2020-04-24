@@ -102,6 +102,8 @@ export default {
 
 <style lang="postcss">
 /* INFO THEME */
+/* only applicable if using vue-portal */
+/* TODO: clean-up if ain't being used… */
 .info-modal .Modal-backdrop {
   @apply bg-scheme-bg-html;
 }

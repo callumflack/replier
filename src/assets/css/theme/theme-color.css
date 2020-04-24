@@ -30,8 +30,8 @@
   --lightness: 40%;
 
   /* alphas */
-  --alpha-hover: 0.2;
-  --alpha-selected: 0.1;
+  --alpha-hover: 0.3;
+  --alpha-selected: 0.15;
 
   /* merged */
   /* --color-normal: hsla(var(--hue), 100%, 50%, 1); */

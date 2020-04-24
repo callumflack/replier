@@ -4,6 +4,7 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 const defaultState = {
+  showInfoDialog: false,
   timestamp: null,
   editorState: null,
   selections: [],
@@ -17,6 +18,9 @@ const defaultState = {
 export default new Vuex.Store({
   state: Object.assign({}, defaultState),
   mutations: {
+    setInfoDialogState(state, showInfoDialog) {
+      state.showInfoDialog = showInfoDialog;
+    },
     setEditorState(state, editorState) {
       state.editorState = editorState;
     },

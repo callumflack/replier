@@ -1,6 +1,6 @@
 .container {
   /* @apply max-w-3xl; */ /* 48rem 768px */
-  @apply bg-scheme-bg;
+  @apply px-inset;
   max-width: 800px;
 }
 

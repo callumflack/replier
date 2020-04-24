@@ -1,35 +1,56 @@
 <template>
   <div id="app" class="Site">
     <div class="Site-content">
-      <div class="container bg-transparent">
-        <MessageBar>
-          <span class="font-bold">It's your data, not ours.</span>
-          We don't store anything you paste nor type here.
-          <span class="Link">Opt out of all tracking.</span>
-        </MessageBar>
-      </div>
-      <div class="container h-full">
+      <!-- MESSAGES -->
+      <Messages :class="{ 'invisible': showInfoDialog }"></Messages>
+
+      <!-- WRITE CONTAINER -->
+      <div
+        class="container h-full"
+        :class="`${ showInfoDialog ? 'bg-scheme-bg-html' : 'bg-scheme-bg'}`"
+      >
         <NavBar></NavBar>
+        <transition type="transition" name="dialog">
+          <div class="relative" v-show="showInfoDialog">
+            <Info key="1" class="absolute w-full"></Info>
+          </div>
+        </transition>
+
+        <!-- APP -->
         <transition-page>
-          <router-view />
+          <router-view :class="{ 'hidden': showInfoDialog }"></router-view>
         </transition-page>
       </div>
     </div>
+
+    <!-- MODALS -->
     <portal-target name="modals" multiple></portal-target>
   </div>
 </template>
 
 <script>
-import MessageBar from '@/components/MessageBar.vue';
+import Info from '@/components/Info';
+import Messages from '@/components/Messages.vue';
 import NavBar from '@/components/NavBar.vue';
 import TransitionPage from '@/components/TransitionPage.vue';
 
 export default {
   components: {
-    MessageBar,
+    Info,
+    Messages,
     NavBar,
     TransitionPage,
   },
+  computed: {
+    showInfoDialog() {
+      return this.$store.state.showInfoDialog;
+    },
+  },
+  // head: {
+  //   script: [
+  //     { src: "https://js.stripe.com/v3/" } // Used for the donation button
+  //   ]
+  // }
 };
 </script>
 
@@ -51,5 +72,16 @@ export default {
   to inherit this elements height */
   @apply h-px min-h-screen;
   @apply flex-1;
+}
+
+/* TRANSITION */
+.dialog-enter-active,
+.dialog-leave-active {
+  transition: opacity 750ms theme(bezier.thisalso);
+}
+.dialog-enter,
+.dialog-leave-to {
+  @apply opacity-0;
+  /* transform: scale(1.05); */
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
-  <div class="container bg-transparent pb-w5 info-block">
-    <div class="px-w4">
-      <vue-markdown class="Markdown" :source="copy"></vue-markdown>
+  <div class="container py-w5 px-inset">
+    <div class="px-inset">
+      <vue-markdown class="Markdown Link-block" :source="copy"></vue-markdown>
     </div>
   </div>
 </template>
@@ -19,7 +19,9 @@ export default {
       copy: `
 ## What is Write?
 
-Corvid Write helps you reply to your friends, clients, colleagues and collaborators by choosing only what's most important in the conversation. It removes the superfluous and helps you avoid losing important information to the vortex of chat messages and email chains.
+Write helps you reply to friends, clients, colleagues and collaborators by choosing only what's important in the conversation.
+
+It removes the superfluous, creates focus and helps you avoid losing important information to the vortex of chat messages and email chains.
 
 We also give you custom formatted responses to paste into for your favourite project management apps. So it's clear who said what.
 
@@ -32,7 +34,7 @@ We also give you custom formatted responses to paste into for your favourite pro
 
 ## Who made it?
 
-[Jeremy](https://jackywinter.com), [Callum](https://callumflack.design) &amp; Barry.
+[Jeremy](https://jackywinter.com), [Callum](https://callumflack.design) &amp; [Barry](https://barryph.com/blog/).
 
 <small>Version 0.0.2 2020-04-18</small>`
       /* eslint-enable max-len */

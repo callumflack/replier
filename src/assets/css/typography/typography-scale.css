@@ -2,6 +2,7 @@
 
 :root {
   --viewport-basis: 414;
+  --grid-inset: 24px;
   --messagebar-height: 61px;
   --info-block-position: 205px; /* pt-w8 ? */
   --text-ratio: theme(responsiveScale.textXs);
@@ -19,6 +20,7 @@
 @screen lg {
   :root {
     --viewport-basis: 1024;
+    --grid-inset: 32px;
     --text-ratio: theme(responsiveScale.textMd);
     --title-ratio: theme(responsiveScale.titleMd);
     --space-ratio: theme(responsiveScale.spaceMd);
@@ -26,8 +28,6 @@
 }
 @screen 2xl {
   :root {
-    --viewport-basis: 1680;
-    --text-ratio: theme(responsiveScale.textRg);
-    --heading-ratio: theme(responsiveScale.headingRg);
+    --viewport-basis: 2080;
   }
 }
