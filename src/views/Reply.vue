@@ -75,10 +75,16 @@
           </p>
           <hr class="my-4" />
           <div class="flex pt-1">
-            <button class="mr-2 w-1/2 font-title font-semibold Button" @click="resetState">
+            <button
+              class="mr-2 w-1/2 font-title font-semibold Button Button--black"
+              @click="resetState"
+            >
               Start again
             </button>
-            <button class="ml-2 w-1/2 font-title font-semibold Button Button--outline" @click="dismiss">
+            <button
+              class="ml-2 w-1/2 font-title font-semibold Button"
+              @click="dismiss"
+            >
               Keep editing
             </button>
           </div>

@@ -10,20 +10,35 @@
         :class="{ 'Button--active': showDialog }"
       ></DonationButton>
     </div>
+    <!-- NAV: R LOGO + L INFO -->
     <router-link
       to="/"
-      class="Title relative w-1/2"
+      class="Title relative w-1/2 lg:w-2/3"
     >
-      <h1
+      <span
         class="element"
         :class="{ home: $route.name === 'home', 'text-brand-primary': showDialog }"
       >
-        Write
+        <!-- LOGO -->
+        <h1 class="inline mr-2">Write</h1>
+        <!-- directions after pasting -->
         <span
-          v-if="$store.state.timestamp && $store.state.selections.length < 1" class="Title-direction text-brand-primary font-normal mobile:hidden"
+          v-if="$store.state.timestamp"
+          class="Text-sm font-semibold text-brand-primary font-normal mobile:hidden"
           :class="{ invisible: showDialog }"
-        >click to select…</span>
-      </h1>
+        >
+          <template v-if="$store.state.selections.length === 0">
+            Click to select…
+          </template>
+          <template v-if="$store.state.selections.length > 0 && $store.state.selections.length < 3">
+            Click + command to select multiples…
+          </template>
+          <template v-if="$store.state.selections.length === 3">
+            Well done!
+          </template>
+        </span>
+      </span>
+      <!-- REVISE -->
       <span
         class="element"
         :class="{ reply: $route.name !== 'home', 'text-brand-primary': showDialog }"
@@ -32,6 +47,7 @@
         <span>Revise</span>
       </span>
     </router-link>
+    <!-- L: INFO -->
     <NavBarInfo class="transform translate-y-1"></NavBarInfo>
   </nav>
 </template>
@@ -102,7 +118,7 @@ export default {
   box-shadow: theme(colors.brand.primary) 0 0 0 var(--button-box-shadow-stroke-hover);
 }
 
-.modal-is-active .Title-direction {
+/* .modal-is-active .Title-direction {
   @apply opacity-0;
-}
+} */
 </style>

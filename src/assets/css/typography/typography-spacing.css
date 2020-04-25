@@ -9,20 +9,20 @@
 .Markdown figure,
 .Space-block > *:not(:last-child),
 .Space {
-  @apply mb-w1;
+  @apply mb-2;
 }
 .Space-t {
-  @apply mt-w1;
+  @apply mt-2;
 }
 .Space-y {
-  @apply my-w1;
+  @apply my-2;
 }
 .Markdown h1:not(:last-child),
 .Markdown h2:not(:last-child),
 .Markdown h3:not(:last-child),
 .Markdown h4:not(:last-child),
 .Markdown h5:not(:last-child) {
-  @apply mb-w1;
+  @apply mb-2;
 }
 .Markdown h1:not(:first-child),
 .Markdown h2:not(:first-child),
@@ -30,5 +30,5 @@
 .Markdown h4:not(:first-child),
 .Markdown h5:not(:first-child),
 .Markdown small {
-  @apply mt-w3;
+  @apply mt-w2;
 }

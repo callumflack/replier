@@ -1,10 +1,10 @@
 <template>
   <div>
-    <span v-if="!showDialog" class="Timestamp Text-xs font-title font-medium mr-2">
+    <span v-if="!showDialog" class="Timestamp Text-xs font-title font-semibold mr-2">
       {{ $store.state.timestamp }}
     </span>
     <button
-      class="Info-button Text-xs font-title font-medium"
+      class="Info-button Text-xs font-title font-semibold"
       :class="{ 'text-brand-primary': showDialog }"
       ref="infoIcon"
       @click.prevent="active"

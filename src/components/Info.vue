@@ -1,8 +1,6 @@
 <template>
   <div class="container py-w5 px-inset">
-    <div class="px-inset">
-      <vue-markdown class="Markdown Link-block" :source="copy"></vue-markdown>
-    </div>
+    <vue-markdown class="Markdown Link-block" :source="copy"></vue-markdown>
   </div>
 </template>
 

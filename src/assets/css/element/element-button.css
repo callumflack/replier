@@ -27,7 +27,7 @@
   --button-box-shadow-stroke-inset: 1px;
   --button-disabled-opacity: 0.6;
   --button-font-case: initial;
-  --button-font-weight: 500;
+  --button-font-weight: 600;
   --button-height: 44px;
   --button-inline-spacing: 0;
   --button-padding-x: 2em;
@@ -207,6 +207,12 @@ textarea.Input {
 .Button--white {
   --button-color: theme(colors.black);
   --button-invert-color: theme(colors.white);
+}
+
+.Button--black {
+  --button-color: var(--scheme-bg);
+  --button-bg-color: var(--scheme-text);
+  --button-invert-color: var(--scheme-text);
 }
 
 .ButtonComplex .Button--outline,
