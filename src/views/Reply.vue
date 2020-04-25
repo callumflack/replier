@@ -273,7 +273,7 @@ export default {
   --min-height: 90px;
   min-height: var(--min-height);
   height: var(--min-height);
-  @apply font-title font-normal text-black leading-relaxed;
+  @apply font-title font-normal text-scheme-text leading-relaxed;
   @apply bg-transparent;
   /* @apply border border-gray-light; */
   /* font-size: calc(theme(fontSize.xl) * var(--text-ratio) - 1px); */
