@@ -22,7 +22,8 @@ exports.handler = async function() {
     // ],
     items: [
       {
-        sku: 'sku_H9hlmTOYXeeC8k',
+        // sku: 'sku_H9hlmTOYXeeC8k',
+        sku: 'sku_HA2ZsTlYVOHV2n', // TEST
         // name: "Donation",
         // amount: 200,
         // currency: "AUD",
