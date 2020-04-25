@@ -11,23 +11,23 @@ exports.handler = async function() {
   const session = await stripe.checkout.sessions.create({
     submit_type: 'donate',
     payment_method_types: ["card"],
-    line_items: [
-      {
-        name: "Donation",
-        amount: 200,
-        currency: "AUD",
-        quantity: 1,
-      },
-    ],
-    // items: [
+    // line_items: [
     //   {
-    //     sku: 'sku_H9hlmTOYXeeC8k',
-    //     // name: "Donation",
-    //     // amount: 200,
-    //     // currency: "AUD",
-    //     quantity: 1
-    //   }
+    //     name: "Donation",
+    //     amount: 200,
+    //     currency: "AUD",
+    //     quantity: 1,
+    //   },
     // ],
+    items: [
+      {
+        sku: 'sku_H9hlmTOYXeeC8k',
+        // name: "Donation",
+        // amount: 200,
+        // currency: "AUD",
+        quantity: 1
+      }
+    ],
 
     // Do not rely on the redirect to the successUrl for fulfilling
     // purchases, customers may not always reach the success_url after
