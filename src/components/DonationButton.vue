@@ -10,7 +10,8 @@
 export default {
   methods: {
     async handleClick() {
-      const stripe = Stripe(process.env.STRIPE_PUBLISHABLE_KEY);
+      // const stripe = Stripe(process.env.STRIPE_PUBLISHABLE_KEY);
+      const stripe = Stripe("pk_test_DAddKTtCLuVq2utH4ANloAO5");
       const response = await fetch("/.netlify/functions/donation");
       const json = await response.json();
       await stripe.redirectToCheckout({
