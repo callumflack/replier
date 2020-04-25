@@ -6,7 +6,7 @@
 */
 
 .Link {
-  @apply text-brand-primary;
+  /* @apply text-brand-primary; */
 }
 
 .Link--underline {
@@ -16,7 +16,7 @@
 
 /* LINK BLOCKS */
 
-.Link-block a:not(.Button) {
+/* .Link-block a:not(.Button) {
   transition: color 250ms ease;
 }
 .Link-block a:not(.Button):hover {
@@ -30,4 +30,38 @@
 }
 .Link-underline-block a:not(.Button):hover {
   @apply text-black border-black;
+} */
+
+/*
+
+  OLD MEDIUM STYLE
+  See: https://medium.design/crafting-link-underlines-on-medium-7c03a9274f9
+  And: https://codepen.io/ghepting/pen/tLnHK/
+
+  Also: text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+ */
+
+.Link:not(.Button),
+.Link-block a:not(.Button),
+.Link--span span,
+.Link--hoverSpan:hover span,
+.nuxt-link-active span,
+.nuxt-link-exact-active span {
+  background-position: 0 calc(1em + 3px);
+  background-size: 1px 1px;
+  background-image: linear-gradient(to right,rgba(0, 0, 0, 0.5) 100%,rgba(0, 0, 0, 0.5) 0);
+  background-image: url('data:image/svg+xml;utf8,<svg preserveAspectRatio="none" viewBox="0 0 1 1" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="0" x2="1" y2="1" stroke="rgba(0, 0, 0, 0.5)" /></svg>');
+  background-repeat: repeat-x;
+  text-decoration: none;
+}
+@media (prefers-color-scheme: dark) {
+  .Link:not(.Button),
+  .Link-block a:not(.Button),
+  .Link--span span,
+  .Link--hoverSpan:hover span,
+  .nuxt-link-active span,
+  .nuxt-link-exact-active span {
+    background-image: linear-gradient(to right,rgba(255, 255, 255, 0.5) 100%,rgba(255, 255, 255, 0.5) 0);
+    background-image: url('data:image/svg+xml;utf8,<svg preserveAspectRatio="none" viewBox="0 0 1 1" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="0" x2="1" y2="1" stroke="rgba(255, 255, 255, 0.5)" /></svg>');
+  }
 }

@@ -14,10 +14,10 @@
  */
 
 :root {
-  --button-color: theme(colors.white);
-  --button-invert-color: theme(colors.black);
-  --button-bg-color: var(--button-invert-color);
-  --button-bg-color-hover: var(--button-invert-color);
+  --button-color: var(--scheme-text);
+  --button-invert-color: var(--scheme-text);
+  --button-bg-color: transparent;
+  --button-bg-color-hover: transparent;
   --button-border-color: var(--button-invert-color);
   --button-border-width: 1px;
   --button-border-radius: 2px;
@@ -27,12 +27,19 @@
   --button-box-shadow-stroke-inset: 1px;
   --button-disabled-opacity: 0.6;
   --button-font-case: initial;
-  --button-font-weight: 500;
+  --button-font-weight: 600;
   --button-height: 44px;
   --button-inline-spacing: 0;
   --button-padding-x: 2em;
   --input-placeholder-color: theme(colors.text);
 }
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --button-bg-color: theme(colors.scheme.bg);
+    --button-border-color: theme(colors.scheme.text-border);
+    --button-box-shadow-color: theme(colors.scheme.text);
+  }
+} */
 
 .Input,
 .Button {
@@ -56,6 +63,8 @@
   position: relative;
   text-decoration: none;
   text-transform: var(--button-font-case);
+}
+.Button {
   user-select: none;
 }
 
@@ -69,10 +78,18 @@
 .Button:hover,
 .Button:focus,
 .Button:active {
-  --button-bg-color: var(--button-bg-color-hover);
+  /* --button-bg-color: var(--button-bg-color-hover); */
   outline: 0;
   text-decoration: none;
 }
+/* @media (prefers-color-scheme: dark) {
+  .Button:hover,
+  .Button:focus,
+  .Button:active {
+    --button-bg-color: theme(colors.scheme.bg);
+    --button-border-color: theme(colors.scheme.text);
+  }
+} */
 
 .ButtonComplex:hover .Button,
 .Button:hover {
@@ -109,7 +126,6 @@ button:disabled {
 
   Input
   Same styles as .Button with minor differences
-  1. Let inputs *input*…
 
  */
 
@@ -121,7 +137,6 @@ button:disabled {
   --button-font-weight: 400;
   /* unlike buttons, inputs are full width */
   @apply w-full cursor-text leading-normal;
-  user-select: text; /* 1 */
 }
 
 .Input::placeholder {
@@ -157,11 +172,10 @@ textarea.Input {
  */
 
 .Button--sm {
-  --button-height: 28px;
+  --button-height: 25px;
   --button-padding-x: 0.75em;
-  padding-bottom: calc((1.5 / 15) * 1em);
+  /* padding-bottom: calc((1.5 / 15) * 1em); */
 }
-
 .Button--lg {
   --button-height: 60px;
   --button-padding-x: 1.5em;
@@ -193,6 +207,12 @@ textarea.Input {
 .Button--white {
   --button-color: theme(colors.black);
   --button-invert-color: theme(colors.white);
+}
+
+.Button--black {
+  --button-color: var(--scheme-bg);
+  --button-bg-color: var(--scheme-text);
+  --button-invert-color: var(--scheme-text);
 }
 
 .ButtonComplex .Button--outline,

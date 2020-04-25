@@ -1,43 +1,40 @@
 <template>
-  <div class="container max-w-3xl Block">
-    <div class="container-inset pt-1 text-scope">
-      <h1
-        class="Subtitle s-p"
-      >{{ thisTitle }}</h1>
-      <p class="s-p">{{ thisOne }}</p>
-      <p class="s-p">{{ thisTwo }}</p>
-      <h2
-        class="Subtitle s-p st-2xh"
-      >{{ howTitle }}</h2>
-      <ol>
-        <li class="s-p">{{ howOne }}</li>
-        <li class="s-p">{{ howTwo }}</li>
-        <li class="s-2xh">{{ howThree }}</li>
-      </ol>
-      <p class="Text-xs text-gray-mid">{{ version }}</p>
-    </div>
+  <div class="container py-w5 px-inset">
+    <vue-markdown class="Markdown Link-block" :source="copy"></vue-markdown>
   </div>
 </template>
 
 <script>
+import VueMarkdown from 'vue-markdown';
+
 export default {
-  components: {},
-  props: [],
+  components: {
+    VueMarkdown,
+  },
   data() {
     return {
-      thisTitle: 'What is this?',
       /* eslint-disable max-len */
-      thisOne:
-          "Corvid Write helps you reply to your project collaborators by choosing only what's most important in the conversation. It removes the superfluous and helps avoid important info falling through the cracks.",
-      thisTwo:
-          "We also give you custom formatted responses to paste into for your favourite project management apps. So it's clear who said what.",
-      howTitle: 'How does it work?',
-      howOne: 'Click on the line you wish to reply to.',
-      howTwo:
-          'Select multiple sentences by holding `command` while you click.',
-      howThree:
-          'Choose to export to Gmail, Slack or Basecamp.',
-      version: 'Version 0.0.1 2019-10-01',
+      copy: `
+## What is Write?
+
+Write helps you reply to friends, clients, colleagues and collaborators by choosing only what's important in the conversation.
+
+It removes the superfluous, creates focus and helps you avoid losing important information to the vortex of chat messages and email chains.
+
+We also give you custom formatted responses to paste into for your favourite project management apps. So it's clear who said what.
+
+## How does it work?
+
+1. Click on the line you wish to reply to.
+2. Select multiple sentences by holding "command" while you click.
+3. Hit the reply button and write your replies.
+4. Choose to export to Gmail, Slack or Basecamp.
+
+## Who made it?
+
+[Jeremy](https://jackywinter.com), [Callum](https://callumflack.design) &amp; [Barry](https://barryph.com/blog/).
+
+<small>Version 0.0.2 2020-04-18</small>`
       /* eslint-enable max-len */
     };
   },
@@ -45,20 +42,27 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-.Block {
-  margin-top: calc(theme(spacing.40) * var(--block-size-ratio));
-  margin-bottom: calc(theme(spacing.24) * var(--block-size-ratio));
+/* presumed to be within the info modal */
+.Markdown >>> h1,
+.Markdown >>> h2 {
+  @apply text-scheme-text;
 }
+.Markdown >>> p,
+.Markdown >>> ol {
+  @apply text-scheme-text-gray;
+}
+.Markdown >>> small {
+  @apply opacity-50;
+}
+</style>
 
-/*
-  Scoped to css vars under `custom-info-modal.css`
- */
-.text-scope h1,
-.text-scope h2 {
-  color: var(--info-modal-text);
+<style lang="postcss">
+/* MODAL POSITIONS */
+.info-block {
+  padding-top: var(--info-block-position);
 }
-.text-scope p,
-.text-scope ol {
-  color: var(--info-modal-text-light);
+/* avoid any padding-top transitions */
+.messagebar-is-active .info-block {
+  transform: translateY(var(--messagebar-height));
 }
 </style>

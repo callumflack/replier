@@ -1,6 +1,6 @@
 <template>
-  <div class="container max-w-3xl relative">
-    <Editor class="editor" :editor.sync="editor" />
+  <div class="relative">
+    <Editor class="editor py-w5 px-inset" :editor.sync="editor" />
 
     <div
       class="ActionButton"
@@ -68,7 +68,7 @@ export default {
 
 .aside-map {
   @apply absolute top-0 right-0;
-  transform: translateX(100%);
+  transform: translateX(144%);
   width: 150px;
 }
 .aside-map p {

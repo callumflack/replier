@@ -3,35 +3,48 @@
 
 const blueLight = '#00CDFB';
 // const hue = '211';
-const hue = '36';
+const hue = '39';
+// const saturation = '100';
+// const lightness = '40';
 
 module.exports = {
   prefix: '',
   important: false,
   separator: ':',
+  hsl: {
+    hue: '39',
+    saturation: '100%',
+    lightness: '40%',
+  },
   theme: {
     colors: {
       transparent: 'transparent',
-      white: '#fff',
-      black: 'rgb(55,53,47)',
+      white: '#fdfdfd',
+      black: 'rgb(49, 48, 45)',
+      blackgray: 'rgba(49, 48, 45, 0.6)',
+      scheme: {
+        text: "var(--scheme-text)",
+        "text-gray": "var(--scheme-text-gray)",
+        "text-border": "var(--scheme-text-border)",
+        border: "var(--scheme-border)",
+        bg: "var(--scheme-bg)",
+        "bg-html": "var(--scheme-bg-html)",
+        "bg-tint": "var(--scheme-bg-tint)",
+        "bg-dark": "var(--scheme-bg-dark)",
+      },
       brand: {
-        // primary: blueLight,
-        // primary: '#00A7FF',
-        // primary: 'hsl(201, 100%, 50%)',
-        // primary: 'hsl(214, 100%, 50%)',
-        // primary: `hsl(${hue}, 100%, 50%)`,
-        primary: `hsl(${hue}, 100%, 33%)`, // brown HSL
-        // primary: 'rgb(166, 101, 1)', // brown
+        // primary: `hsl(36, 100%, 33%)`, // brown HSL original
+        primary: `hsl(44, 100%, 40%)`, // brown HSL
+        primarys: `44, 100%, 40%`, // brown HSL values
+        // primary: `hsl(272, 80%, 46%)`, // brown HSL
+        complement: `hsl(${hue}, 100%, 40%)`, // brown HSL
         blue: '#1b495a',
         blueneutral: '#f1f2f3',
         bluelight: blueLight,
         neutral: '#f4f2f0',
       },
-      group: {
-        2: 'hsl(110, 63%, 43%)',
-        3: 'hsl(179, 63%, 43%)',
-      },
       gray: {
+        lightest: 'rgba(0,0,0,0.03)',
         light: 'rgba(0,0,0,0.1)',
         mid: '#bbb',
         dark: '#858585',
@@ -41,9 +54,76 @@ module.exports = {
         bad: '#e53e3e',
       },
     },
+    bezier: {
+      thisalso: "cubic-bezier(0.19, 1, 0.22, 1)",
+    },
+    screens: {
+      mobile: { max: "639px" },
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1440px',
+      "2xl": "1920px"
+    },
+    /* Corresponding to breakpoints */
+    responsiveScale: {
+      textXs: '0.857142857', // 14 > 12
+      textSm: '0.909090909',
+      textMd: '1',
+      titleXs: '0.842105263', // 19 > 16
+      titleSm: '0.9',
+      titleMd: '1',
+      blockXs: '0.5',
+      blockSm: '0.7',
+      blockMd: '1',
+      spaceXs: '1',
+      spaceSm: '1',
+      spaceMd: '1',
+      gridXs: '0.5',
+      gridSm: '0.9',
+      gridMd: '1',
+    },
+    fontSize: {
+      xs: '11px',
+      sm: '14px',
+      base: '15px',
+      lg: '17px',
+      xl: '18px',
+      '2xl': '19px',
+      '3xl': '21px',
+      '4xl': '24px',
+      '5xl': '36px',
+      '6xl': '44px',
+      '7xl': '64px',
+    },
+    lineHeight: {
+      title: '0.85',
+      none: '1',
+      tight: '1.2',
+      snug: '1.375',
+      reduced: '1.42861',
+      normal: '1.47059',
+      relaxed: '1.625',
+      loose: '2',
+      nav: '4.5',
+    },
+    letterSpacing: {
+      tighter: '-0.05em',
+      tight: '-0.0125em',
+      normal: '0',
+      subtitle: '0.02em',
+      wide: '0.025em',
+      wider: '0.05em',
+      widest: '0.1em',
+    },
+    container: {
+      center: true,
+      padding: '2rem',
+    },
     spacing: {
       px: '1px',
       '2px': '2px',
+      'inset': 'var(--grid-inset)',
       0: '0',
       1: '0.25rem',
       2: '0.5rem',
@@ -64,97 +144,17 @@ module.exports = {
       56: '14rem',
       64: '16rem',
       96: '24rem',
-    },
-    screens: {
-      sm: '640px',
-      md: '768px',
-      lg: '1040px',
-      xl: '1408px',
-    },
-    fontFamily: {
-      title: [
-        'IBMPlexMono',
-        'Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace',
-      ],
-      sans: [
-        'Graphik',
-        '-apple-system',
-        'BlinkMacSystemFont',
-        '"Segoe UI"',
-        'Roboto',
-        '"Helvetica Neue"',
-        'Arial',
-        '"Noto Sans"',
-        'sans-serif',
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"',
-        '"Noto Color Emoji"',
-      ],
-      serif: ['Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
-      mono: ['Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace'],
-    },
-    fontSize: {
-      xs: '0.6875rem', // 11 or 12
-      sm: '0.875rem', // 14
-      base: '0.9375rem', // 15
-      lg: '1.0625rem', // 17
-      xl: '1.125rem', // 18
-      '2xl': '1.25rem',
-      '3xl': '1.3125rem',
-      '4xl': '2.25rem',
-      '5xl': '2.75rem',
-      '6xl': '4rem',
-      '7xl': '5rem',
-    },
-    /* Corresponding to breakpoints */
-    responsiveScale: {
-      textXs: '0.8',
-      textSm: '0.9',
-      textMd: '1',
-      titleXs: '0.666',
-      titleSm: '0.9',
-      titleMd: '1',
-      blockXs: '0.5',
-      blockSm: '0.7',
-      blockMd: '1',
-      spaceXs: '1',
-      spaceSm: '1',
-      spaceMd: '1',
-      gridXs: '0.5',
-      gridSm: '0.9',
-      gridMd: '1',
-    },
-    fontWeight: {
-      hairline: '100',
-      thin: '200',
-      light: '300',
-      normal: '400',
-      medium: '500',
-      semibold: '600',
-      bold: '700',
-      extrabold: '800',
-      black: '900',
-    },
-    lineHeight: {
-      title: '0.85',
-      none: '1',
-      tight: '1.2',
-      snug: '1.375',
-      reduced: '1.42861',
-      normal: '1.47059',
-      relaxed: '1.625',
-      loose: '2',
-      nav: '4.5',
-    },
-    letterSpacing: {
-      tighter: '-0.05em',
-      tight: '-0.0125em',
-      normal: '0',
-      subtitle: '0.02em',
-      wide: '0.0333em',
-      wider: '0.05em',
-      widest: '0.1em',
+      w1: "calc(8 / var(--viewport-basis) * 100vw)",
+      w2: "calc(16 / var(--viewport-basis) * 100vw)",
+      w3: "calc(24 / var(--viewport-basis) * 100vw)",
+      w4: "calc(32 / var(--viewport-basis) * 100vw)",
+      w5: "calc(40 / var(--viewport-basis) * 100vw)",
+      w6: "calc(60 / var(--viewport-basis) * 100vw)",
+      w7: "calc(120 / var(--viewport-basis) * 100vw)",
+      w8: "calc(160 / var(--viewport-basis) * 100vw)",
+      w9: "calc(240 / var(--viewport-basis) * 100vw)",
+      w10: "calc(320 / var(--viewport-basis) * 100vw)",
+      w11: "calc(560 / var(--viewport-basis) * 100vw)",
     },
     textColors: theme => ({
       ...theme('colors'),
@@ -172,9 +172,50 @@ module.exports = {
       75: '0.75',
       100: '1',
     },
-    container: {
-      center: true,
-      padding: '2rem',
+    zIndex: {
+      auto: "auto",
+      "0": "0",
+      "10": "10",
+      "20": "20",
+      "30": "30",
+      "40": "40",
+      "50": "50",
+      "100": "100"
+    },
+    fontFamily: {
+      title: [
+        'IBMPlexMono',
+        'Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace',
+      ],
+      sans: [
+        // 'Graphik',
+        'IBMPlexSans',
+        '-apple-system',
+        'BlinkMacSystemFont',
+        '"Segoe UI"',
+        'Roboto',
+        '"Helvetica Neue"',
+        'Arial',
+        '"Noto Sans"',
+        'sans-serif',
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"',
+        '"Noto Color Emoji"',
+      ],
+      serif: ['Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
+      mono: ['Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace'],
+    },
+    fontWeight: {
+      hairline: '100',
+      thin: '200',
+      light: '300',
+      normal: '400',
+      medium: '500',
+      semibold: '600',
+      bold: '700',
+      extrabold: '800',
+      black: '900',
     },
   },
   corePlugins: {

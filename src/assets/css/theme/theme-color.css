@@ -7,18 +7,100 @@
 
 :root {
   /* hues */
-  /* --hue: 211; */ /* Blue */
-  --hue: 36; /* Brown */
-  --accent-hue: 25; /* Orange */
+  --hue: 200; /* Blue */
+  --hue: 211; /* Blue */
+  --accent-hue: 25; /* orange */
+
+  /* yellwo */
+  --hue: 45;
+  --saturation: 80%;
+  --lightness: 50%;
+
+  /* browns */
+  --hue: 36;
+  --saturation: 100%;
+  --lightness: 33%;
+
+  --hue: 33;
+  --saturation: 89%;
+  --lightness: 42%;
+
+  --hue: 34;
+  --saturation: 100%;
+  --lightness: 40%;
 
   /* alphas */
   --alpha-hover: 0.3;
-  --alpha-selected: 0.125;
+  --alpha-selected: 0.15;
 
   /* merged */
   /* --color-normal: hsla(var(--hue), 100%, 50%, 1); */
-  --color-normal: hsla(var(--hue), 100%, 33%, 1);
-  --color-hover: hsla(var(--hue), 100%, 33%, var(--alpha-hover));
-  --color-selected: hsla(var(--hue), 100%, 33%, var(--alpha-selected));
   /* --color-highlight: hsl(var(--accent-hue), 70%, 45%); */
+  /* --color-normal: hsla(var(--hue), 100%, 33%, 1);
+  --color-hover: hsla(var(--hue), 100%, 33%, var(--alpha-hover));
+  --color-selected: hsla(var(--hue), 100%, 33%, var(--alpha-selected)); */
+  /* --color-normal: hsla(var(--hue), var(--saturation), var(--lightness), 1);
+  --color-hover: hsla(var(--hue), var(--saturation), var(--lightness), var(--alpha-hover));
+  --color-selected: hsla(var(--hue), var(--saturation), var(--lightness), var(--alpha-selected)); */
+  --color-normal: hsla(theme(colors.brand.primarys), 1);
+  --color-hover: hsla(theme(colors.brand.primarys), var(--alpha-hover));
+  --color-selected: hsla(theme(colors.brand.primarys), var(--alpha-selected));
 }
+
+/*
+
+  COLOR SCHEMES for day & night
+
+  CSS media query:
+  * https://www.bram.us/2019/05/23/css-color-scheme-queries-dark-mode-css/#how
+  * https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme#Examples
+
+  Switch button:
+  * https://dev.to/denisnutiu/simple-dark-theme-switch-with-vue-js-59hp
+
+ */
+
+:root {
+  color-scheme: light dark;
+  --scheme-text: theme(colors.black);
+  --scheme-text-gray: theme(colors.blackgray);
+  --scheme-text-border: theme(colors.black);
+  --scheme-border: rgba(0,0,0,0.1);
+  --scheme-bg: theme(colors.white);
+  --scheme-bg-html: #F5F5F5;
+  --scheme-bg-tint: rgba(0,0,0,0.03);
+  --scheme-bg-dark: theme(colors.black);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --scheme-text: #ccc;
+    --scheme-text-gray: rgba(255,255,255,0.5);
+    --scheme-text-border: rgba(255,255,255,0.5);
+    --scheme-border: rgba(255,255,255,0.1);
+    --scheme-bg: #2d2d2d;
+    --scheme-bg-html: #1d1d1d;
+    --scheme-bg-tint: rgba(0,0,0,0.15);
+    --scheme-bg-dark: theme(colors.black);
+  }
+}
+
+/* FAILS */
+.test {
+  color: hsl(theme(hsl.hue), theme(hsl.saturation), theme(hsl.lightness));
+}
+
+/*
+
+  Another color schema method
+  See: https://medium.com/@mwichary/dark-theme-in-a-day-3518dde2955a
+
+*/
+
+html[data-theme='dark'] {
+  --hue: 210; /* Blue */
+  --accent-hue: 25; /* Orange */
+  --text-color-normal: hsl(var(--hue), 10%, 62%);
+  --text-color-highlight: hsl(var(--accent-hue), 70%, 45%);
+}
+
+/* blue: hsl(201, 100%, 50%) or #00A7FF */

@@ -1,50 +1,124 @@
 <template>
-  <div id="nav" class="container max-w-3xl Block-md-t Block-sm-b">
-    <nav class="Nav flex justify-between">
-      <router-link
-        to="/"
-        class="Title relative w-2/3"
+  <nav
+    id="nav"
+    class="Nav flex justify-between"
+    :class="{ 'border-brand-primary': showDialog }"
+  >
+    <div class="pos-button">
+      <DonationButton
+        class="Button--sm Text-xs"
+        :class="{ 'Button--active': showDialog }"
+      ></DonationButton>
+    </div>
+    <!-- NAV: R LOGO + L INFO -->
+    <router-link
+      to="/"
+      class="Title relative w-1/2 lg:w-2/3"
+    >
+      <span
+        class="element"
+        :class="{ home: $route.name === 'home', 'text-brand-primary': showDialog }"
       >
-        <span :class="{ home: $route.name === 'home' }">Corvid Write</span>
-        <span :class="{ reply: $route.name !== 'home' }">
-          <icon name="arrow-back" class="mr-1" />
-          <span>Revise selection</span>
+        <!-- LOGO -->
+        <h1 class="inline mr-2">Write</h1>
+        <!-- directions after pasting -->
+        <span
+          v-if="$store.state.timestamp"
+          class="Text-sm font-semibold text-brand-primary font-normal mobile:hidden"
+          :class="{ invisible: showDialog }"
+        >
+          <template v-if="$store.state.selections.length === 0">
+            Click to select…
+          </template>
+          <template v-if="$store.state.selections.length > 0 && $store.state.selections.length < 3">
+            Click + command to select multiples…
+          </template>
+          <template v-if="$store.state.selections.length === 3">
+            Well done!
+          </template>
         </span>
-      </router-link>
-      <NavBarInfo class="mt-px"></NavBarInfo>
-    </nav>
-  </div>
+      </span>
+      <!-- REVISE -->
+      <span
+        class="element"
+        :class="{ reply: $route.name !== 'home', 'text-brand-primary': showDialog }"
+      >
+        <icon name="arrow-back" class="mr-1" />
+        <span>Revise</span>
+      </span>
+    </router-link>
+    <!-- L: INFO -->
+    <NavBarInfo class="transform translate-y-1"></NavBarInfo>
+  </nav>
 </template>
 
 <script>
-import NavBarInfo from '@/components/NavBarInfo.vue';
+import DonationButton from "@/components/DonationButton";
+import NavBarInfo from '@/components/NavBarInfo2';
 
 export default {
   components: {
+    DonationButton,
     NavBarInfo,
   },
+  computed: {
+    showDialog() {
+      return this.$store.state.showInfoDialog;
+    },
+  },
+  // if using portal for modal
+  // data: () => ({
+  //   modalActive: false
+  // }),
+  // methods: {
+  //   infoModalActive() {
+  //     this.modalActive = !this.modalActive;
+  //     this.$emit('info-modal-active');
+  //   }
+  // }
 };
 </script>
 
 <style lang="postcss">
-#nav {
-  @apply relative;
-  z-index: 100;
-}
 .Nav {
-  @apply w-full border-b-2 border-black pb-4;
+  @apply relative z-100 w-full border-b-2 border-scheme-text-border pt-w6 pb-4;
 }
 
-.Title > span {
+.Button--sm.Text-xs {
+  /* Text-sm has a cascade issue */
+  font-size: calc(theme(fontSize.xs) * var(--text-ratio));
+}
+
+.Title .element {
   @apply absolute left-0 opacity-0 inline-block;
   transition:
-    opacity 200ms cubic-bezier(0.19, 1, 0.22, 1),
-    transform 750ms cubic-bezier(0.19, 1, 0.22, 1);
+    opacity 250ms theme(bezier.thisalso),
+    transform 1000ms theme(bezier.thisalso);
   transform: translateX(-5%);
 }
-.Title span.home,
-.Title span.reply {
+.Title .home,
+.Title .reply {
   @apply opacity-100;
   transform: translateX(0);
 }
+</style>
+
+<style lang="postcss" scoped>
+.pos-button {
+  @apply absolute top-0 right-0 pt-w2;
+}
+.Button {
+  border-color: var(--scheme-border);
+}
+.Button--active {
+  border-color: theme(colors.brand.primary);
+  color: theme(colors.brand.primary);
+}
+.Button--active:hover {
+  box-shadow: theme(colors.brand.primary) 0 0 0 var(--button-box-shadow-stroke-hover);
+}
+
+/* .modal-is-active .Title-direction {
+  @apply opacity-0;
+} */
 </style>

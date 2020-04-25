@@ -1,3 +1,9 @@
+.container {
+  /* @apply max-w-3xl; */ /* 48rem 768px */
+  @apply px-inset;
+  max-width: 800px;
+}
+
 /* CONTAINER VAR */
 .container--su {
   max-width: none !important;
@@ -13,10 +19,4 @@
     padding-left: 14vw !important;
     padding-right: 14vw !important;
   }
-}
-
-/* editor inset */
-.container-inset {
-  padding-left: calc(theme(spacing.10) * var(--block-size-ratio));
-  padding-right: calc(theme(spacing.10) * var(--block-size-ratio));
 }

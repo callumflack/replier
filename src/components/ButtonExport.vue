@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pt-w5">
     <div class="ActionButton opacity-100">
       <Popover ref='popover'>
         <template v-slot:trigger>
@@ -139,8 +139,11 @@ export default {
 >>> .vue-slick-popover[x-placement^="bottom"] {
   margin-top: 16px;
 }
+>>> .vue-slick-popover-content__arrow {
+  border-bottom-color: theme(colors.scheme.bg) !important;
+}
 >>> .vue-slick-popover-content__body {
-  @apply rounded-lg bg-white;
+  @apply rounded-lg bg-scheme-bg;
   /* @apply shadow-xl; */
   box-shadow: 0 0 40px 3px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.05);
   width: 300px;
@@ -151,7 +154,7 @@ export default {
   --button-height: 54px;
   --button-border-radius: 0;
   --button-box-shadow-color: transparent;
-  border-bottom-color: theme(colors.gray.light);
+  border-bottom-color: theme(colors.scheme.border);
   height: var(--button-height);
   line-height: 1;
   padding: 0 var(--button-padding-x);
@@ -178,7 +181,6 @@ export default {
 .Button--export:focus {
   --button-invert-color: theme(colors.brand.primary);
   --button-bg-color: var(--button-invert-color);
-  --button-bg-color-hover: var(--button-invert-color);
   --button-border-color: var(--button-invert-color);
   --button-box-shadow-color: var(--button-invert-color);
 }
