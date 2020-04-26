@@ -11,12 +11,22 @@
 export default {
   methods: {
     async handleClick() {
-      // const stripe = Stripe(process.env.STRIPE_PUBLISHABLE_KEY);
-      const stripe = Stripe("pk_test_DAddKTtCLuVq2utH4ANloAO5");
-      const response = await fetch("/.netlify/functions/donation");
-      const json = await response.json();
+      const stripe = Stripe(process.env.VUE_APP_STRIPE_PUBLISHABLE_KEY);
       await stripe.redirectToCheckout({
-        sessionId: json.session.id,
+        items: [
+          {
+            sku: 'sku_HA2ZsTlYVOHV2n', // TEST
+            quantity: 1
+          }
+        ],
+        // Do not rely on the redirect to the successUrl for fulfilling
+        // purchases, customers may not always reach the success_url after
+        // a successful payment, or malicious users could directly access
+        // the successUrl without paying.
+        // Instead use one of the strategies described in
+        // https://stripe.com/docs/payments/checkout/fulfillment
+        successUrl: "http://write.corv.id?donation=success",
+        cancelUrl: "http://write.corv.id?donation=cancelled"
       });
       // `redirectToCheckout` may fail due to a browser or network error
     },
