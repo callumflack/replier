@@ -1,4 +1,0 @@
-[build]
-  command = "yarn build && yarn build:lambda"
-  publish = "dist"
-  functions = ".netlify/functions/"
