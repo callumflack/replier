@@ -330,11 +330,13 @@ export default {
   z-index: 101; /* 1 */
 }
 .modal-is-active .Modal-backdrop {
-  background-color: rgba(166, 101, 1, 0.5);
+  /* background-color: rgba(166, 101, 1, 0.5); */
+  background-color: hsla(theme(colors.brand.primarys), 0.5);
 }
 @media (prefers-color-scheme: dark) {
   .modal-is-active .Modal-backdrop {
-    background-color: rgba(166, 101, 1, 0.25);
+    /* background-color: rgba(166, 101, 1, 0.25); */
+    background-color: hsla(theme(colors.brand.primarys), 0.25);
   }
 }
 

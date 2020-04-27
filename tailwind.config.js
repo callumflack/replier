@@ -3,7 +3,7 @@
 
 const blueLight = '#00CDFB';
 // const hue = '211';
-const hue = '39';
+// const hue = '39';
 // const saturation = '100';
 // const lightness = '40';
 
@@ -21,8 +21,9 @@ module.exports = {
       transparent: 'transparent',
       white: '#fdfdfd',
       black: 'rgb(49, 48, 45)',
-      blackgray: 'rgba(49, 48, 45, 0.6)',
+      blackgray: 'rgba(49, 48, 45, 0.7)',
       scheme: {
+        primary: "var(--scheme-primary)",
         text: "var(--scheme-text)",
         "text-gray": "var(--scheme-text-gray)",
         "text-border": "var(--scheme-text-border)",
@@ -34,10 +35,10 @@ module.exports = {
       },
       brand: {
         // primary: `hsl(36, 100%, 33%)`, // brown HSL original
-        primary: `hsl(44, 100%, 40%)`, // brown HSL
-        primarys: `44, 100%, 40%`, // brown HSL values
         // primary: `hsl(272, 80%, 46%)`, // brown HSL
-        complement: `hsl(${hue}, 100%, 40%)`, // brown HSL
+        // primary: `hsl(44, 100%, 43%)`, // yellow
+        primary: `hsl(211, 100%, 50%)`,
+        primarys: `211, 100%, 50%`,
         blue: '#1b495a',
         blueneutral: '#f1f2f3',
         bluelight: blueLight,

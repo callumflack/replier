@@ -173,12 +173,13 @@ export default {
   transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 .export-option:hover {
-  background-color: rgba(166, 101, 1, 0.1);
+  background-color: var(--color-selected);
 }
 
 .Button--export:hover,
 .Button--export:active,
 .Button--export:focus {
+  --button-color: theme(colors.white);
   --button-invert-color: theme(colors.brand.primary);
   --button-bg-color: var(--button-invert-color);
   --button-border-color: var(--button-invert-color);

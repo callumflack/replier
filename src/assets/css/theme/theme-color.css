@@ -5,13 +5,22 @@
 
  */
 
+/* html[data-theme='dark'] {
+  --hue: 210;
+  --accent-hue: 25;
+  --text-color-normal: hsl(var(--hue), 10%, 62%);
+  --text-color-highlight: hsl(var(--accent-hue), 70%, 45%);
+} */
+
+/* blue: hsl(201, 100%, 50%) or #00A7FF */
+
 :root {
   /* hues */
   --hue: 200; /* Blue */
   --hue: 211; /* Blue */
   --accent-hue: 25; /* orange */
 
-  /* yellwo */
+  /* yellow */
   --hue: 45;
   --saturation: 80%;
   --lightness: 50%;
@@ -47,6 +56,11 @@
   --color-selected: hsla(theme(colors.brand.primarys), var(--alpha-selected));
 }
 
+/* FAILS */
+.test {
+  color: hsl(theme(hsl.hue), theme(hsl.saturation), theme(hsl.lightness));
+}
+
 /*
 
   COLOR SCHEMES for day & night
@@ -62,6 +76,7 @@
 
 :root {
   color-scheme: light dark;
+  --scheme-primary: theme(colors.brand.primary);
   --scheme-text: theme(colors.black);
   --scheme-text-gray: theme(colors.blackgray);
   --scheme-text-border: theme(colors.black);
@@ -73,6 +88,7 @@
 }
 @media (prefers-color-scheme: dark) {
   :root {
+    --scheme-primary: theme(colors.brand.primary);
     --scheme-text: #ccc;
     --scheme-text-gray: rgba(255,255,255,0.5);
     --scheme-text-border: rgba(255,255,255,0.5);
@@ -83,24 +99,3 @@
     --scheme-bg-dark: theme(colors.black);
   }
 }
-
-/* FAILS */
-.test {
-  color: hsl(theme(hsl.hue), theme(hsl.saturation), theme(hsl.lightness));
-}
-
-/*
-
-  Another color schema method
-  See: https://medium.com/@mwichary/dark-theme-in-a-day-3518dde2955a
-
-*/
-
-html[data-theme='dark'] {
-  --hue: 210; /* Blue */
-  --accent-hue: 25; /* Orange */
-  --text-color-normal: hsl(var(--hue), 10%, 62%);
-  --text-color-highlight: hsl(var(--accent-hue), 70%, 45%);
-}
-
-/* blue: hsl(201, 100%, 50%) or #00A7FF */
