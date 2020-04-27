@@ -25,8 +25,8 @@ export default {
         // the successUrl without paying.
         // Instead use one of the strategies described in
         // https://stripe.com/docs/payments/checkout/fulfillment
-        successUrl: "http://write.corv.id?donation=success",
-        cancelUrl: "http://write.corv.id?donation=cancelled"
+        successUrl: "http://www.replier.app?donation=success",
+        cancelUrl: "http://www.replier.app?donation=cancelled"
       });
       // `redirectToCheckout` may fail due to a browser or network error
     },
