@@ -10,13 +10,13 @@
       @click.prevent="active"
     >
       <template v-if="!showDialog">
-        <span v-if="!$store.state.timestamp" class="inline-block mr-2">
-          What is Write?
+        <span v-if="!$store.state.timestamp" class="inline-block mr-1">
+          What is Replier?
         </span>
       </template>
       <!-- icons -->
       <icon v-if="showDialog" name="close" height="1.75em" width="1.75em"></icon>
-      <icon v-else name="info" height="1.75em" width="1.75em"></icon>
+      <icon v-else name="info-outline" height="1.75em" width="1.75em"></icon>
     </button>
   </div>
 </template>

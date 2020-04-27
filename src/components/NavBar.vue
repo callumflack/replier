@@ -20,21 +20,24 @@
         :class="{ home: $route.name === 'home', 'text-brand-primary': showDialog }"
       >
         <!-- LOGO -->
-        <h1 class="inline mr-2">Write</h1>
+        <h1 class="inline mr-2">
+          <!-- Replier -->
+          <Logo></Logo>
+        </h1>
         <!-- directions after pasting -->
         <span
           v-if="$store.state.timestamp"
-          class="Text-sm font-semibold text-brand-primary font-normal mobile:hidden"
+          class="Text-sm font-medium text-brand-primary mobile:hidden"
           :class="{ invisible: showDialog }"
         >
           <template v-if="$store.state.selections.length === 0">
             Click to select…
           </template>
           <template v-if="$store.state.selections.length > 0 && $store.state.selections.length < 3">
-            Click + command to select multiples…
+            Click + command for multiples…
           </template>
           <template v-if="$store.state.selections.length === 3">
-            Well done!
+            Nice!
           </template>
         </span>
       </span>
@@ -44,7 +47,7 @@
         :class="{ reply: $route.name !== 'home', 'text-brand-primary': showDialog }"
       >
         <icon name="arrow-back" class="mr-1" />
-        <span>Revise</span>
+        <span>revise</span>
       </span>
     </router-link>
     <!-- L: INFO -->
@@ -54,11 +57,13 @@
 
 <script>
 import DonationButton from "@/components/DonationButton";
+import Logo from '@/components/Logo';
 import NavBarInfo from '@/components/NavBarInfo2';
 
 export default {
   components: {
     DonationButton,
+    Logo,
     NavBarInfo,
   },
   computed: {
@@ -109,14 +114,27 @@ export default {
 }
 .Button {
   border-color: var(--scheme-border);
+  color: var(--scheme-text-gray);
+}
+.Button:hover,
+.Button:active,
+.Button:focus {
+  border-color: var(--scheme-text);
+  box-shadow: var(--scheme-text) 0 0 0 var(--button-box-shadow-stroke-hover);
+  color: var(--scheme-text);
 }
 .Button--active {
   border-color: theme(colors.brand.primary);
   color: theme(colors.brand.primary);
 }
-.Button--active:hover {
-  box-shadow: theme(colors.brand.primary) 0 0 0 var(--button-box-shadow-stroke-hover);
+.Button--active:hover,
+.Button--active:active,
+.Button--active:focus {
+  border-color: var(--scheme-primary);
+  box-shadow: var(--scheme-primary) 0 0 0 var(--button-box-shadow-stroke-hover);
+  color: var(--scheme-primary);
 }
+
 
 /* .modal-is-active .Title-direction {
   @apply opacity-0;

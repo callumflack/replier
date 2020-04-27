@@ -15,13 +15,13 @@ export default {
     return {
       /* eslint-disable max-len */
       copy: `
-## What is Write?
+## What is Replier?
 
-Write helps you reply to friends, clients, colleagues and collaborators by choosing only what's important in the conversation.
+Replier helps you reply to friends, clients, colleagues and collaborators by choosing only what's important in the conversation.
 
 It removes the superfluous, creates focus and helps you avoid losing important information to the vortex of chat messages and email chains.
 
-We also give you custom formatted responses to paste into for your favourite project management apps. So it's clear who said what.
+We also give you custom formatted responses to paste into your favourite project management apps. So it's clear who said what.
 
 ## How does it work?
 
