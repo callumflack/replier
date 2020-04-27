@@ -13,7 +13,7 @@
     <!-- TRACKING -->
     <MessageBar>
       <span class="font-bold mobile:table mobile:mx-auto">
-        It's not our data, it's yours.
+        It's your data, not ours.
       </span>
       We don't store anything you paste nor type here.
       <!-- <span class="Link">Opt out of all tracking.</span> -->

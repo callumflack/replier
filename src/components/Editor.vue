@@ -4,7 +4,7 @@
       v-if="!$store.state.timestamp"
       class="ml-2px Placeholder Subtitle font-normal"
     >
-      Paste here &amp; click to select…
+      Paste here, then click to select…
     </div>
     <div
       class="editor z-10 mb-2"
