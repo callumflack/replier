@@ -23,23 +23,20 @@ Vue.config.productionTip = false;
 // https://docs.sentry.io/platforms/javascript/vue/
 Sentry.init({
   dsn: 'https://8cbe086668634a66874bc13cea49da71@o379282.ingest.sentry.io/5203892',
-  integrations: [new Integrations.Vue({Vue, attachProps: true, logErrors: true})],
+  integrations: [new Integrations.Vue({ Vue, attachProps: true, logErrors: true })],
 });
 
 // https://github.com/mib200/vue-gtm
 /* eslint-disable */
 Vue.use(VueGtm, {
-  id: 'GTM-KMRRBXD',
+  id: "GTM-KMRRBXD",
   // queryParams: { // Add url query string when load gtm.js with GTM ID (optional)
   //   gtm_auth:'AB7cDEf3GHIjkl-MnOP8qr',
   //   gtm_preview:'env-4',
   //   gtm_cookies_win:'x'
   // },
   // enabled: true, // defaults to true. Plugin can be disabled by setting this to false for Ex: enabled: !!GDPR_Cookie (optional)
-  // debug: true, // Whether or not display console logs debugs (optional)
-  // loadScript: true, // Whether or not to load the GTM Script (Helpful if you are including GTM manually, but need the dataLayer functionality in your components) (optional)
   vueRouter: router, // Pass the router instance to automatically sync with router (optional)
-  // ignoredViews: ['homepage'] // If router, you can exclude some routes name (case insensitive) (optional)
 });
 /* eslint-enable */
 
