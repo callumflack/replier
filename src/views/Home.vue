@@ -67,9 +67,14 @@ export default {
 }
 
 .aside-map {
-  @apply absolute top-0 right-0;
+  @apply hidden absolute top-0 right-0;
   transform: translateX(144%);
   width: 150px;
+}
+@screen lg {
+  .aside-map {
+    @apply block;
+  }
 }
 .aside-map p {
   @apply text-transparent;
