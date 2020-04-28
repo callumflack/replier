@@ -25,7 +25,7 @@
             <div class="selection__options">
               <Tooltip>
                 <button class="option-button handle">
-                  <icon name="grip" />
+                  <icon name="grip"></icon>
                 </button>
                 <span class="ui-label" slot="content">Drag to move</span>
               </Tooltip>
@@ -34,7 +34,7 @@
                   @click="(event) => deleteSelection(event, selection)"
                   class="option-button delete-button"
                 >
-                  <icon name="delete" />
+                  <icon name="delete"></icon>
                 </button>
                 <span class="ui-label" slot="content">Delete</span>
               </Tooltip>
@@ -55,7 +55,7 @@
 
       <textarea
         class="reply-input reply-input--contextual reply-input--outro Input"
-        placeholder="Add a summary…"
+        placeholder="Add a summary or closing remark…"
         tabindex="999"
         @input="handleOutroInput"
       >{{ $store.state.repliesOutro }}</textarea>
