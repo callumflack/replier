@@ -1,4 +1,6 @@
-# writing-app
+# replier-app
+
+An app to help you corral your email, chat & project management conversations and reply with clarity.
 
 ## Project setup
 
