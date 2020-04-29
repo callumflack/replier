@@ -15,7 +15,8 @@ export default {
       await stripe.redirectToCheckout({
         items: [
           {
-            sku: 'sku_HA2ZsTlYVOHV2n', // TEST
+            // sku: "sku_HA2ZsTlYVOHV2n", // TEST
+            sku: "sku_H9hlmTOYXeeC8k", // LIVE
             quantity: 1
           }
         ],
