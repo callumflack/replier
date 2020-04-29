@@ -61,6 +61,7 @@
       >{{ $store.state.repliesOutro }}</textarea>
     </div>
     <ButtonExport @onExport="handleExport" :groupedSelections="groupedSelections" />
+
     <!-- success modal -->
     <portal to="modals">
       <Modal
@@ -218,7 +219,6 @@ export default {
   margin-bottom: calc(theme(spacing.2) * var(--block-size-ratio));
 }
 .selection-header {
-  @apply text-brand-primary;
   @apply text-gray-dark;
 }
 .selection-content {
@@ -235,7 +235,7 @@ export default {
 }
 .selection .option-button {
   @apply opacity-0;
-  @apply text-black;
+  @apply text-scheme-text;
   transition: opacity 250ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 .selection .option-button:focus {
@@ -259,9 +259,23 @@ export default {
 }
 .selection .option-button:hover svg {
   @apply bg-gray-light;
+  @apply bg-scheme-border;
 }
 .selection .option-button.handle {
   @apply cursor-move;
+}
+
+@screen mobile {
+  .selection__options {
+    left: -1.75em;
+  }
+  .selection .option-button {
+    @apply opacity-33;
+  }
+  .selection .option-button svg {
+    height: 1.05em !important;
+    width: 1.05em !important;
+  }
 }
 
 /*
