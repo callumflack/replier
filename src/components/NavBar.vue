@@ -17,7 +17,7 @@
     >
       <span
         class="element"
-        :class="{ home: $route.name === 'home', 'text-brand-primary': showDialog }"
+        :class="{ home: $route.name === 'home' || showDialog, 'text-brand-primary': showDialog }"
       >
         <!-- LOGO -->
         <h1 class="inline mr-2">
@@ -44,7 +44,7 @@
       <!-- REVISE -->
       <span
         class="element"
-        :class="{ reply: $route.name !== 'home', 'text-brand-primary': showDialog }"
+        :class="{ reply: $route.name !== 'home' && !showDialog, 'text-brand-primary': showDialog }"
       >
         <icon name="arrow-back" class="mr-1" />
         <span>revise</span>
