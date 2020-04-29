@@ -77,13 +77,13 @@
           <hr class="my-4" />
           <div class="flex pt-1">
             <button
-              class="mr-2 w-1/2 font-title font-semibold Button Button--black"
+              class="mr-2 w-1/2 font-title font-semibold Button Button--modalBlack"
               @click="resetState"
             >
               Start again
             </button>
             <button
-              class="ml-2 w-1/2 font-title font-semibold Button"
+              class="ml-2 w-1/2 font-title font-semibold Button Button--modalOutline"
               @click="dismiss"
             >
               Keep editing
@@ -362,6 +362,22 @@ export default {
 }
 .Modal-body .Button {
   white-space: nowrap;
+}
+.Modal-body .Button--modalBlack {
+  /* --button-color: var(--scheme-bg);
+  --button-bg-color: var(--scheme-text);
+  --button-invert-color: var(--scheme-text); */
+  --button-color: theme(colors.white);
+  --button-bg-color: theme(colors.black);
+  --button-border-color: theme(colors.black);
+  --button-box-shadow-color: theme(colors.black);
+  /* --button-invert-color: theme(colors.black); */
+}
+.Modal-body .Button--modalOutline {
+  --button-color: theme(colors.black);
+  --button-border-color: theme(colors.black);
+  --button-box-shadow-color: theme(colors.black);
+  /* --button-invert-color: theme(colors.black); */
 }
 
 /*
