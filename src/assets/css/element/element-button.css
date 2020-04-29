@@ -14,8 +14,8 @@
  */
 
 :root {
-  --button-color: theme(colors.black);
-  --button-invert-color: theme(colors.black);
+  --button-color: var(--scheme-text);
+  --button-invert-color: var(--scheme-text);
   --button-bg-color: transparent;
   --button-bg-color-hover: transparent;
   --button-border-color: var(--button-invert-color);
