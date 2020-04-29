@@ -140,7 +140,7 @@ export default {
   margin-top: 16px;
 }
 >>> .vue-slick-popover-content__arrow {
-  border-bottom-color: theme(colors.scheme.bg) !important;
+  border-top-color: theme(colors.scheme.bg) !important;
 }
 >>> .vue-slick-popover-content__body {
   @apply rounded-lg bg-scheme-bg;
@@ -189,10 +189,7 @@ export default {
 .Text-reset,
 .Text-reset > *,
 .Text-reset >>> > * {
-  /* @apply bg-transparent !important; */
-  background-color: initial !important;
-  color: black;
+  @apply bg-white text-black tracking-normal !important;
   font: small/1.5 Arial,Helvetica,sans-serif;
-  letter-spacing: normal;
 }
 </style>
