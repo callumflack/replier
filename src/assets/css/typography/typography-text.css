@@ -27,7 +27,6 @@ main {
 .Text-xs {
   font-size: calc(theme(fontSize.xs) * var(--text-ratio));
 }
-
 .Markdown-sm > *,
 .Text-sm {
   font-size: calc(theme(fontSize.sm) * var(--text-ratio));
@@ -45,27 +44,35 @@ main {
   @apply font-title font-medium tracking-subtitle;
 }
 
-
 p,
 body,
 .Text {
   font-size: calc(theme(fontSize.lg) * var(--text-ratio));
 }
-
 .Text-xl {
   font-size: calc(theme(fontSize.xl) * var(--text-ratio));
 }
+
+@screen mobile {
+  /* prevent iOS mobile zoom on eeditable texts by setting to 16px */
+  p,
+  body,
+  .Text {
+    font-size: 16px;
+  }
+}
+
+
+/*
+
+  Markdown etc
+
+ */
 
 ol {
   list-style-type: decimal;
   padding-left: calc(theme(spacing.6) * var(--text-ratio));
 }
-
-/*
-
-  Markdown
-
- */
 
 .Markdown small {
   @apply inline-block;
