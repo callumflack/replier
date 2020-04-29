@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-w5 pb-w8">
+  <div class="pt-w5">
     <!-- tabindex starting with a positive value and
     ending with the highest possible value: tiny.cc/txtudz -->
     <div class="px-inset">

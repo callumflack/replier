@@ -6,7 +6,7 @@
 
       <!-- WRITE CONTAINER -->
       <div
-        class="container min-h-full"
+        class="container min-h-full pb-w8"
         :class="`${ showInfoDialog ? 'bg-scheme-bg-html' : 'bg-scheme-bg'}`"
       >
         <NavBar></NavBar>
@@ -46,11 +46,6 @@ export default {
       return this.$store.state.showInfoDialog;
     },
   },
-  // head: {
-  //   script: [
-  //     { src: "https://js.stripe.com/v3/" } // Used for the donation button
-  //   ]
-  // }
 };
 </script>
 
