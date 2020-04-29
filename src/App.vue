@@ -6,7 +6,7 @@
 
       <!-- WRITE CONTAINER -->
       <div
-        class="container h-full"
+        class="container min-h-full"
         :class="`${ showInfoDialog ? 'bg-scheme-bg-html' : 'bg-scheme-bg'}`"
       >
         <NavBar></NavBar>
