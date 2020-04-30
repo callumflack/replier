@@ -4,6 +4,7 @@
 .Markdown h4:not(:last-child),
 .Markdown h5:not(:last-child),
 .Markdown p:not(:last-child),
+.Markdown ol:not(:last-child),
 .Markdown ul:not(:last-child),
 .Markdown blockquote,
 .Markdown figure,

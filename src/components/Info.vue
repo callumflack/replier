@@ -30,6 +30,10 @@ We also give you custom formatted responses to paste into your favourite project
 3. Hit the reply button and write your replies.
 4. Choose to export to Gmail, Slack or Basecamp.
 
+Replier is a work in progress. We welcome feedback! [Email us with bugs, ideas, etc.](mailto:callum@callumflack.design)
+
+Please note that we can't select multiple sentences on touch devices. Yet. A fix isn't far away.
+
 ## Who made it?
 
 [Jeremy](https://jackywinter.com), [Callum](https://callumflack.design) &amp; [Barry](https://barryph.com/blog/).
