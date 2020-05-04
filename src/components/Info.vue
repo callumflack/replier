@@ -26,7 +26,7 @@ We also give you custom formatted responses to paste into your favourite project
 ## How does it work?
 
 1. Click on the line you wish to reply to.
-2. Select multiple sentences by holding "command" while you click.
+2. Join sentences by holding "command" while you click, anywhere across the doc.
 3. Hit the reply button and write your replies.
 4. Choose to export to Gmail, Slack or Basecamp.
 
