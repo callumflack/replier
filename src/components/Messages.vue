@@ -12,11 +12,11 @@
 
     <!-- TRACKING -->
     <MessageBar>
-      <span class="font-bold mobile:table mobile:mx-auto">
+      <!-- <span class="font-bold mobile:table mobile:mx-auto">
         It's your data, not ours.
-      </span>
-      We don't store anything you paste nor type here.
-      <!-- <span class="Link">Opt out of all tracking.</span> -->
+      </span> -->
+      We don't store anything you paste or type here. You can also
+      <span class="Link">opt out of analytics tracking.</span>
     </MessageBar>
   </div>
 </template>
