@@ -11,7 +11,7 @@ html {
 body {
   @apply text-scheme-text;
   @apply antialiased font-sans font-normal;
-  @apply leading-normal tracking-subtitle;
+  @apply leading-normal tracking-normal;
   @apply h-full;
 }
 main {
@@ -26,6 +26,7 @@ main {
 
 .Text-xs {
   font-size: calc(theme(fontSize.xs) * var(--text-ratio));
+  @apply tracking-subtitle;
 }
 .Markdown-sm > *,
 .Text-sm {
