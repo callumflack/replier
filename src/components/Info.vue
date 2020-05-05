@@ -17,6 +17,8 @@ export default {
   },
   data() {
     return {
+      /* https://github.com/miaolz123/vue-markdown/issues/36 */
+      /* also: https://github.com/miaolz123/vue-markdown/issues/74 */
       anchorAttributes: {
           target: '_blank',
           rel: 'noopener noreferrer nofollow'
