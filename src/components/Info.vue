@@ -32,7 +32,11 @@ We also give you custom formatted responses to paste into your favourite project
 
 Replier is a work in progress. We welcome feedback! [Email us with bugs, ideas, etc.](mailto:callum@callumflack.design)
 
-Please note that we can't select multiple sentences on touch devices. Yet. A fix isn't far away.
+## Your privacy
+
+We don't like using apps that aren't clear about how they use input data. So let's be clear: if you paste or type anything into Replier, we don't save it. We use your browser's [sessionStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage) to handle the text manipulations that create your reply. Once you close refresh or the browser tab, whatever data you entered is permanently deleted.
+
+We also use analytics to see how people are using Replier so we can keep making it better. You can opt out of analytics tracking using the message bar link that appears when you load Replier.
 
 ## Who made it?
 
