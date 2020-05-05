@@ -15,8 +15,18 @@
       <!-- <span class="font-bold mobile:table mobile:mx-auto">
         It's your data, not ours.
       </span> -->
-      We don't store anything you paste or type here. You can also
-      <span @click="optOutOfTracking" class="Link">opt out of analytics tracking.</span>
+      We don't store anything you paste or type here.
+      <template v-if="!optOut">
+        You can also
+        <button @click="optOutOfTracking" class="Link ">
+          opt out of analytics tracking.
+        </button>
+      </template>
+      <template v-else>
+        <span class="font-bold mobile:table mobile:mx-auto">
+          Analytics tracking turned off.
+        </span>
+      </template>
     </MessageBar>
   </div>
 </template>
@@ -28,10 +38,14 @@ export default {
   components: {
     MessageBar
   },
+  data: () => ({
+    optOut: false,
+  }),
   methods: {
     optOutOfTracking() {
       localStorage.setItem("doNotTrack", true);
       this.$gtm.enable(false);
+      this.optOut = true;
     },
     optInToTracking() {
       localStorage.setItem("doNotTrack", false);
