@@ -16,7 +16,7 @@
         It's your data, not ours.
       </span> -->
       We don't store anything you paste or type here. You can also
-      <span class="Link">opt out of analytics tracking.</span>
+      <span @click="optOutOfTracking" class="Link">opt out of analytics tracking.</span>
     </MessageBar>
   </div>
 </template>
@@ -27,6 +27,16 @@ import MessageBar from '@/components/MessageBar.vue';
 export default {
   components: {
     MessageBar
+  },
+  methods: {
+    optOutOfTracking() {
+      localStorage.setItem("doNotTrack", true);
+      this.$gtm.enable(false);
+    },
+    optInToTracking() {
+      localStorage.setItem("doNotTrack", false);
+      this.$gtm.enable(true);
+    },
   },
 }
 </script>
