@@ -30,7 +30,6 @@ Sentry.init({
 });
 
 const trackingDisabled = localStorage.getItem("doNotTrack");
-console.log(trackingDisabled);
 // https://github.com/mib200/vue-gtm
 /* eslint-disable */
 Vue.use(VueGtm, {
