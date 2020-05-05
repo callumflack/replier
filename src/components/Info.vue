@@ -1,6 +1,10 @@
 <template>
   <div class="container py-w5 px-inset">
-    <vue-markdown class="Markdown Link-block" :source="copy"></vue-markdown>
+    <vue-markdown
+      class="Markdown Link-block"
+      :anchor-attributes="anchorAttributes"
+      :source="copy"
+    ></vue-markdown>
   </div>
 </template>
 
@@ -13,6 +17,10 @@ export default {
   },
   data() {
     return {
+      anchorAttributes: {
+          target: '_blank',
+          rel: 'noopener noreferrer nofollow'
+      },
       /* eslint-disable max-len */
       copy: `
 ## What is Replier?
