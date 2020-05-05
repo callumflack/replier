@@ -3,7 +3,7 @@
     <!-- DONATIONS -->
     <MessageBar alert v-if="$route.query.donation === 'success'">
       <span class="font-bold">Thanks!</span>
-      We appreciate it. Tell your friends, and keep on tap tappin'
+      We appreciate it. Tell your friends, and keep on tap tappin'.
     </MessageBar>
     <MessageBar alert v-if="$route.query.donation === 'cancelled'">
       <span class="font-bold">Oh well!</span>
