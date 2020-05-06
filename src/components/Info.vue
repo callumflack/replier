@@ -44,7 +44,7 @@ Replier is a work in progress. We welcome feedback! [Email us with bugs, ideas, 
 
 ## Your privacy
 
-We don't like using apps that aren't clear about how they use input data. So let's be clear: if you paste or type anything into Replier, we don't save it. There is no database connected to Replier. We handle the text manipulations that create your reply using application state. So once you close refresh or the browser tab, whatever data you entered is permanently deleted.
+We don't like using apps that aren't clear about how they use input data. So let's be clear: if you paste or type anything into Replier, we don't save it. There is no database connected to Replier. We handle the text manipulations that create your reply using application state. So once you refresh or close the browser tab, whatever data you entered is permanently deleted.
 
 We also use analytics to see how people are using Replier so we can keep making it better. You can opt out of analytics tracking using the message bar link that appears when you load Replier.
 
