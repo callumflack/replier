@@ -52,7 +52,7 @@ We also use analytics to see how people are using Replier so we can keep making 
 
 [Jeremy](https://jackywinter.com), [Callum](https://callumflack.design) &amp; [Barry](https://barryph.com/blog/).
 
-<small>Version 0.0.2 2020-04-18</small>`
+<small>Version 0.0.2 2020-05-06</small>`
       /* eslint-enable max-len */
     };
   },
