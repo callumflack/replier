@@ -29,7 +29,7 @@ export default {
 
 Replier helps you reply to friends, clients, colleagues and collaborators by choosing only what's important in the conversation.
 
-It removes the superfluous, creates focus and helps you avoid losing important information to the vortex of chat messages and email chains.
+Replier creates focus by removing the superfluous. It helps you avoid losing important info to the vortex of chat messages and email chains. And makes it [easy for the reader](http://www.idallen.com/topposting.html).
 
 We also give you custom formatted responses to paste into your favourite project management apps. So it's clear who said what.
 
