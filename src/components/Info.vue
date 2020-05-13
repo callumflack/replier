@@ -27,11 +27,11 @@ export default {
       copy: `
 ## What is Replier?
 
-Replier helps you reply to friends, clients, colleagues and collaborators by choosing only what's important in the conversation.
+Replier helps you reply to friends, clients, colleagues and collaborators by choosing only what's important in the conversation by removing the superfluous. It creates focus so you can avoid losing important info to the vortex of chat messages and email chains.
 
-Replier creates focus by removing the superfluous. It helps you avoid losing important info to the vortex of chat messages and email chains. And makes it [easy for the reader](http://www.idallen.com/topposting.html).
+We also give you custom formatted responses to paste into your favourite project management apps, making it [easy for the reader](http://www.idallen.com/topposting.html). So it's clear who said what.
 
-We also give you custom formatted responses to paste into your favourite project management apps. So it's clear who said what.
+To learn more about the problems we're trying to solve, [continue reading](https://jackywinter.com/homeroom/introducing-replier).
 
 ## How does it work?
 
@@ -44,9 +44,9 @@ Replier is a work in progress. We welcome feedback! [Email us with bugs, ideas, 
 
 ## Your privacy
 
-We don't like using apps that aren't clear about how they use input data. So let's be clear: if you paste or type anything into Replier, we don't save it. There is no database connected to Replier. We handle the text manipulations that create your reply using application state. So once you refresh or close the browser tab, whatever data you entered is permanently deleted.
+Let's be clear: if you paste or type anything into Replier, we don't save it. There is no database connected to Replier. We handle the text manipulations that create your reply using application state. So once you refresh or close the browser tab, whatever data you entered is permanently deleted.
 
-We also use analytics to see how people are using Replier so we can keep making it better. You can opt out of analytics tracking using the message bar link that appears when you load Replier.
+We use analytics so we can keep making Replier better. You can opt out of analytics tracking using the message bar that appears when you load Replier.
 
 ## Who made it?
 
