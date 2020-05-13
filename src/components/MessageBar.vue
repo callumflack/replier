@@ -7,7 +7,7 @@
       :class="`${ alert ? 'py-1 md:py-2' : 'py-4 md:py-5' }`"
     >
       <div
-        class="Text-sm text-center px-8 lg:px-16 mb-px"
+        class="Text-sm text-center px-12 lg:px-16 mb-px"
         :class="`${ alert ? 'text-scheme-bg': 'text-scheme-text-gray'}`"
       >
         <slot></slot>
