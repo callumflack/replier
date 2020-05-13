@@ -3,18 +3,18 @@
  *
  * @module selection
  */
-import { Plugin } from 'prosemirror-state';
-import { Decoration, DecorationSet } from 'prosemirror-view';
-import store from '../store';
+import { Plugin } from "prosemirror-state";
+import { Decoration, DecorationSet } from "prosemirror-view";
+import store from "../store";
 
 // End of sentence punctuation
 const EOSPuncRegex = /([.?!]) /g;
 const nonWhitespaceRegex = /[^\s\\]/;
 // Styled in Home.js
 const sentenceClasses = {
-  base: 'editor__sentence',
-  selected: 'sentence--selected',
-  group: 'sentence--group',
+  base: "editor__sentence",
+  selected: "sentence--selected",
+  group: "sentence--group"
 };
 // Track unique groupIds to set unique group class based number of groups
 const groupIds = [];
@@ -56,9 +56,8 @@ class Selection {
 }
 
 function updateSelectionsInStore(decos) {
-  const activeDecos = decos
-    .find(null, null, spec => spec.selection.active);
-  store.commit('setSelections', activeDecos);
+  const activeDecos = decos.find(null, null, (spec) => spec.selection.active);
+  store.commit("setSelections", activeDecos);
 }
 
 /**
@@ -89,7 +88,6 @@ function deco(from, to, selection) {
   return Decoration.inline(from, to, { class: cls }, { selection });
 }
 
-
 /**
  * Create a decorator for each sentence in the document
  */
@@ -102,7 +100,7 @@ function split(doc) {
     result.push({
       from: from + position,
       to: to + position,
-      text: node.text.substring(from, to),
+      text: node.text.substring(from, to)
     });
   }
 
@@ -115,14 +113,16 @@ function split(doc) {
       let match;
       // Record blocks of text between each match of "EOSPuncRegex"
       // eslint-disable-next-line no-cond-assign
-      while (match = EOSPuncRegex.exec(node.text)) {
+      while ((match = EOSPuncRegex.exec(node.text))) {
         const end = match.index + 1;
         record(start, end, position, node);
 
         start = end;
 
         // Ignore whitespace, find next character position
-        const nextCharacter = node.text.substring(end).match(nonWhitespaceRegex);
+        const nextCharacter = node.text
+          .substring(end)
+          .match(nonWhitespaceRegex);
         if (nextCharacter) {
           start += nextCharacter.index;
         }
@@ -145,12 +145,17 @@ function split(doc) {
  */
 function splitDeco(doc, activeDecos) {
   return split(doc).map((c) => {
-    const active = activeDecos.find(x => x.from === c.from);
+    const active = activeDecos.find((x) => x.from === c.from);
     let newSelection;
 
     if (active) {
       const selection = active.type.spec.selection;
-      newSelection = new Selection(c.text, selection.id, selection.active, selection.groupId);
+      newSelection = new Selection(
+        c.text,
+        selection.id,
+        selection.active,
+        selection.groupId
+      );
     } else {
       newSelection = new Selection(c.text);
     }
@@ -184,15 +189,15 @@ class SelectionState {
 
   apply(tr) {
     // eslint-disable-next-line
-    const action = tr.getMeta(selectionPlugin); const
-      actionType = action && action.type;
+    const action = tr.getMeta(selectionPlugin);
+    const actionType = action && action.type;
     if (!action && !tr.docChanged) return this;
 
     let { decos } = this;
     decos = decos.map(tr.mapping, tr.doc);
 
     // Update list of decorations
-    if (actionType === 'toggleSelect') {
+    if (actionType === "toggleSelect") {
       const active = !action.selection.active;
       action.selection.active = active;
 
@@ -200,7 +205,7 @@ class SelectionState {
       const newSelection = new Selection(
         action.selection.text,
         action.selection.id,
-        action.selection.active,
+        action.selection.active
       );
 
       if (!active) {
@@ -216,7 +221,9 @@ class SelectionState {
             // Add new selection to group
 
             // Update last selected deco to be in group the if it's not
-            const prevSelectedDeco = this.findDecoOfSelection(g_group.lastSelection.id);
+            const prevSelectedDeco = this.findDecoOfSelection(
+              g_group.lastSelection.id
+            );
             const prevSelection = prevSelectedDeco.type.spec.selection;
 
             if (!prevSelection.groupId) {
@@ -225,12 +232,16 @@ class SelectionState {
                 prevSelection.text,
                 prevSelection.id,
                 prevSelection.active,
-                g_group.id,
+                g_group.id
               );
 
               decos = decos.remove([prevSelectedDeco]);
               decos = decos.add(tr.doc, [
-                deco(prevSelectedDeco.from, prevSelectedDeco.to, updatedPrevSelection),
+                deco(
+                  prevSelectedDeco.from,
+                  prevSelectedDeco.to,
+                  updatedPrevSelection
+                )
               ]);
             }
           }
@@ -242,12 +253,18 @@ class SelectionState {
       }
 
       decos = decos.remove([selectedDeco]);
-      decos = decos.add(tr.doc, [deco(selectedDeco.from, selectedDeco.to, newSelection)]);
+      decos = decos.add(tr.doc, [
+        deco(selectedDeco.from, selectedDeco.to, newSelection)
+      ]);
     } else {
       // Handle general updates (typing)
 
       // Maintain active state of current selections
-      const activeDecos = decos.find(null, null, spec => spec.selection.active);
+      const activeDecos = decos.find(
+        null,
+        null,
+        (spec) => spec.selection.active
+      );
       decos = splitDeco(tr.doc, activeDecos);
       decos = DecorationSet.create(tr.doc, decos);
     }
@@ -267,11 +284,15 @@ class SelectionState {
 export const selectionPlugin = new Plugin({
   state: {
     init: SelectionState.init,
-    apply(tr, prev) { return prev.apply(tr); },
+    apply(tr, prev) {
+      return prev.apply(tr);
+    }
   },
   props: {
-    decorations(state) { return this.getState(state).decos; },
-  },
+    decorations(state) {
+      return this.getState(state).decos;
+    }
+  }
 });
 
 // Selection UI
@@ -286,20 +307,32 @@ export function selectionUI(dispatch) {
     // If click is not on a decoration element
     // Using DecorationSet.find (selectionsAt) ProseMirror will return the last decorator
     // on the same line even if it's not under the cursor.
-    const wasDecorationClick = event.target.className.includes(sentenceClasses.base);
+    const wasDecorationClick = event.target.className.includes(
+      sentenceClasses.base
+    );
     if (!wasDecorationClick) return true;
 
-    const sel = view.state.selection;
-    if (!sel.empty) return true;
+    // Use the event coordinates to support mobile as well as desktop
+    // "view.state.selection.from" gives the pos of the cursor, not the click
+    // On mobile the cursor position will not move when clicking a sentence
+    const posAtCoords = view.posAtCoords({ left: event.x, top: event.y });
 
-    const selections = selectionPlugin.getState(view.state).selectionsAt(sel.from);
+    const selections = selectionPlugin
+      .getState(view.state)
+      .selectionsAt(posAtCoords.pos);
     const selection = selections && selections[0].spec.selection;
 
     if (!selection) return true;
 
     // Ctrl for Windows & Linux, Cmd (metaKey) for Mac
     const wasGroupClick = event.ctrlKey || event.metaKey;
-    dispatch(view.state.tr.setMeta(selectionPlugin, { type: 'toggleSelect', selection, wasGroupClick }));
+    dispatch(
+      view.state.tr.setMeta(selectionPlugin, {
+        type: "toggleSelect",
+        selection,
+        wasGroupClick
+      })
+    );
 
     return true;
   }
@@ -311,7 +344,7 @@ export function selectionUI(dispatch) {
       },
       handleClick,
       handleDoubleClick: handleClick,
-      handleTripleClick: handleClick,
-    },
+      handleTripleClick: handleClick
+    }
   });
 }
