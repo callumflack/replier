@@ -12,7 +12,7 @@ export function localStorageGet(key) {
   try {
     return localStorage.getItem(key);
   } catch (error) {
-    console.err("Error getting value from localstorage:", error);
+    // console.err("Error getting value from localstorage:", error);
     return null;
   }
 }
@@ -21,7 +21,7 @@ export function localStorageSet(key, value) {
   try {
     return localStorage.setItem(key, value);
   } catch (error) {
-    console.err("Error setting value in localstorage:", error);
+    // console.err("Error setting value in localstorage:", error);
     return null;
   }
 }
