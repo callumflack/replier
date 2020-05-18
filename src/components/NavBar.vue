@@ -11,10 +11,7 @@
       ></DonationButton>
     </div>
     <!-- NAV: R LOGO + L INFO -->
-    <router-link
-      to="/"
-      class="Title relative w-1/2 lg:w-2/3"
-    >
+    <router-link to="/" class="Title relative w-1/2 lg:w-2/3">
       <span
         class="element"
         :class="{ home: $route.name === 'home' || showDialog, 'text-brand-primary': showDialog }"
@@ -25,7 +22,7 @@
           <Logo></Logo>
         </h1>
         <!-- directions after pasting -->
-        <span
+        <!-- <span
           v-if="$store.state.timestamp"
           class="Text-sm font-medium text-brand-primary mobile:hidden"
           :class="{ invisible: showDialog }"
@@ -39,7 +36,7 @@
           <template v-if="$store.state.selections.length === 3">
             Nice!
           </template>
-        </span>
+        </span>-->
       </span>
       <!-- REVISE -->
       <span
@@ -56,87 +53,85 @@
 </template>
 
 <script>
-import DonationButton from "@/components/DonationButton";
-import Logo from '@/components/Logo';
-import NavBarInfo from '@/components/NavBarInfo2';
+  import DonationButton from "@/components/DonationButton";
+  import Logo from "@/components/Logo";
+  import NavBarInfo from "@/components/NavBarInfo2";
 
-export default {
-  components: {
-    DonationButton,
-    Logo,
-    NavBarInfo,
-  },
-  computed: {
-    showDialog() {
-      return this.$store.state.showInfoDialog;
+  export default {
+    components: {
+      DonationButton,
+      Logo,
+      NavBarInfo
     },
-  },
-  // if using portal for modal
-  // data: () => ({
-  //   modalActive: false
-  // }),
-  // methods: {
-  //   infoModalActive() {
-  //     this.modalActive = !this.modalActive;
-  //     this.$emit('info-modal-active');
-  //   }
-  // }
-};
+    computed: {
+      showDialog() {
+        return this.$store.state.showInfoDialog;
+      }
+    }
+    // if using portal for modal
+    // data: () => ({
+    //   modalActive: false
+    // }),
+    // methods: {
+    //   infoModalActive() {
+    //     this.modalActive = !this.modalActive;
+    //     this.$emit('info-modal-active');
+    //   }
+    // }
+  };
 </script>
 
 <style lang="postcss">
-.Nav {
-  @apply relative z-100 w-full border-b-2 border-scheme-text-border pt-w6 pb-4;
-}
+  .Nav {
+    @apply relative z-100 w-full border-b-2 border-scheme-text-border pt-w6 pb-4;
+  }
 
-.Button--sm.Text-xs {
-  /* Text-sm has a cascade issue */
-  font-size: calc(theme(fontSize.xs) * var(--text-ratio));
-}
+  .Button--sm.Text-xs {
+    /* Text-sm has a cascade issue */
+    font-size: calc(theme(fontSize.xs) * var(--text-ratio));
+  }
 
-.Title .element {
-  @apply absolute left-0 opacity-0 inline-block;
-  transition:
-    opacity 250ms theme(bezier.thisalso),
-    transform 1000ms theme(bezier.thisalso);
-  transform: translateX(-5%);
-}
-.Title .home,
-.Title .reply {
-  @apply opacity-100;
-  transform: translateX(0);
-}
+  .Title .element {
+    @apply absolute left-0 opacity-0 inline-block;
+    transition: opacity 250ms theme(bezier.thisalso),
+      transform 1000ms theme(bezier.thisalso);
+    transform: translateX(-5%);
+  }
+  .Title .home,
+  .Title .reply {
+    @apply opacity-100;
+    transform: translateX(0);
+  }
 </style>
 
 <style lang="postcss" scoped>
-.pos-button {
-  @apply absolute top-0 right-0 pt-w2;
-}
-.Button {
-  border-color: var(--scheme-border);
-  color: var(--scheme-text-gray);
-}
-.Button:hover,
-.Button:active,
-.Button:focus {
-  border-color: var(--scheme-text);
-  box-shadow: var(--scheme-text) 0 0 0 var(--button-box-shadow-stroke-hover);
-  color: var(--scheme-text);
-}
-.Button--active {
-  border-color: theme(colors.brand.primary);
-  color: theme(colors.brand.primary);
-}
-.Button--active:hover,
-.Button--active:active,
-.Button--active:focus {
-  border-color: var(--scheme-primary);
-  box-shadow: var(--scheme-primary) 0 0 0 var(--button-box-shadow-stroke-hover);
-  color: var(--scheme-primary);
-}
+  .pos-button {
+    @apply absolute top-0 right-0 pt-w2;
+  }
+  .Button {
+    border-color: var(--scheme-border);
+    color: var(--scheme-text-gray);
+  }
+  .Button:hover,
+  .Button:active,
+  .Button:focus {
+    border-color: var(--scheme-text);
+    box-shadow: var(--scheme-text) 0 0 0 var(--button-box-shadow-stroke-hover);
+    color: var(--scheme-text);
+  }
+  .Button--active {
+    border-color: theme(colors.brand.primary);
+    color: theme(colors.brand.primary);
+  }
+  .Button--active:hover,
+  .Button--active:active,
+  .Button--active:focus {
+    border-color: var(--scheme-primary);
+    box-shadow: var(--scheme-primary) 0 0 0 var(--button-box-shadow-stroke-hover);
+    color: var(--scheme-primary);
+  }
 
-
-/* .modal-is-active .Title-direction {
-  @apply opacity-0;
-} */
+  /* .modal-is-active .Title-direction {
+    @apply opacity-0;
+  } */
 </style>

@@ -86,7 +86,7 @@ module.exports = {
     },
     fontSize: {
       xs: '11px',
-      sm: '14px',
+      sm: '13px',
       base: '15px',
       lg: '17px',
       xl: '18px',
@@ -112,7 +112,7 @@ module.exports = {
       tighter: '-0.05em',
       tight: '-0.0125em',
       normal: '0',
-      subtitle: '0.02em',
+      subtitle: '0.05em',
       wide: '0.025em',
       wider: '0.05em',
       widest: '0.1em',
