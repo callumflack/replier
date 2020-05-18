@@ -17,6 +17,7 @@
     left: 50%;
     transform: translateX(-50%);
     transition: opacity 750ms theme(bezier.thisalso);
-    @apply font-semibold bg-brand-primary text-white text-center tracking-wide;
+    @apply font-semibold bg-brand-primary text-white text-center;
+    z-index: 101;
   }
 </style>

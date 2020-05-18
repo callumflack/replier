@@ -10,11 +10,14 @@
         :class="`${ showInfoDialog ? 'bg-scheme-bg-html' : 'bg-scheme-bg'}`"
       >
         <Notification
-          v-if="$store.state.timestamp"
-          :class="{ 'opacity-0': $store.state.selections.length > 2}"
+          v-if="$store.state.timestamp && $route.name !== 'reply'"
+          :class="{
+            'opacity-0': $store.state.selections.length > 2,
+            'hidden': showInfoDialog
+          }"
         >
           <template v-if="$store.state.selections.length === 0">
-            Click to select…
+            Click to select a sentence
           </template>
           <template v-if="$store.state.selections.length > 0">
             Hold command to click multiple sentences
