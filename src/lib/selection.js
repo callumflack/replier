@@ -224,25 +224,29 @@ class SelectionState {
             const prevSelectedDeco = this.findDecoOfSelection(
               g_group.lastSelection.id
             );
-            const prevSelection = prevSelectedDeco.type.spec.selection;
 
-            if (!prevSelection.groupId) {
-              // Add group id to last selection
-              const updatedPrevSelection = new Selection(
-                prevSelection.text,
-                prevSelection.id,
-                prevSelection.active,
-                g_group.id
-              );
+            // Check incase the previously selected deco/sentence has been deleted
+            if (prevSelectedDeco) {
+              const prevSelection = prevSelectedDeco.type.spec.selection;
 
-              decos = decos.remove([prevSelectedDeco]);
-              decos = decos.add(tr.doc, [
-                deco(
-                  prevSelectedDeco.from,
-                  prevSelectedDeco.to,
-                  updatedPrevSelection
-                )
-              ]);
+              if (!prevSelection.groupId) {
+                // Add group id to last selection
+                const updatedPrevSelection = new Selection(
+                  prevSelection.text,
+                  prevSelection.id,
+                  prevSelection.active,
+                  g_group.id
+                );
+
+                decos = decos.remove([prevSelectedDeco]);
+                decos = decos.add(tr.doc, [
+                  deco(
+                    prevSelectedDeco.from,
+                    prevSelectedDeco.to,
+                    updatedPrevSelection
+                  )
+                ]);
+              }
             }
           }
 
