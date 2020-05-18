@@ -4,6 +4,7 @@ import SvgIcon from "vue-svgicon";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import * as storage from "@/lib/storage";
 import "./components/icons";
 import "./assets/css/tailwind.css";
 import * as Sentry from "@sentry/browser";
@@ -29,7 +30,7 @@ Sentry.init({
   ]
 });
 
-const trackingDisabled = localStorage.getItem("doNotTrack");
+const trackingDisabled = storage.localStorageGet("doNotTrack");
 // https://github.com/mib200/vue-gtm
 /* eslint-disable */
 Vue.use(VueGtm, {

@@ -16,7 +16,7 @@
         It's your data, not ours.
       </span> -->
       We don't store anything you paste or type here.
-      <template v-if="!optOut">
+      <template v-if="!optedOut">
         You can also
         <button @click="optOutOfTracking" class="Link ">
           opt out of analytics tracking.
@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import * as storage from "@/lib/storage";
 import MessageBar from '@/components/MessageBar.vue';
 
 export default {
@@ -39,17 +40,13 @@ export default {
     MessageBar
   },
   data: () => ({
-    optOut: false,
+    optedOut: storage.localStorageGet("doNotTrack"),
   }),
   methods: {
     optOutOfTracking() {
-      localStorage.setItem("doNotTrack", true);
+      storage.localStorageSet("doNotTrack", true);
       this.$gtm.enable(false);
-      this.optOut = true;
-    },
-    optInToTracking() {
-      localStorage.setItem("doNotTrack", false);
-      this.$gtm.enable(true);
+      this.optedOut = true;
     },
   },
 }
