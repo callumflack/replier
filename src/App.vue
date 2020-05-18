@@ -42,7 +42,7 @@
       </div>
     </div>
 
-    <!-- MODALS -->
+    <!-- MODALS (currently unused) -->
     <portal-target name="modals" multiple></portal-target>
   </div>
 </template>

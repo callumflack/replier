@@ -41,11 +41,11 @@ export default {
       copy: `
 ## What is Replier?
 
-Replier helps you reply to friends, clients, colleagues and collaborators by choosing only what's important in the conversation by removing the superfluous. It creates focus so you can avoid losing important info to the vortex of chat messages and email chains.
+Replier lets you quickly respond to questions buried in a long message by choosing what's important and removing the rest. It helps avoid losing important info to the vortex of chat messages and email chains.
 
 We also give you custom formatted responses to paste into your favourite project management apps, making it [easy for the reader](http://www.idallen.com/topposting.html). So it's clear who said what.
 
-To learn more about the problems we're trying to solve, [continue reading](https://jackywinter.com/homeroom/introducing-replier).
+[Here's an article](https://jackywinter.com/homeroom/introducing-replier) about the genesis of the idea and the problems we're trying to solve.
 
 ## How does it work?
 
@@ -55,7 +55,7 @@ To learn more about the problems we're trying to solve, [continue reading](https
 4. Choose to export to Gmail, Slack or Basecamp.
 
 
-Replier is a work in progress. [Got feedback? We welcome it on our public spreadsheet!](https://www.notion.so/callum/139e53429d9f4216a4521a3da10d8e51?v=47af5078446f44e28406cbd14139b69f)
+Replier is a work in progress. [We welcome feedback on our public spreadsheet.](https://www.notion.so/callum/139e53429d9f4216a4521a3da10d8e51?v=47af5078446f44e28406cbd14139b69f)
 
 Ps. Replier runs in dark mode automatically based on your OS.
 
