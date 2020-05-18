@@ -1,5 +1,18 @@
 <template>
   <div class="container py-w5 px-inset">
+    <div class="pb-w3 mx-auto lg:w-5/6">
+    <figure class="Aspect">
+      <iframe
+          width="100%"
+          height="100%"
+          frameborder="0"
+          allow="autoplay"
+          :src="
+            `https://player.vimeo.com/video/${vimeoId}?playsinline=1&title=0&byline=0&portrait=0&color=000&`
+          "
+        />
+    </figure>
+    </div>
     <vue-markdown
       class="Markdown Link-block"
       :anchor-attributes="anchorAttributes"
@@ -23,6 +36,7 @@ export default {
           target: '_blank',
           rel: 'noopener noreferrer nofollow'
       },
+      vimeoId: "419858766",
       /* eslint-disable max-len */
       copy: `
 ## What is Replier?
@@ -40,7 +54,10 @@ To learn more about the problems we're trying to solve, [continue reading](https
 3. Hit the reply button and write your replies.
 4. Choose to export to Gmail, Slack or Basecamp.
 
-Replier is a work in progress. We welcome feedback! [Email us with bugs, ideas, etc.](mailto:callum@callumflack.design)
+
+Replier is a work in progress. [Got feedback? We welcome it on our public spreadsheet!](https://www.notion.so/callum/139e53429d9f4216a4521a3da10d8e51?v=47af5078446f44e28406cbd14139b69f)
+
+Ps. Replier runs in dark mode automatically based on your OS.
 
 ## Your privacy
 
@@ -71,6 +88,20 @@ We use analytics so we can keep making Replier better. You can opt out of analyt
 }
 .Markdown >>> small {
   @apply opacity-50;
+}
+
+/* ASPECT */
+.Aspect {
+  @apply relative overflow-hidden m-0 w-full bg-transparent;
+}
+.Aspect:before {
+  @apply block;
+  content: "";
+  padding-bottom: calc(100% * 1);
+}
+.Aspect > * {
+  @apply absolute inset-0 h-full w-full;
+  @apply object-cover;
 }
 </style>
 
