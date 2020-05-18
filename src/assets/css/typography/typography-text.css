@@ -31,6 +31,7 @@ main {
 .Markdown-sm > *,
 .Text-sm {
   font-size: calc(theme(fontSize.sm) * var(--text-ratio));
+  @apply tracking-wide;
 }
 
 .Markdown.in-aside > *,
