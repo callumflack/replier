@@ -119,7 +119,7 @@ module.exports = {
     },
     container: {
       center: true,
-      padding: '2rem',
+      padding: 'var(--grid-inset)',
     },
     spacing: {
       px: '1px',
