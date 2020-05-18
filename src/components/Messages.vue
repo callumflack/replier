@@ -7,7 +7,17 @@
     </MessageBar>
     <MessageBar alert v-if="$route.query.donation === 'cancelled'">
       <span class="font-bold">Oh well!</span>
-      Write is still free to use. If you like it, tell your friends. We'd appreciate it.
+      Replier is still free to use. If you like it, tell your friends. We'd appreciate it.
+    </MessageBar>
+    <MessageBar alert v-if="$route.query.ref === 'producthunt'">
+      <icon
+        name="flash_on"
+        class="text-white mr-2px"
+        height="1.25em"
+        width="1.25em"
+      ></icon>
+      <span class="font-bold">Hello Product Hunters.</span>
+      Replier is free to use. If you like it, tell your friends!
     </MessageBar>
 
     <!-- TRACKING -->
