@@ -1,5 +1,5 @@
 <template>
-  <div class="container py-w5 px-inset">
+  <div class="container py-w5 mobile:px-0">
     <div class="pb-w3 mx-auto lg:w-5/6">
     <figure class="Aspect">
       <iframe

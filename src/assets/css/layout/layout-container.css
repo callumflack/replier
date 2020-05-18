@@ -1,6 +1,6 @@
 .container {
   /* @apply max-w-3xl; */ /* 48rem 768px */
-  @apply px-inset;
+  /* @apply px-0; */
   max-width: 800px;
 }
 
