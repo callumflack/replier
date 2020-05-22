@@ -101,6 +101,9 @@ We use analytics so we can keep making Replier better. You can opt out of analyt
 }
 .Aspect > * {
   @apply absolute inset-0 h-full w-full;
+  /* @apply object-cover; */
+}
+.Aspect > video {
   @apply object-cover;
 }
 </style>
