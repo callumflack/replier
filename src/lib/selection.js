@@ -8,7 +8,7 @@ import { Decoration, DecorationSet } from "prosemirror-view";
 import store from "../store";
 
 // End of sentence punctuation
-const EOSPuncRegex = /([.?!]) /g;
+const EOSPuncRegex = /([.?!])\s/g;
 const nonWhitespaceRegex = /[^\s\\]/;
 // Styled in Home.js
 const sentenceClasses = {
